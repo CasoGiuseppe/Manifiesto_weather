@@ -15,12 +15,12 @@ module.exports = {
     },
     spacing: {
       none: "0px",
-      xsm: ".25rem",
-      sm: ".5rem",
-      md: "1rem",
-      lg: '1.5rem',
-      xlg: '2rem',
-      xxlg: '4rem'
+      xsm: ".25rem", // 4
+      sm: ".5rem", // 8
+      md: "1rem", // 16
+      lg: '1.5rem', // 24
+      xlg: '2rem', // 32
+      xxlg: '4rem' // 64
     },
     colors: {
       none: "none",
@@ -33,6 +33,7 @@ module.exports = {
         100: "var(--sm-c-gray-100)"
       },
       blue: {
+        400: "var(--sm-c-blue-400)",
         300: "var(--sm-c-blue-300)",
         200: "var(--sm-c-blue-200)",
         100: "var(--sm-c-blue-100)",
@@ -59,7 +60,20 @@ module.exports = {
       lg: ['var(--sm-font-size-big)', { lineHeight: 'normal' }],
       xlg: ['var(--sm-font-size-xlarge)', { lineHeight: 'normal' }],
     },
-    extend: {},
+    transitionProperty: {
+      colors: 'color, background-color, border-color, text-decoration-color, fill, stroke, outline-color'
+    },
+    extend: {
+      animation: {
+        wiggle: 'wiggle 1s ease-in-out infinite',
+      },
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        }
+      },
+    },
   },
   plugins: [],
 }

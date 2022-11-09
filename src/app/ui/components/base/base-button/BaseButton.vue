@@ -4,20 +4,13 @@
       `base-button--is-${mode}`,
       isSecondary ? 'base-button--is-secondary' : null,
       isWarning ? 'base-button--is-warning' : null,
-      'base-button',
+      'base-button wiggle',
     ]"
     :data-id="id"
     :disabled="isDisabled"
     @click="handleClick(id)"
   >
     <span class="base-button__label">
-      <transition mode="out-in" name="appear-extra-info">
-        <span
-          :key="`appear-${extraInfo}`"
-          class="base-button__label--is-animated"
-          >{{ extraInfo }}
-        </span>
-      </transition>
       <slot />
     </span>
   </button>
@@ -49,6 +42,6 @@ defineProps({
 });
 
 const clickEmit = defineEmits(["handleClick"]);
-const handleClick = (id: string) => clickEmit("handleClick", id);
+const handleClick = (id: string | number) => clickEmit("handleClick", id);
 </script>
 <style lang="scss" src="./BaseButton.scss" />

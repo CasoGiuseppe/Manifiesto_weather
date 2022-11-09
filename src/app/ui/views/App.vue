@@ -7,7 +7,10 @@
     </aside>
     <section class="layout__router-box">
       <header class="layout__router-box__header">h</header>
-      <section class="layout__router-box__content">m</section>
+      <section class="layout__router-box__content">
+        <BaseButton extra-info="ciccio">button</BaseButton>
+        <BaseButton is-secondary>secondary</BaseButton>
+      </section>
       <!--<RouterView />-->
     </section>
   </section>
@@ -15,7 +18,7 @@
 
 <script setup lang="ts">
 import { onMounted } from "vue";
-
+import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue" 
 
 onMounted(async () => {
   const res = await fetch(`${import.meta.env.VITE_APP_API_ENDPOINT}`)
