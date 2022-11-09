@@ -1,0 +1,14 @@
+:root {
+  --sm-c-blue-300: #263238;
+  --sm-c-blue-200: #5694F2;
+  --sm-c-blue-100: #ACB9FF;
+
+  --sm-c-gray-500: #414141;
+  --sm-c-gray-400: #4E4E4E;
+  --sm-c-gray-300: #545454;
+  --sm-c-gray-200: #828282;
+  --sm-c-gray-100: #D0D0D0;
+
+  --sm-c-white: #fff;
+  --sm-c-black: #000;
+}
