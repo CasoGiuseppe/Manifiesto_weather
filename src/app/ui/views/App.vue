@@ -1,15 +1,15 @@
 <template>
-  <section
-    :class="['root-layout bg-gray-500 phone:bg-gray-200 tablet-ld:bg-blue-200 p-lg phone:p-sm font-default text-base']"
-  >
-    <header class="root-layout__header">
-      <h1>Starwars Heroes</h1>
-    </header>
+  <section class="layout">
 
-    <section class="root-layout__content">
-      <RouterView />
+    <aside class="layout__panel">
+      <navigation class="layout__panel-navigation">n</navigation>
+      <section class="layout__panel-content">c</section>
+    </aside>
+    <section class="layout__router-box">
+      <header class="layout__router-box__header">h</header>
+      <section class="layout__router-box__content">m</section>
+      <!--<RouterView />-->
     </section>
-
   </section>
 </template>
 

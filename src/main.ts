@@ -5,7 +5,7 @@ import router from "@/app/router";
 import "@/server";
 
 
-import '@/assets/styles/global.css';
+import '@/assets/styles/layout.scss';
 
 const app = createApp(App);
 

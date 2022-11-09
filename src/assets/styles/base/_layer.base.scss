@@ -1,0 +1,11 @@
+@layer base {
+
+  html,
+  body {
+    @apply min-h-full m-none p-none bg-blue-50;
+
+    * {
+      @apply box-border
+    }
+  }
+}
