@@ -26,6 +26,10 @@
       &secondary {
         @apply bg-default-positive text-gray-400 outline outline-gray-100 outline-2 outline-offset-[-1px]
       }
+
+      &small {
+        @apply text-xs py-xsm px-md
+      }
     }
 
     &__label {

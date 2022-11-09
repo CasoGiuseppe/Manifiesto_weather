@@ -1,10 +1,8 @@
 <template>
   <button
     :class="[
-      `base-button--is-${mode}`,
-      isSecondary ? 'base-button--is-secondary' : null,
-      isWarning ? 'base-button--is-warning' : null,
-      'base-button wiggle',
+      (is.length > 0) ? `${is.map((type) => `base-button--is-${type}`).join(' ')}` : null,
+      'base-button',
     ]"
     :data-id="id"
     :disabled="isDisabled"
@@ -22,9 +20,13 @@ defineProps({
     type: [String, Number],
     default: "test",
   },
-  mode: {
-    type: String,
-    default: "basic",
+  is: {
+    type: Array,
+    default: [],
+    validator(value: string[]) {
+      const matchArray = ['secondary', 'small']
+      return value.length > 0 ? matchArray.some(node => value.includes(node)) : true
+    }
   },
   isDisabled: {
     type: Boolean,
@@ -34,11 +36,10 @@ defineProps({
     type: Boolean,
     default: false,
   },
-  isWarning: {
+  isSmall: {
     type: Boolean,
     default: false,
   },
-  extraInfo: [String, Number],
 });
 
 const clickEmit = defineEmits(["handleClick"]);

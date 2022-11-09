@@ -8,8 +8,9 @@
     <section class="layout__router-box">
       <header class="layout__router-box__header">h</header>
       <section class="layout__router-box__content">
-        <BaseButton extra-info="ciccio">button</BaseButton>
-        <BaseButton is-secondary>secondary</BaseButton>
+        <BaseButton>button</BaseButton><br><br>
+        <BaseButton :is="['secondary']">secondary</BaseButton><br><br>
+        <BaseButton :is="['small']">button</BaseButton><br><br>
       </section>
       <!--<RouterView />-->
     </section>
