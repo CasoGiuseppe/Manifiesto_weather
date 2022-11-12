@@ -23,7 +23,7 @@ module.exports = {
       xxlg: '4rem' // 64
     },
     colors: {
-      none: "none",
+      none: "transparent",
       gray: {
         600: "var(--sm-c-gray-600)",
         500: "var(--sm-c-gray-500)",

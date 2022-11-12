@@ -12,28 +12,78 @@
           @apply bg-blue-300;
 
           &#{$basebutton}--is-secondary {
-            @apply bg-blue-50 outline-blue-200 text-gray-200
+            @apply bg-blue-50 outline-blue-200 text-gray-200;
+          }
+
+          &#{$basebutton}--is-transparent {
+            @apply bg-default-positive
+          }
+
+          &#{$basebutton}--is-squared,
+          &#{$basebutton}--is-rounded {
+            >#{$basebutton}__label {
+              >svg {
+                @apply text-default-positive;
+              }
+            }
+
+            &#{$basebutton}--is-transparent {
+              >#{$basebutton}__label {
+                >svg {
+                  @apply text-gray-400;
+                }
+              }
+            }
           }
         }
       }
     }
 
     &:disabled {
-      @apply bg-gray-200
+      @apply bg-gray-200;
     }
 
-    &--is- {
-      &secondary {
-        @apply bg-default-positive text-gray-400 outline outline-gray-100 outline-2 outline-offset-[-1px]
-      }
+    &#{$basebutton}--is-secondary {
+      @apply bg-default-positive text-gray-400 outline outline-gray-100 outline-2 outline-offset-[-1px]
+    }
 
-      &small {
-        @apply text-xs py-xsm px-md
+    &#{$basebutton}--is-small {
+      @apply text-xs py-xsm px-sm
+    }
+
+    &#{$basebutton}--is-squared,
+    &#{$basebutton}--is-rounded {
+      @apply p-none w-xlg h-xlg flex justify-center items-center bg-gray-100
+    }
+
+    &#{$basebutton}--is-squared {
+      @apply p-none w-xlg h-xlg flex justify-center items-center bg-gray-100;
+
+      &#{$basebutton}--is-small {
+        @apply w-lg h-lg;
+      }
+    }
+
+    &#{$basebutton}--is-rounded {
+      @apply rounded-full;
+
+      &#{$basebutton}--is-transparent {
+        @apply bg-none;
+
+        >#{$basebutton}__label {
+          >svg {
+            @apply text-default-positive;
+          }
+        }
       }
     }
 
     &__label {
-      @apply relative;
+      @apply relative flex;
+
+      >svg {
+        @apply transition-colors duration-500 text-gray-400 w-lg h-md;
+      }
     }
   }
 }

@@ -1,25 +1,41 @@
 <template>
   <section class="layout">
 
-    <aside class="layout__panel">
+    <!--
+      behaiour: user panel
+      visible: router name !== library
+    -->
+    <aside
+      v-if="$route.name !== 'library'"
+      class="layout__panel"
+    >
       <navigation class="layout__panel-navigation">n</navigation>
       <section class="layout__panel-content">c</section>
     </aside>
+
+    <!--
+      behaiour: dashboard/component library
+    -->
     <section class="layout__router-box">
-      <header class="layout__router-box__header">h</header>
+      <!--
+        behaiour: user login/logout
+        visible: router name !== library
+      -->
+      <header
+        v-if="$route.name !== 'library'"
+        class="layout__router-box__header"
+      >
+        h
+      </header>
       <section class="layout__router-box__content">
-        <BaseButton>button</BaseButton><br><br>
-        <BaseButton :is="['secondary']">secondary</BaseButton><br><br>
-        <BaseButton :is="['small']">button</BaseButton><br><br>
+        <RouterView />
       </section>
-      <!--<RouterView />-->
     </section>
   </section>
 </template>
 
 <script setup lang="ts">
 import { onMounted } from "vue";
-import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue" 
 
 onMounted(async () => {
   const res = await fetch(`${import.meta.env.VITE_APP_API_ENDPOINT}`)

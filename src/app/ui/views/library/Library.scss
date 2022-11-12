@@ -1,0 +1,64 @@
+@layer components {
+  .library {
+    $library: &;
+
+    @apply flex p-sm flex-col;
+
+    &__title {
+      @apply text-gray-600 font-bold text-xlg;
+
+      &:is(h1) {
+        @apply text-xlg
+      }
+
+      &:is(h2) {
+        @apply text-gray-300 text-lg;
+
+        >span {
+          @apply text-blue-200 text-base;
+        }
+      }
+
+      +#{$library}__category {
+        @apply mt-xlg
+      }
+    }
+
+    &__category {
+      +#{$library}__category {
+        @apply mt-md pt-md border-t border-dotted border-gray-200
+      }
+    }
+
+    &__table {
+      @apply flex flex-wrap;
+
+      &--is-negative {
+        @apply bg-gray-400
+      }
+
+      >li {
+        @apply basis-1/4 flex flex-col justify-center items-center px-sm py-xlg;
+
+        &:after {
+          @apply text-xs text-center;
+          content: attr(data-label);
+        }
+
+        &#{$library}__table--is-negative {
+          &:after {
+            @apply text-default-positive
+          }
+        }
+
+        @screen phone {
+          @apply basis-1/2
+        }
+
+        @screen tablet-ld {
+          @apply basis-1/3
+        }
+      }
+    }
+  }
+}

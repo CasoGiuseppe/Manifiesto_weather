@@ -1,8 +1,8 @@
 <template>
   <button
     :class="[
-      (is.length > 0) ? `${is.map((type) => `base-button--is-${type}`).join(' ')}` : null,
       'base-button',
+      cssCustomElementTypes,
     ]"
     :data-id="id"
     :disabled="isDisabled"
@@ -15,7 +15,8 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
+import { computed } from 'vue'
+const props = defineProps({
   id: {
     type: [String, Number],
     default: "test",
@@ -24,7 +25,7 @@ defineProps({
     type: Array,
     default: [],
     validator(value: string[]) {
-      const matchArray = ['secondary', 'small']
+      const matchArray = ['secondary', 'small', 'squared', 'rounded', 'transparent']
       return value.length > 0 ? matchArray.some(node => value.includes(node)) : true
     }
   },
@@ -32,15 +33,11 @@ defineProps({
     type: Boolean,
     default: false,
   },
-  isSecondary: {
-    type: Boolean,
-    default: false,
-  },
-  isSmall: {
-    type: Boolean,
-    default: false,
-  },
 });
+
+const cssCustomElementTypes = computed(() => {
+  return props.is.length > 0 ? props.is.map((type) => `base-button--is-${type}`) : []
+})
 
 const clickEmit = defineEmits(["handleClick"]);
 const handleClick = (id: string | number) => clickEmit("handleClick", id);

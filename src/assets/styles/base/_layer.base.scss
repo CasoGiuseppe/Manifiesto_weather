@@ -2,7 +2,7 @@
 
   html,
   body {
-    @apply min-h-full m-none p-none bg-blue-50;
+    @apply min-h-full m-none p-none bg-blue-50 font-default;
 
     * {
       @apply box-border

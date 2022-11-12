@@ -10,6 +10,13 @@ const router = createRouter({
         default: () => undefined,
       },
     },
+    {
+      path: "/library",
+      name: "library",
+      components: {
+        default: () => import("@/app/ui/views/library/Library.vue"),
+      },
+    },
   ],
 });
 
