@@ -26,7 +26,7 @@
 
     &__category {
       +#{$library}__category {
-        @apply mt-md pt-md border-t border-dotted border-gray-200
+        @apply mt-md pt-md border-t border-dashed border-gray-100
       }
     }
 

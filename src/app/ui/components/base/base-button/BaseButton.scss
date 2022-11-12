@@ -1,89 +1,101 @@
-@layer components {
-  .base-button {
-    $basebutton: &;
+.base-button {
+  $basebutton: &;
 
-    @apply bg-blue-200 text-sm uppercase py-sm px-md rounded text-default-positive transition-colors duration-500 font-light;
+  @apply bg-blue-200 text-sm uppercase py-sm px-md rounded text-default-positive transition-colors duration-500 font-light;
 
-    &:not([disabled]) {
-      @apply cursor-pointer;
+  &:not([disabled]) {
+    @apply cursor-pointer;
 
-      &:hover {
-        @screen tablet-ld {
-          @apply bg-blue-300;
+    &:hover {
+      @screen tablet-ld {
+        @apply bg-blue-300;
 
-          &#{$basebutton}--is-secondary {
-            @apply bg-blue-50 outline-blue-200 text-gray-200;
+        &#{$basebutton}--is-secondary {
+          @apply bg-blue-50 outline-blue-200 text-gray-200;
+        }
+
+        &#{$basebutton}--is-transparent {
+          @apply bg-default-positive
+        }
+
+        &#{$basebutton}--is-squared,
+        &#{$basebutton}--is-rounded {
+          >#{$basebutton}__label {
+            >svg {
+              @apply text-default-positive;
+            }
           }
 
           &#{$basebutton}--is-transparent {
-            @apply bg-default-positive
-          }
-
-          &#{$basebutton}--is-squared,
-          &#{$basebutton}--is-rounded {
             >#{$basebutton}__label {
               >svg {
-                @apply text-default-positive;
-              }
-            }
-
-            &#{$basebutton}--is-transparent {
-              >#{$basebutton}__label {
-                >svg {
-                  @apply text-gray-400;
-                }
+                @apply text-gray-400;
               }
             }
           }
         }
       }
     }
+  }
 
-    &:disabled {
-      @apply bg-gray-200;
-    }
+  &:disabled {
+    @apply bg-gray-200;
 
     &#{$basebutton}--is-secondary {
-      @apply bg-default-positive text-gray-400 outline outline-gray-100 outline-2 outline-offset-[-1px]
+      @apply bg-gray-100
     }
+  }
+
+  &--is-secondary {
+    @apply bg-default-positive text-gray-400 outline outline-gray-100 outline-2 outline-offset-[-1px]
+  }
+
+  &--is-small {
+    @apply text-xs py-xsm px-sm
+  }
+
+  &--is-squared,
+  &--is-rounded {
+    @apply p-none w-xlg h-xlg flex justify-center items-center bg-gray-100
+  }
+
+  &--is-squared {
+    @apply p-none w-xlg h-xlg flex justify-center items-center bg-gray-100;
 
     &#{$basebutton}--is-small {
-      @apply text-xs py-xsm px-sm
+      @apply w-lg h-lg;
     }
+  }
 
-    &#{$basebutton}--is-squared,
-    &#{$basebutton}--is-rounded {
-      @apply p-none w-xlg h-xlg flex justify-center items-center bg-gray-100
-    }
+  &--is-rounded {
+    @apply rounded-full;
 
-    &#{$basebutton}--is-squared {
-      @apply p-none w-xlg h-xlg flex justify-center items-center bg-gray-100;
+    &#{$basebutton}--is-transparent {
+      @apply bg-none;
 
-      &#{$basebutton}--is-small {
-        @apply w-lg h-lg;
-      }
-    }
-
-    &#{$basebutton}--is-rounded {
-      @apply rounded-full;
-
-      &#{$basebutton}--is-transparent {
-        @apply bg-none;
-
-        >#{$basebutton}__label {
-          >svg {
-            @apply text-default-positive;
-          }
+      >#{$basebutton}__label {
+        >svg {
+          @apply text-default-positive;
         }
       }
     }
+  }
 
-    &__label {
-      @apply relative flex;
+  &--is-icon {
+    @apply p-sm pr-md;
 
+    #{$basebutton}__label {
       >svg {
-        @apply transition-colors duration-500 text-gray-400 w-lg h-md;
+        @apply mr-md
       }
+    }
+  }
+
+  &__label {
+    @apply relative flex;
+
+    >svg {
+      @apply transition-colors duration-500 text-gray-400 w-lg h-md;
     }
   }
 }

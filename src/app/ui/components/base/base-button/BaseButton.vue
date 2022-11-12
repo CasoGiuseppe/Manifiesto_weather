@@ -5,7 +5,6 @@
       cssCustomElementTypes,
     ]"
     :data-id="id"
-    :disabled="isDisabled"
     @click="handleClick(id)"
   >
     <span class="base-button__label">
@@ -16,6 +15,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+
 const props = defineProps({
   id: {
     type: [String, Number],
@@ -25,13 +25,9 @@ const props = defineProps({
     type: Array,
     default: [],
     validator(value: string[]) {
-      const matchArray = ['secondary', 'small', 'squared', 'rounded', 'transparent']
-      return value.length > 0 ? matchArray.some(node => value.includes(node)) : true
+      const matchArray: string[] = ['secondary', 'small', 'squared', 'rounded', 'transparent']
+      return value.length > 0 ? matchArray.some((node:string) => value.includes(node)) : true
     }
-  },
-  isDisabled: {
-    type: Boolean,
-    default: false,
   },
 });
 
@@ -43,3 +39,4 @@ const clickEmit = defineEmits(["handleClick"]);
 const handleClick = (id: string | number) => clickEmit("handleClick", id);
 </script>
 <style lang="scss" src="./BaseButton.scss" />
+ 

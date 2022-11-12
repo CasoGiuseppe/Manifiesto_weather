@@ -1,0 +1,31 @@
+.base-input {
+  $baseinput: &;
+
+  @apply px-md py-sm rounded-2xl outline-0 border-2 border-solid border-gray-100 transition-colors duration-500 text-xs;
+
+  &:not([disabled]) {
+    &::placeholder {
+      @apply text-gray-300 text-xs
+    }
+
+    &:focus {
+      @apply border-blue-100
+    }
+  }
+
+  &:disabled {
+    @apply bg-gray-50 border-gray-100 border;
+
+    &::placeholder {
+      @apply text-gray-200
+    }
+  }
+
+  &--is-wrong {
+    @apply border-red-100 bg-red-50 text-default-positive
+  }
+
+  &--is-correct {
+    @apply border-green-100 bg-green-50
+  }
+}

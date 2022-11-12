@@ -30,7 +30,8 @@ module.exports = {
         400: "var(--sm-c-gray-400)",
         300: "var(--sm-c-gray-300)",
         200: "var(--sm-c-gray-200)",
-        100: "var(--sm-c-gray-100)"
+        100: "var(--sm-c-gray-100)",
+        50: "var(--sm-c-gray-50)"
       },
       blue: {
         400: "var(--sm-c-blue-400)",
@@ -38,6 +39,14 @@ module.exports = {
         200: "var(--sm-c-blue-200)",
         100: "var(--sm-c-blue-100)",
         50: "var(--sm-c-blue-50)"
+      },
+      red: {
+        100: "var(--sm-c-red-100)",
+        50: "var(--sm-c-red-50)"
+      },
+      green: {
+        100: "var(--sm-c-green-100)",
+        50: "var(--sm-c-green-50)"
       },
       default: {
         positive: "var(--sm-c-white)",
