@@ -17,13 +17,13 @@
     <fieldset class="login__fields">
       <BaseInput
         placeholder="Write your enamil"
-        v-model:input-model="email"
-        :is="isCorrectEmail"
+        v-model:input-model="email.label"
+        :is="email.state()"
       />
       <BaseInput
         :type="Types.PASSWORD"
         placeholder="Your password"
-        v-model:input-model="pwd"
+        v-model:input-model="pwd.label"
       />
     </fieldset>
 
@@ -46,7 +46,7 @@
   </form>
 </template>
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { reactive, computed } from 'vue'
 import BaseInput from "@/app/ui/components/base/base-input/BaseInput.vue"
 import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 import { Types } from '@/app/ui/components/base/base-input/types'
@@ -55,19 +55,33 @@ import { Is as IsInput } from '@/app/ui/components/base/base-input/types'
 import { TvIcon } from '@heroicons/vue/24/solid'
 import { emailValidator} from '@/app/shared/helpers/validators'
 
+interface IEmail {
+  label: string
+  state: any
+  error: boolean | undefined
+}
+
 // input models
-const email = ref('')
-const pwd = ref('')
+const email:IEmail = reactive({
+  label: '',
+  state: () => {
+    if(email.error === undefined) return []
+    return email.error ? [IsInput.WRONG] : [IsInput.CORRECT]
+  },
+  error: computed(() => emailValidator(email.label)),
+})
 
-// validations: buttons disabled state
+const pwd = reactive({
+  label: '',
+  type: [],
+  error: false
+})
+
+// validations: all fields are filled qith correct format
 const fieldsEmptyState = computed(() => {
-  return [email.value, pwd.value].some(value => value === '')
+  const validator = [[email.label, pwd.label].some(value => value === ''), email.error]
+  return validator.some((value: boolean | undefined) => value)
 })
 
-// validations: email correct format
-const isCorrectEmail = computed(() => {
-  if (email.value === '') return []
-  return emailValidator(email.value) ? [IsInput.WRONG] : [IsInput.CORRECT]
-})
 </script>
 <style lang="scss" src="./Login.scss" />
