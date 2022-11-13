@@ -1,0 +1,32 @@
+.login {
+  $login: &;
+
+  // layer structure
+  @apply flex flex-col gap-y-md;
+
+  &__title,
+  &__message {
+    // appearance
+    @apply text-default-positive
+  }
+
+  &__title {
+    // appearance
+    @apply text-xlg font-bold
+  }
+
+  &__message {
+    // appearance
+    @apply text-xs
+  }
+
+  &__fields {
+    // layer structure
+    @apply flex flex-col gap-y-sm
+  }
+
+  &__actions {
+    // layer structure
+    @apply flex gap-x-xsm
+  }
+}

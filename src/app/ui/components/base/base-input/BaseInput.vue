@@ -21,7 +21,7 @@ export interface IButton {
   type?: Types,
   placeholder?: string,
   is?: Is[],
-  inputModel?: string,
+  inputModel?: string | null,
   maxWidth?: string,
 }
 
@@ -33,40 +33,6 @@ const props = withDefaults(defineProps<IButton>(), {
   inputModel: '',
   maxWidth: '100%'
 })
-
-/*const props = defineProps({
-  id: {
-    type: [String, Number],
-    default: "test",
-  },
-  type: {
-    type: String,
-    default: "text",
-    validator(value: string) {
-      const matchArray: string[] = ['text', 'password']
-      return matchArray.includes(value)
-    }
-  },
-  placeholder: {
-    type: String,
-    default: "placeholder",
-  },
-  is: {
-    type: Array,
-    default: [],
-    validator(value: string[]) {
-      const matchArray: string[] = ['correct', 'wrong']
-      return value.length > 0 ? matchArray.some((node:string) => value.includes(node)) : true
-    }
-  },
-  inputModel: {
-    type: String
-  },
-  maxWidth: {
-    type: String,
-    default: "100%"
-  }
-})*/
 
 const cssCustomElementTypes = computed(() => {
   return props.is.length > 0 ? props.is.map((type) => `base-input--is-${type}`) : []

@@ -15,7 +15,7 @@
         <li data-label="is squared with icon"><BaseButton id="squared" :is="[IsButton.SQUARED]"><Cog6ToothIcon/></BaseButton></li>
         <li data-label="is squared small with icon"><BaseButton id="squared-small" :is="[IsButton.SQUARED, IsButton.SMALL]"><Cog6ToothIcon/></BaseButton></li>
         <li data-label="is rounded with icon"><BaseButton id="rounded" :is="[IsButton.ROUNDED]"><Cog6ToothIcon/></BaseButton></li>
-        <li data-label="is rounded with icon and transparent" class="library__table--is-negative"><BaseButton id="rounded" :is="[IsButton.ROUNDED, IsButton.TRANSPARENT]"><Cog6ToothIcon/></BaseButton></li>
+        <li data-label="is rounded with icon and transparent" class="library--is-negative"><BaseButton id="rounded" :is="[IsButton.ROUNDED, IsButton.TRANSPARENT]"><Cog6ToothIcon/></BaseButton></li>
       </ul>
     </article>
 
@@ -55,10 +55,17 @@
 
      <!-- category: widgets -->
      <article class="library__category">
-      <h2 class="library__title">Widgets</h2>
+      <h2 class="library__title">Widgets: <span>Login</span></h2>
       <ul class="library__table">
-        <li>1</li>
-        <li>2</li>
+        <li class="library--is-negative library--is-max">
+          <Login>
+            <template #title>title</template>
+            <template #message>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim</template>
+          </Login>
+        </li>
+        <li class="library--is-max">2</li>
+        <li class="library--is-max">3</li>
+        <li class="library--is-max">4</li>
       </ul>
     </article>
   </section>
@@ -68,6 +75,7 @@ import { ref } from 'vue'
 import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 import BaseInput from "@/app/ui/components/base/base-input/BaseInput.vue"
 import BaseSelect from "@/app/ui/components/base/base-select/BaseSelect.vue"
+import Login from "@/app/ui/widgets/login/Login.vue"
 import { Cog6ToothIcon } from '@heroicons/vue/24/solid'
 import { Is as IsButton } from '@/app/ui/components/base/base-button/types'
 import { Is as IsInput } from '@/app/ui/components/base/base-input/types'

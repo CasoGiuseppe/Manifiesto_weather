@@ -3,7 +3,7 @@
   --max-width: 100%;
 
   // layer structure
-  @apply px-md py-sm;
+  @apply px-md py-[12px];
   @apply w-full max-w-[var(--max-width)];
 
   // appearance
@@ -23,8 +23,11 @@
     }
 
     &:focus {
-      // appearance
-      @apply border-blue-100
+
+      &:not(#{$baseinput}--is-wrong):not(#{$baseinput}--is-correct) {
+        // appearance
+        @apply border-blue-100 bg-blue-50;
+      }
     }
   }
 
