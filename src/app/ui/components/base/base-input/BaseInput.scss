@@ -1,7 +1,8 @@
 .base-input {
   $baseinput: &;
+  --max-width: 100%;
 
-  @apply px-md py-sm rounded-2xl outline-0 border-2 border-solid border-gray-100 transition-colors duration-500 text-xs;
+  @apply px-md py-sm rounded-2xl outline-0 border-2 border-solid border-gray-100 transition-colors duration-500 text-xs w-full max-w-[var(--max-width)];
 
   &:not([disabled]) {
     &::placeholder {

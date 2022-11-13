@@ -5,8 +5,9 @@
     <article class="library__category">
       <h2 class="library__title">Base Components: <span>Buttons</span></h2>
       <ul class="library__table">
-        <li data-label="is default"><BaseButton id="simple">default</BaseButton></li>
-        <li data-label="is disabled"><BaseButton id="disabled" disabled>disabled</BaseButton></li>
+        <li data-label="is default"><BaseButton id="default" :is="['default']">default</BaseButton></li>
+        <li data-label="is disabled"><BaseButton id="disabled" :is="['default']" disabled>disabled</BaseButton></li>
+        <li data-label="has max width"><BaseButton id="disabled" :is="['default']" max-width="200px">max width: 200px</BaseButton></li>
         <li data-label="is secondary"><BaseButton id="secondary" :is="['secondary']">secondary</BaseButton></li>
         <li data-label="is secondary and disabled"><BaseButton id="secondary" :is="['secondary']" disabled>secondary</BaseButton></li>
         <li data-label="is secondary with icon"><BaseButton id="secondary-icon" :is="['secondary', 'icon']"><Cog6ToothIcon/>secondary</BaseButton></li>
@@ -22,11 +23,12 @@
     <article class="library__category">
       <h2 class="library__title">Base Components: <span>Input field</span></h2>
       <ul class="library__table">
-        <li data-label="is default"><BaseInput/></li>
-        <li data-label="is disabled"><BaseInput disabled/></li>
-        <li data-label="has default value"><BaseInput v-model:inputModel="message"/></li>
-        <li data-label="is wrong"><BaseInput v-model:inputModel="message" :is="['wrong']"/></li>
-        <li data-label="is wrong"><BaseInput v-model:inputModel="message" :is="['correct']"/></li>
+        <li data-label="is default"><BaseInput :placeholder="placeholder"/></li>
+        <li data-label="is disabled"><BaseInput disabled :placeholder="placeholder"/></li>
+        <li data-label="has max width"><BaseInput max-width="200px" :placeholder="placeholder"/></li>
+        <li data-label="has default value"><BaseInput v-model:inputModel="message" :placeholder="placeholder"/></li>
+        <li data-label="is wrong"><BaseInput v-model:inputModel="wrong" :is="['wrong']" :placeholder="placeholder"/></li>
+        <li data-label="is correct"><BaseInput v-model:inputModel="correct" :is="['correct']" :placeholder="placeholder"/></li>
       </ul>
     </article>
 
@@ -40,12 +42,15 @@
     </article>
   </section>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 import BaseInput from "@/app/ui/components/base/base-input/BaseInput.vue"
 import { Cog6ToothIcon } from '@heroicons/vue/24/solid'
 
+const placeholder = ref('Write your custom input')
 const message = ref('default input value')
+const wrong = ref('wrong input')
+const correct = ref('correct input')
 </script>
 <style lang="scss" src="./Library.scss" />

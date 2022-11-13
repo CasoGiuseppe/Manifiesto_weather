@@ -2,8 +2,9 @@
   <button
     :class="[
       'base-button',
-      cssCustomElementTypes,
+      cssCustomElementTypes
     ]"
+    :style="cssCustomVariables"
     :data-id="id"
     @click="handleClick(id)"
   >
@@ -25,14 +26,24 @@ const props = defineProps({
     type: Array,
     default: [],
     validator(value: string[]) {
-      const matchArray: string[] = ['secondary', 'small', 'squared', 'rounded', 'transparent']
+      const matchArray: string[] = ['default', 'secondary', 'small', 'squared', 'rounded', 'transparent']
       return value.length > 0 ? matchArray.some((node:string) => value.includes(node)) : true
     }
   },
+  maxWidth: {
+    type: String,
+    default: "100%"
+  }
 });
 
 const cssCustomElementTypes = computed(() => {
   return props.is.length > 0 ? props.is.map((type) => `base-button--is-${type}`) : []
+})
+
+const cssCustomVariables = computed(() => {
+  return {
+    '--max-width': props.maxWidth
+  }
 })
 
 const clickEmit = defineEmits(["handleClick"]);

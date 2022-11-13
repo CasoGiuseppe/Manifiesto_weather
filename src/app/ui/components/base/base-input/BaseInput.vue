@@ -8,6 +8,7 @@
       'base-input',
       cssCustomElementTypes
     ]"
+    :style="cssCustomVariables"
     @input="update"
   />
 </template>
@@ -18,7 +19,6 @@ const props = defineProps({
     type: [String, Number],
     default: "test",
   },
-
   type: {
     type: String,
     default: "text",
@@ -27,12 +27,10 @@ const props = defineProps({
       return matchArray.includes(value)
     }
   },
-
   placeholder: {
     type: String,
     default: "placeholder",
   },
-
   is: {
     type: Array,
     default: [],
@@ -41,14 +39,21 @@ const props = defineProps({
       return value.length > 0 ? matchArray.some((node:string) => value.includes(node)) : true
     }
   },
-
   inputModel: {
     type: String
+  },
+  maxWidth: {
+    type: String,
+    default: "100%"
   }
 })
 
 const cssCustomElementTypes = computed(() => {
   return props.is.length > 0 ? props.is.map((type) => `base-input--is-${type}`) : []
+})
+
+const cssCustomVariables = computed(() => {
+  return { '--max-width': props.maxWidth }
 })
 
 const updateEmit = defineEmits(["update:inputModel"]);
