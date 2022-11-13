@@ -1,0 +1,49 @@
+.base-select {
+  $basebutton: &;
+  --max-width: 100%;
+
+  // layer structure
+  @apply w-full max-w-[var(--max-width)] px-md py-[10px] relative;
+
+  // appearance
+  @apply appearance-none;
+  @apply cursor-pointer outline-none;
+  @apply bg-none bg-default-positive;
+  @apply border-2 border-solid border-gray-100;
+  @apply rounded-2xl;
+  @apply text-xs;
+
+  // transition
+  @apply transition-colors duration-500;
+
+  // custom
+  -webkit-appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%);
+
+  background-position:
+    calc(100% - 20px) calc(50%),
+    calc(100% - 15px) calc(50%);
+
+  background-size:
+    5px 5px,
+    5px 5px;
+
+  background-repeat: no-repeat;
+
+  &::-ms-expand {
+    // layer structure
+    @apply hidden
+  }
+
+  &:focus {
+    // appearance
+    @apply border-blue-100
+  }
+
+  &:disabled {
+    // appearance
+    @apply bg-gray-50;
+  }
+}

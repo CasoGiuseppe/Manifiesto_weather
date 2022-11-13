@@ -15,26 +15,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from 'vue';
+import type { Is } from './types';
 
-const props = defineProps({
-  id: {
-    type: [String, Number],
-    default: "test",
-  },
-  is: {
-    type: Array,
-    default: [],
-    validator(value: string[]) {
-      const matchArray: string[] = ['default', 'secondary', 'small', 'squared', 'rounded', 'transparent']
-      return value.length > 0 ? matchArray.some((node:string) => value.includes(node)) : true
-    }
-  },
-  maxWidth: {
-    type: String,
-    default: "100%"
-  }
-});
+export interface IButton {
+  id: string,
+  is: Is[],
+  maxWidth?: string
+}
+
+const props = withDefaults(defineProps<IButton>(), {
+  id: 'test',
+  is: () => [],
+  maxWidth: '100%'
+})
 
 const cssCustomElementTypes = computed(() => {
   return props.is.length > 0 ? props.is.map((type) => `base-button--is-${type}`) : []

@@ -2,7 +2,17 @@
   $basebutton: &;
   --max-width: 100%;
 
-  @apply bg-blue-200 text-sm uppercase py-sm px-md rounded text-default-positive transition-colors duration-500 font-light;
+  // layer structure
+  @apply py-sm px-md;
+
+  // appearance
+  @apply appearance-none;
+  @apply bg-blue-200;
+  @apply rounded;
+  @apply text-sm text-default-positive font-light uppercase;
+
+  // transition
+  @apply transition-colors duration-500;
 
   &:not([disabled]) {
     @apply cursor-pointer;
@@ -40,47 +50,65 @@
   }
 
   &:disabled {
+    // appearance
     @apply bg-gray-200;
 
     &#{$basebutton}--is-secondary {
+      // appearance
       @apply bg-gray-100
     }
   }
 
   &--is-default,
   &--is-secondary {
+    // layer structure
     @apply w-full max-w-[var(--max-width)]
   }
 
   &--is-secondary {
-    @apply bg-default-positive text-gray-400 outline outline-gray-100 outline-2 outline-offset-[-1px];
+    // appearance
+    @apply bg-default-positive;
+    @apply text-gray-400;
+    @apply outline outline-gray-100 outline-2 outline-offset-[-1px]
   }
 
   &--is-small {
-    @apply text-xs py-xsm px-sm
+    // layer structure
+    @apply py-xsm px-sm;
+
+    // appearance
+    @apply text-xs
   }
 
   &--is-squared,
   &--is-rounded {
-    @apply p-none w-xlg h-xlg flex justify-center items-center bg-gray-100
+    // layer structure
+    @apply w-xlg h-xlg;
+    @apply flex justify-center items-center;
+    @apply p-none;
+
+    // appearance
+    @apply bg-gray-100;
   }
 
   &--is-squared {
-    @apply p-none w-xlg h-xlg flex justify-center items-center bg-gray-100;
-
     &#{$basebutton}--is-small {
+      // layer structure
       @apply w-lg h-lg;
     }
   }
 
   &--is-rounded {
+    // appearance
     @apply rounded-full;
 
     &#{$basebutton}--is-transparent {
+      // appearance
       @apply bg-none;
 
       >#{$basebutton}__label {
         >svg {
+          // appearance
           @apply text-default-positive;
         }
       }
@@ -88,20 +116,31 @@
   }
 
   &--is-icon {
+    // layer structure
     @apply p-sm pr-md;
 
     #{$basebutton}__label {
       >svg {
+        // layer structure
         @apply mr-md
       }
     }
   }
 
   &__label {
-    @apply relative flex justify-center;
+    // layer structure
+    @apply relative;
+    @apply flex justify-center;
 
     >svg {
-      @apply transition-colors duration-500 text-gray-400 w-lg h-md;
+      // layer structure
+      @apply w-lg h-md;
+
+      // appearance
+      @apply text-gray-400;
+
+      // transition
+      @apply transition-colors duration-500;
     }
   }
 }

@@ -2,31 +2,50 @@
   $baseinput: &;
   --max-width: 100%;
 
-  @apply px-md py-sm rounded-2xl outline-0 border-2 border-solid border-gray-100 transition-colors duration-500 text-xs w-full max-w-[var(--max-width)];
+  // layer structure
+  @apply px-md py-sm;
+  @apply w-full max-w-[var(--max-width)];
+
+  // appearance
+  @apply appearance-none;
+  @apply border-2 border-solid border-gray-100;
+  @apply rounded-2xl;
+  @apply outline-0;
+  @apply text-xs;
+
+  // transition
+  @apply transition-colors duration-500;
 
   &:not([disabled]) {
     &::placeholder {
+      // appearance
       @apply text-gray-300 text-xs
     }
 
     &:focus {
+      // appearance
       @apply border-blue-100
     }
   }
 
   &:disabled {
+    // appearance
     @apply bg-gray-50 border-gray-100 border;
 
     &::placeholder {
+      // appearance
       @apply text-gray-200
     }
   }
 
   &--is-wrong {
-    @apply border-red-100 bg-red-50 text-default-positive
+    // appearance
+    @apply border-red-100 bg-red-50;
+    @apply text-default-positive;
   }
 
   &--is-correct {
+    // appearance
     @apply border-green-100 bg-green-50
   }
 }

@@ -5,7 +5,12 @@
     @apply min-h-full m-none p-none bg-blue-50 font-default;
 
     * {
-      @apply box-border
+      @apply box-border;
+
+      &::after,
+      &::before {
+        @apply box-border
+      }
     }
   }
 }

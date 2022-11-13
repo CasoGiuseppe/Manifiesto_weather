@@ -14,7 +14,27 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
-const props = defineProps({
+import { Types, type Is } from './types';
+
+export interface IButton {
+  id?: string,
+  type?: Types,
+  placeholder?: string,
+  is?: Is[],
+  inputModel?: string,
+  maxWidth?: string,
+}
+
+const props = withDefaults(defineProps<IButton>(), {
+  id: 'test',
+  type: Types.TEXT,
+  placeholder: 'placeholder',
+  is: () => [],
+  inputModel: '',
+  maxWidth: '100%'
+})
+
+/*const props = defineProps({
   id: {
     type: [String, Number],
     default: "test",
@@ -46,7 +66,7 @@ const props = defineProps({
     type: String,
     default: "100%"
   }
-})
+})*/
 
 const cssCustomElementTypes = computed(() => {
   return props.is.length > 0 ? props.is.map((type) => `base-input--is-${type}`) : []
