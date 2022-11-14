@@ -1,0 +1,1 @@
+export const MIN_PWD_REQUIRED: number = 8

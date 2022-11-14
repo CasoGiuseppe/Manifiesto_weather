@@ -4,6 +4,7 @@ export const emailValidator = (email: string): boolean | undefined => {
   return !pattern.test(email)
 }
 
-export const fieldLengthValidator = (value: string, min: number): boolean => {
+export const fieldLengthValidator = (value: string, min: number): boolean | undefined => {
+  if (value === '') return
   return !(value.length > min)
 }

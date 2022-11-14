@@ -6,19 +6,19 @@
   .layout {
     $layout: &;
 
-    @apply flex flex-col min-h-screen w-screen justify-end;
+    @apply flex flex-col min-h-screen w-screen justify-start;
 
     @screen tablet-ld {
-      @apply flex-row;
+      @apply flex-row justify-end;
     }
 
     // lateral panel
     &__panel {
-      @apply order-2 flex flex-col justify-end;
+      @apply order-2 flex flex-col justify-start;
       @apply bg-gray-500;
 
       @screen tablet-ld {
-        @apply flex-row order-1 basis-2/5;
+        @apply flex-row order-1 basis-2/5 justify-end;
       }
 
       &-navigation {
@@ -33,11 +33,11 @@
 
       &-content {
         // layer structure
-        @apply flex flex-initial flex-col grow order-1 p-lg min-w-[100%] justify-end gap-xlg;
+        @apply flex flex-initial flex-col grow order-1 p-lg min-h-[100%] justify-end gap-xlg;
 
         @screen tablet-ld {
           // layer structure
-          @apply flex-col order-2;
+          @apply flex-col order-2 min-w-[100%];
         }
       }
 
@@ -58,14 +58,6 @@
         @screen tablet-ld {
           @apply justify-start
         }
-
-        >svg {
-          @apply w-xlg h-xlg;
-
-          @screen tablet-ld {
-            @apply w-xxlg h-xxlg;
-          }
-        }
       }
 
       &__footer {
@@ -79,14 +71,21 @@
 
     // router view box
     &__router-box {
-      @apply order-1 flex-1 flex flex-col min-w-[60%];
-      @apply transition-size;
+      @apply order-1 flex-1 flex flex-col min-h-fit;
+      @apply transition-size duration-300;
+
+      @screen desktop {
+        @apply min-w-[70vw]
+      }
 
       @screen tablet-ld {
-        @apply order-2;
+        @apply order-2 min-w-[60vw];
+      }
 
-        #{$layout}--is-secondary & {
-          // layer structure
+      #{$layout}--is-secondary & {
+        @apply min-h-screen;
+
+        @screen tablet-ld {
           @apply min-w-[100vw]
         }
       }

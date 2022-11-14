@@ -24,6 +24,7 @@
         :type="Types.PASSWORD"
         placeholder="Your password"
         v-model:input-model="pwd.label"
+        :is="pwd.state()"
       />
     </fieldset>
 
@@ -53,16 +54,17 @@ import { Types } from '@/app/ui/components/base/base-input/types'
 import { Is as IsButton } from '@/app/ui/components/base/base-button/types'
 import { Is as IsInput } from '@/app/ui/components/base/base-input/types'
 import { TvIcon } from '@heroicons/vue/24/solid'
-import { emailValidator} from '@/app/shared/helpers/validators'
+import { emailValidator, fieldLengthValidator} from '@/app/shared/helpers/validators'
+import { MIN_PWD_REQUIRED } from '@/app/shared/helpers/constants'
 
-interface IEmail {
+interface IReactive {
   label: string
   state: any
   error: boolean | undefined
 }
 
 // input models
-const email:IEmail = reactive({
+const email:IReactive = reactive({
   label: '',
   state: () => {
     if(email.error === undefined) return []
@@ -71,15 +73,18 @@ const email:IEmail = reactive({
   error: computed(() => emailValidator(email.label)),
 })
 
-const pwd = reactive({
+const pwd:IReactive = reactive({
   label: '',
-  type: [],
-  error: false
+  state: () => {
+    if(pwd.error === undefined) return []
+    return pwd.error ? [IsInput.WRONG] : [IsInput.CORRECT]
+  },
+  error: computed(() => fieldLengthValidator(pwd.label, MIN_PWD_REQUIRED))
 })
 
-// validations: all fields are filled qith correct format
+// validations: all fields are filled with correct format
 const fieldsEmptyState = computed(() => {
-  const validator = [[email.label, pwd.label].some(value => value === ''), email.error]
+  const validator = [[email.label, pwd.label].some(value => value === ''), email.error, pwd.error]
   return validator.some((value: boolean | undefined) => value)
 })
 
