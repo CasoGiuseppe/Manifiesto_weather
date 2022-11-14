@@ -1,5 +1,5 @@
-import type { UserType } from '../user.types';
+import type { User } from '../user';
 
-export interface HandleRequest {
-  getUser(email: string, password: string): Promise<UserType>;
+export interface IHandleRequest {
+  getUser(email: string, password: string): Promise<User>;
 }

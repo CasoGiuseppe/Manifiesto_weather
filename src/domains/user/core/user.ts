@@ -14,7 +14,7 @@ export class User {
     return new User(id, name, surname, email, password)
   }
 
-  get user(): UserType {
+  get userEntity(): UserType {
     return {
       id: this.id,
       name: this.name,
