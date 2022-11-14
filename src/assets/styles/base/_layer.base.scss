@@ -2,7 +2,7 @@
 
   html,
   body {
-    @apply min-h-full m-none p-none bg-blue-50 font-default;
+    @apply min-h-full m-none p-none bg-blue-50 font-default overflow-hidden;
 
     * {
       @apply box-border;

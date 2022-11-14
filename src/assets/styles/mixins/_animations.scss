@@ -7,7 +7,7 @@
   $duration: .4s,
   $duration-out: .6s,
   $delay: 0s,
-) {
+  $ease: linear) {
 
   .#{$name}-leave,
   .#{$name}-enter-to {
@@ -18,12 +18,12 @@
   .#{$name}-leave-active,
   .#{$name}-enter-active {
     transition: transform $duration var(--sm-ease-out, linear) $delay,
-      opacity $duration var(--sm-ease-out, linear) $delay;
+      opacity $duration var($ease, linear) $delay;
   }
 
   .#{$name}-leave-active {
     transition-duration: $duration-out;
-    transition-timing-function: var(--sm-ease-out, linear)
+    transition-timing-function: var($ease, linear)
   }
 
   .#{$name}-leave-to {

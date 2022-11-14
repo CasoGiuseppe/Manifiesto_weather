@@ -7,7 +7,8 @@ const router = createRouter({
       path: "/",
       name: "route",
       components: {
-        default: () => undefined,
+        default: () => import("@/app/ui/views/dashboard/Dashboard.vue"),
+        panel: () => import("@/app/ui/widgets/login/Login.vue")
       },
     },
     {

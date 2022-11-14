@@ -63,6 +63,7 @@ module.exports = {
       bold: "var(--sm-font-weight-bold)",
     },
     fontSize: {
+      xxs: ['var(--sm-font-size-xxsmall)', { lineHeight: 'normal' }],
       xs: ['var(--sm-font-size-xsmall)', { lineHeight: 'normal' }],
       sm: ['var(--sm-font-size-small)', { lineHeight: 'normal' }],
       base: ['var(--sm-font-size-medium)', { lineHeight: 'normal' }],
@@ -70,7 +71,9 @@ module.exports = {
       xlg: ['var(--sm-font-size-xlarge)', { lineHeight: 'normal' }],
     },
     transitionProperty: {
-      colors: 'color, background-color, border-color, text-decoration-color, fill, stroke, outline-color'
+      colors: 'color, background-color, border-color, text-decoration-color, fill, stroke, outline-color',
+      transform: 'transform',
+      size: 'width, min-width'
     },
     extend: {
       animation: {

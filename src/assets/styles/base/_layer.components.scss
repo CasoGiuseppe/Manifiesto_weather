@@ -1,12 +1,12 @@
 @layer components {
   #app {
-    @apply h-screen overflow-auto flex justify-start;
+    @apply h-screen overflow-hidden flex justify-start;
   }
 
   .layout {
     $layout: &;
 
-    @apply flex flex-col justify-start min-h-screen w-screen;
+    @apply flex flex-col min-h-screen w-screen justify-end;
 
     @screen tablet-ld {
       @apply flex-row;
@@ -14,39 +14,86 @@
 
     // lateral panel
     &__panel {
-      @apply order-2 flex flex-col bg-gray-500 basis-1/6;
+      @apply order-2 flex flex-col justify-end;
+      @apply bg-gray-500;
 
       @screen tablet-ld {
         @apply flex-row order-1 basis-2/5;
       }
 
       &-navigation {
-        @apply basis-xlg order-2 bg-gray-600 rounded-t-lg justify-end items-end flex p-sm;
+        @apply basis-xlg order-2 justify-end items-end flex p-sm;
+        @apply bg-gray-600 rounded-t-lg;
 
         @screen tablet-ld {
-          @apply flex-row order-1 basis-xxlg rounded-r-xl justify-center;
+          @apply flex-row order-1 basis-xxlg justify-center;
+          @apply rounded-r-xl
         }
       }
 
       &-content {
-        @apply flex-initial grow order-1 p-sm;
+        // layer structure
+        @apply flex flex-initial flex-col grow order-1 p-lg min-w-[100%] justify-end gap-xlg;
 
         @screen tablet-ld {
-          @apply flex-row order-2;
+          // layer structure
+          @apply flex-col order-2;
+        }
+      }
+
+      &__header,
+      &__footer {
+        @apply flex gap-sm items-center;
+        @apply text-default-positive;
+
+        >svg {
+          @apply w-xlg h-xlg
+        }
+      }
+
+      &__header {
+        @apply mt-none mb-auto justify-end;
+        @apply text-lg font-bold;
+
+        @screen tablet-ld {
+          @apply justify-start
+        }
+
+        >svg {
+          @apply w-xlg h-xlg;
+
+          @screen tablet-ld {
+            @apply w-xxlg h-xxlg;
+          }
+        }
+      }
+
+      &__footer {
+        @apply text-xs;
+
+        >svg {
+          @apply w-xlg h-xlg
         }
       }
     }
 
     // router view box
     &__router-box {
-      @apply order-1 flex-1 flex flex-col;
+      @apply order-1 flex-1 flex flex-col min-w-[60%];
+      @apply transition-size;
 
       @screen tablet-ld {
         @apply order-2;
+
+        #{$layout}--is-secondary & {
+          // layer structure
+          @apply min-w-[100vw]
+        }
       }
 
       &__header {
-        @apply sticky flex justify-end bg-default-positive shadow-b px-xlg py-sm rounded-br-lg rounded-bl-lg;
+        @apply sticky flex justify-end px-xlg py-sm;
+        @apply bg-default-positive shadow-b rounded-br-lg rounded-bl-lg;
 
         @screen tablet-ld {
           @apply rounded-br-xl rounded-bl-none
