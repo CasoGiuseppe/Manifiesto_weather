@@ -57,9 +57,28 @@
     <article class="library__category">
       <h2 class="library__title">Base Components: <span>Badge</span></h2>
       <ul class="library__table">
-        <li data-label="is default">
-          <BaseBadge>
-            
+        <li data-label="direction column and max width" class="library--is-max">
+          <BaseBadge :is="[IsBadge.COLUMN]" max-width="400px">
+            <template #title>title</template>
+            <template #payoff>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et </template>
+            <template #content><ChartBarIcon style="fill: white" /></template>
+            <template #footer>
+              <RouterLink :to="{}" class="link link--is-small">
+                <DocumentDuplicateIcon />compare
+              </RouterLink>
+            </template>
+          </BaseBadge>
+        </li>
+        <li data-label="direction row" class="library--is-max">
+          <BaseBadge :is="[IsBadge.ROW]">
+            <template #title>title</template>
+            <template #payoff>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et </template>
+            <template #content><ChartBarIcon style="fill: white" /></template>
+            <template #footer>
+              <RouterLink :to="{}" class="link link--is-small">
+                <DocumentDuplicateIcon />compare
+              </RouterLink>
+            </template>
           </BaseBadge>
         </li>
       </ul>
@@ -89,9 +108,10 @@ import BaseInput from "@/app/ui/components/base/base-input/BaseInput.vue"
 import BaseSelect from "@/app/ui/components/base/base-select/BaseSelect.vue"
 import BaseBadge from "@/app/ui/components/base/base-badge/BaseBadge.vue"
 import Login from "@/app/ui/widgets/login/Login.vue"
-import { Cog6ToothIcon } from '@heroicons/vue/24/solid'
+import { Cog6ToothIcon, ChartBarIcon, DocumentDuplicateIcon } from '@heroicons/vue/24/solid'
 import { Is as IsButton } from '@/app/ui/components/base/base-button/types'
 import { Is as IsInput } from '@/app/ui/components/base/base-input/types'
+import { Is as IsBadge } from '@/app/ui/components/base/base-badge/types'
 
 const placeholder = ref('Write your custom input')
 const message = ref('default input value')

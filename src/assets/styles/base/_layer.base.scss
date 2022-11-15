@@ -14,8 +14,21 @@
 
       &:is(a) {
         &.link {
+          @apply flex items-center gap-xsm;
+          @apply underline;
+
+          >* {
+            &:is(svg) {
+              @apply w-sm h-sm
+            }
+          }
+
           &--is-simple {
-            @apply text-blue-100 underline
+            @apply text-blue-100
+          }
+
+          &--is-small {
+            @apply text-default-positive text-[10px]
           }
         }
       }
