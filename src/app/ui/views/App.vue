@@ -34,8 +34,8 @@
         visible: router name !== library
       -->
       <header class="layout__router-box__header">
-        <BaseButton @send-click="bringLibrary" :is="[IsButton.SMALL]">Library</BaseButton>
-        <BaseButton @send-click="bringFigma" :is="[IsButton.SMALL, IsButton.SECONDARY]">Figma prototype</BaseButton>
+        <BaseButton id="library" @send-click="bringLibrary" :is="[IsButton.SMALL]">Library</BaseButton>
+        <BaseButton id="figma" @send-click="bringFigma" :is="[IsButton.SMALL, IsButton.SECONDARY]">Figma prototype</BaseButton>
       </header>
       <section class="layout__router-box__content">
         <RouterView />

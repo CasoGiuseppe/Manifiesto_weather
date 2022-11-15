@@ -1,8 +1,9 @@
+import { BASE_API_URL } from "@/app/shared/helpers/constants";
 import type { HTTPService } from "@/app/shared/services/http/http.services";
 import type { UUIDService } from "@/app/shared/services/uuid/uuid.services";
 import type { IHandleRequest } from "../../core/repository/user.repository";
 import type { User } from "../../core/user";
-import { UserDTOAdapter, UserError } from "../user.adapter";
+import { UserDTOAdapter } from "../user.adapter";
 
 export class RequestAdapter implements IHandleRequest {
   constructor(
@@ -11,7 +12,7 @@ export class RequestAdapter implements IHandleRequest {
 
   async getUser(email: string, password: string): Promise<User | string> {
     try {
-      const response = await this.client.get<UserDTOAdapter | any>(`${import.meta.env.VITE_APP_API_ENDPOINT}`, { email, password });
+      const response = await this.client.get<UserDTOAdapter | any>(BASE_API_URL, { email, password });
       if (response.errors) {
         return response.errors
       }
