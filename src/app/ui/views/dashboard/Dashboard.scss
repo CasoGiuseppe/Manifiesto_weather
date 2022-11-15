@@ -4,10 +4,15 @@
   @apply flex flex-1 items-center justify-center h-full;
 
   &__highlight {
+    @apply flex flex-col;
     @apply text-xlg font-bold text-gray-100 text-center;
 
     @screen phone {
       @apply text-lg
+    }
+
+    >* {
+      @apply font-regular text-base;
     }
   }
 }

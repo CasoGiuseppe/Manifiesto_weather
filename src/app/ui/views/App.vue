@@ -14,7 +14,7 @@
         mode="out-in"
         name="appear-extra-panel"
       >
-        <component :is="Component" :key="route.path" v-if="route.name !== 'library'">
+        <component :is="Component" :key="route.meta.login" v-if="route.name !== 'library'">
           <template #component>
             <component :is="setComponent">
               <template #title>get started</template>
@@ -53,7 +53,8 @@ import { Is as IsButton } from '@/app/ui/components/base/base-button/types'
 import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 
 const components = {
-  start: () => import("@/app/ui/widgets/login/Login.vue")
+  start: () => import("@/app/ui/widgets/login/Login.vue"),
+  sign: () => import("@/app/ui/widgets/sign-in/SignIn.vue")
 }
 
 const currentRouteName = computed(() => useRoute().name)

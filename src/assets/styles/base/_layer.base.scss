@@ -11,6 +11,14 @@
       &::before {
         @apply box-border
       }
+
+      &:is(a) {
+        &.link {
+          &--is-simple {
+            @apply text-blue-100 underline
+          }
+        }
+      }
     }
   }
 }
