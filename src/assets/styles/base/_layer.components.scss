@@ -1,6 +1,6 @@
 @layer components {
   #app {
-    @apply h-screen overflow-hidden flex justify-start;
+    @apply h-screen overflow-auto flex justify-start;
   }
 
   .layout {

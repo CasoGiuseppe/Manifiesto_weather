@@ -1,0 +1,13 @@
+.dashboard {
+  $dashboard: &;
+
+  @apply flex flex-1 items-center justify-center h-full;
+
+  &__highlight {
+    @apply text-xlg font-bold text-gray-100 text-center;
+
+    @screen phone {
+      @apply text-lg
+    }
+  }
+}
