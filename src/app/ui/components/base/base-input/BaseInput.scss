@@ -19,7 +19,7 @@
   &:not([disabled]) {
     &::placeholder {
       // appearance
-      @apply text-gray-300 text-xs
+      @apply text-gray-100 text-xs
     }
 
     &:focus {
@@ -37,7 +37,7 @@
 
     &::placeholder {
       // appearance
-      @apply text-gray-200
+      @apply text-gray-100
     }
   }
 

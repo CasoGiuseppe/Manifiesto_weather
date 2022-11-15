@@ -16,13 +16,13 @@
 
     <fieldset class="login__fields">
       <BaseInput
-        placeholder="Write your enamil"
+        placeholder="test@gmail.com"
         v-model:input-model="email.label"
         :is="email.state()"
       />
       <BaseInput
         :type="Types.PASSWORD"
-        placeholder="Your password"
+        placeholder="123456789"
         v-model:input-model="pwd.label"
         :is="pwd.state()"
       />
@@ -33,6 +33,7 @@
         id="email"
         :is="[IsButton.DEFAULT]"
         :disabled="fieldsEmptyState"
+        @send-click="userLogin"
       >
         Login
       </BaseButton>
@@ -47,7 +48,7 @@
   </form>
 </template>
 <script setup lang="ts">
-import { reactive, computed } from 'vue'
+import { reactive, computed, inject } from 'vue'
 import BaseInput from "@/app/ui/components/base/base-input/BaseInput.vue"
 import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 import { Types } from '@/app/ui/components/base/base-input/types'
@@ -56,12 +57,15 @@ import { Is as IsInput } from '@/app/ui/components/base/base-input/types'
 import { TvIcon } from '@heroicons/vue/24/solid'
 import { emailValidator, fieldLengthValidator} from '@/app/shared/helpers/validators'
 import { MIN_PWD_REQUIRED } from '@/app/shared/helpers/constants'
+import type { UserServices } from '@/domains/user/application/use-cases'
 
 interface IReactive {
   label: string
   state: any
   error: boolean | undefined
 }
+
+const userService = inject<UserServices>("userService");
 
 // input models
 const email:IReactive = reactive({
@@ -88,5 +92,6 @@ const fieldsEmptyState = computed(() => {
   return validator.some((value: boolean | undefined) => value)
 })
 
+const userLogin = async () => await userService?.getUserByLogin(email.label, pwd.label)
 </script>
 <style lang="scss" src="./Login.scss" />

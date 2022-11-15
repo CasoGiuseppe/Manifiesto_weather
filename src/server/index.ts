@@ -1,4 +1,4 @@
-import { Server } from 'miragejs';
+import { Server, Response } from 'miragejs';
 import USERS from "./__mocks__/users";
 
 
@@ -13,7 +13,10 @@ const mockServer = new Server({
     this.namespace = import.meta.env.VITE_APP_API_NAMESPACE;
 
     // get users info
-    this.get(`${import.meta.env.VITE_APP_API_PORT}${import.meta.env.VITE_APP_API_ENDPOINT}`, (schema) => schema.db.users);
+    this.get(`${import.meta.env.VITE_APP_API_PORT}${import.meta.env.VITE_APP_API_ENDPOINT}`, (schema, request) => {
+      const result = schema.db.users.where({ email: request?.queryParams?.email, password: request?.queryParams?.password })
+      return result.length > 0 ? result[0] : new Response(400, { some: 'header' }, { errors: '400' })
+    });
 
     this.passthrough('https://api.brightsky.dev/current_weather');
   },

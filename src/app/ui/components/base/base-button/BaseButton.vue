@@ -6,7 +6,7 @@
     ]"
     :style="cssCustomVariables"
     :data-id="id"
-    @click="handleClick(id)"
+    @click="sendClick(id)"
   >
     <span class="base-button__label">
       <slot />
@@ -40,8 +40,8 @@ const cssCustomVariables = computed(() => {
   }
 })
 
-const clickEmit = defineEmits(["handleClick"]);
-const handleClick = (id: string | number) => clickEmit("handleClick", id);
+const clickEmit = defineEmits(["sendClick"]);
+const sendClick = (id: string | number) => clickEmit("sendClick", id);
 </script>
 <style lang="scss" src="./BaseButton.scss" />
  
