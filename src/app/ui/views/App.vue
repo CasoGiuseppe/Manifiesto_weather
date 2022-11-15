@@ -8,26 +8,23 @@
       behaiour: user panel
       visible: router name !== library
     -->
-    <aside class="layout__panel">
-      <navigation class="layout__panel-navigation">n</navigation>
-      <section class="layout__panel-content">
-        <header class="layout__panel__header">
-          <RouterLink :to="{name: 'start'}">
-            <h1 class="layout__logo"><SunIcon />Manifiesto Weather</h1>
-          </RouterLink>
-        </header>
-        <RouterView name="panel" v-slot="{ Component }" :key="$route.path">
-          <component :is="Component">
-            <template #title>get started</template>
-            <template #message>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim</template>
-          </component>
-        </RouterView>
-        <footer class="layout__panel__footer">
-          <AcademicCapIcon />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
-        </footer>
-      </section>
-    </aside>
+    
+    <RouterView name="panel" v-slot="{ Component, route }">
+      <Transition
+        mode="out-in"
+        name="appear-extra-panel"
+      >
+        <component :is="Component" :key="route.path" v-if="route.name !== 'library'">
+          <template #component>
+            <component :is="setComponent">
+              <template #title>get started</template>
+              <template #message>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim</template>
+            </component>
+          </template>
+        </component>
+      </Transition>
+    </RouterView>
+
     <!--
       behaiour: dashboard/component library
     -->
@@ -48,12 +45,18 @@
 </template>
 
 <script setup lang="ts">
-import { provide, onBeforeMount } from "vue";
-import { AcademicCapIcon, SunIcon } from '@heroicons/vue/24/solid';
+import { provide, onBeforeMount, defineAsyncComponent, computed, } from "vue";
+import { useRoute } from 'vue-router';
+
 import type { UserServices } from "@/domains/user/application/use-cases";
 import { userService } from '@/domains/user';
 
+const components = {
+  start: () => import("@/app/ui/widgets/login/Login.vue")
+}
 
+const currentRouteName = computed(() => useRoute().name)
+const setComponent = computed(() => defineAsyncComponent(components[currentRouteName.value as keyof typeof components]))
 onBeforeMount(() => {
   provide<UserServices>("userService", userService);
 })
@@ -68,3 +71,14 @@ onBeforeMount(() => {
 //})
 
 </script>
+<style lang="scss">
+  .page-opacity-enter-active,
+  .page-opacity-leave-active {
+    transition: 600ms ease all
+  }
+
+  .page-opacity-enter-from,
+  .page-opacity-leave-to {
+    opacity: 0;
+  }
+</style>

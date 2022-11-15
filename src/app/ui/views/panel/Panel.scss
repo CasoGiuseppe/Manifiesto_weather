@@ -1,0 +1,69 @@
+@layer components {
+  .panel {
+    $panel: &;
+
+    @apply order-2 flex flex-col justify-start;
+    @apply bg-gray-500;
+    //@apply transition-transform duration-300;
+
+    #{$panel}--is-secondary & {
+      //@apply translate-x-[-100%];
+      //@apply duration-500;
+    }
+
+    @screen tablet-ld {
+      @apply flex-row order-1 basis-2/5 justify-end fixed left-none top-none h-screen max-w-[40vw] z-10;
+    }
+
+    &__logo {
+      @apply flex gap-sm items-center text-sm;
+
+      >svg {
+        @apply w-xlg h-xlg
+      }
+    }
+
+    &-navigation {
+      @apply basis-xlg order-2 justify-end items-end flex p-sm;
+      @apply bg-gray-600 rounded-t-lg;
+
+      @screen tablet-ld {
+        @apply flex-row order-1 basis-xxlg justify-center;
+        @apply rounded-r-xl
+      }
+    }
+
+    &-content {
+      // layer structure
+      @apply flex flex-initial flex-col grow order-1 p-lg justify-end gap-xlg;
+
+      @screen tablet-ld {
+        // layer structure
+        @apply flex-col order-2;
+      }
+    }
+
+    &__header,
+    &__footer {
+      @apply flex gap-sm items-center;
+      @apply text-default-positive;
+    }
+
+    &__header {
+      @apply mt-none mb-auto justify-end;
+      @apply text-lg font-bold;
+
+      @screen tablet-ld {
+        @apply justify-start
+      }
+    }
+
+    &__footer {
+      @apply text-xs;
+
+      >svg {
+        @apply w-xlg h-xlg
+      }
+    }
+  }
+}
