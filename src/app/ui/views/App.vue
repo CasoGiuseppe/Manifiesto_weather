@@ -34,8 +34,8 @@
         visible: router name !== library
       -->
       <header class="layout__router-box__header">
-        <RouterLink :to="{name: 'library'}">library</RouterLink>
-        <a href="https://www.figma.com/proto/GzwexU2trMU1cyvRQnQlPx/Manifesto---Weather-test?page-id=0%3A1&node-id=24%3A22&viewport=668%2C369%2C1.18&scaling=scale-down&starting-point-node-id=6%3A5">Figma prototype</a>
+        <BaseButton @send-click="bringLibrary" :is="[IsButton.SMALL]">Library</BaseButton>
+        <BaseButton @send-click="bringFigma" :is="[IsButton.SMALL, IsButton.SECONDARY]">Figma prototype</BaseButton>
       </header>
       <section class="layout__router-box__content">
         <RouterView />
@@ -46,10 +46,11 @@
 
 <script setup lang="ts">
 import { provide, onBeforeMount, defineAsyncComponent, computed, } from "vue";
-import { useRoute } from 'vue-router';
-
+import { useRoute, useRouter } from 'vue-router';
 import type { UserServices } from "@/domains/user/application/use-cases";
 import { userService } from '@/domains/user';
+import { Is as IsButton } from '@/app/ui/components/base/base-button/types'
+import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 
 const components = {
   start: () => import("@/app/ui/widgets/login/Login.vue")
@@ -70,15 +71,11 @@ onBeforeMount(() => {
   //console.log(await weather.json())
 //})
 
+const router = useRouter()
+const bringLibrary = () => {router.push({ name: 'library'})}
+const bringFigma = () => {
+  const url = "https://www.figma.com/proto/GzwexU2trMU1cyvRQnQlPx/Manifesto---Weather-test?page-id=0%3A1&node-id=24%3A22&viewport=668%2C369%2C1.18&scaling=scale-down&starting-point-node-id=6%3A5"
+  const w = window.open(url, '_blank');
+  if (w) w.focus()
+}
 </script>
-<style lang="scss">
-  .page-opacity-enter-active,
-  .page-opacity-leave-active {
-    transition: 600ms ease all
-  }
-
-  .page-opacity-enter-from,
-  .page-opacity-leave-to {
-    opacity: 0;
-  }
-</style>

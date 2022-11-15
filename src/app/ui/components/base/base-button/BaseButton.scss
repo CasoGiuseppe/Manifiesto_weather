@@ -61,8 +61,10 @@
 
   &--is-default,
   &--is-secondary {
-    // layer structure
-    @apply w-full max-w-[var(--max-width)]
+    &:not(&#{$basebutton}--is-small) {
+      // layer structure
+      @apply w-full max-w-[var(--max-width)]
+    }
   }
 
   &--is-secondary {

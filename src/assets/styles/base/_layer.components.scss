@@ -35,7 +35,7 @@
 
 
       &__header {
-        @apply sticky flex justify-end px-xlg py-sm;
+        @apply sticky flex justify-end px-xlg py-sm gap-sm;
         @apply bg-default-positive shadow-b rounded-br-lg rounded-bl-lg;
 
         @screen tablet-ld {
