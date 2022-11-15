@@ -12,8 +12,9 @@
       <navigation class="layout__panel-navigation">n</navigation>
       <section class="layout__panel-content">
         <header class="layout__panel__header">
-          <SunIcon />
-          Logo here
+          <RouterLink :to="{name: 'start'}">
+            <h1 class="layout__logo"><SunIcon />Manifiesto Weather</h1>
+          </RouterLink>
         </header>
         <RouterView name="panel" v-slot="{ Component }" :key="$route.path">
           <component :is="Component">

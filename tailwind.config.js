@@ -73,7 +73,8 @@ module.exports = {
     transitionProperty: {
       colors: 'color, background-color, border-color, text-decoration-color, fill, stroke, outline-color',
       transform: 'transform',
-      size: 'width, min-width, height, min-height'
+      size: 'width, min-width, height, min-height',
+      spacing: 'margin, padding'
     },
     extend: {
       animation: {

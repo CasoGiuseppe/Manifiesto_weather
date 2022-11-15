@@ -5,7 +5,7 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "route",
+      name: "start",
       components: {
         default: () => import("@/app/ui/views/dashboard/Dashboard.vue"),
         panel: () => import("@/app/ui/widgets/login/Login.vue")
