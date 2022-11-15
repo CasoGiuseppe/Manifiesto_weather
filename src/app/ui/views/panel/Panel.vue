@@ -1,6 +1,8 @@
 <template>
 <aside class="panel" v-if="$route.name !== 'library'">
-  <navigation class="panel-navigation">n</navigation>
+  <navigation class="panel-navigation">
+    <BaseButton id="squared" :is="[IsButton.SQUARED, IsButton.SMALL]"><XCircleIcon/></BaseButton>
+  </navigation>
   <section class="panel-content">
     <header class="panel__header">
       <RouterLink :to="{name: 'start'}">
@@ -16,6 +18,9 @@
 </aside>
 </template>
 <script setup lang="ts">
+import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 import { AcademicCapIcon, SunIcon } from '@heroicons/vue/24/solid';
+import { Is as IsButton } from '@/app/ui/components/base/base-button/types'
+import { XCircleIcon } from '@heroicons/vue/24/solid'
 </script>
 <style lang="scss" src="./Panel.scss" />
