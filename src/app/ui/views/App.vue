@@ -13,10 +13,11 @@
       <Transition
         mode="out-in"
         name="appear-extra-panel"
+        appear
       >
         <component :is="Component" :key="route.meta.login" v-if="route.name !== 'library'">
           <template #component>
-            <component :is="setComponent">
+            <component :is="setComponent" :key="route.name">
               <template #title>get started</template>
               <template #message>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim</template>
             </component>
