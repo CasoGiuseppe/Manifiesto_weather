@@ -2,16 +2,13 @@
   $basebutton: &;
   --max-width: 100%;
 
-  // layer structure
   @apply py-sm px-md;
 
-  // appearance
   @apply appearance-none;
   @apply bg-blue-200;
   @apply rounded;
   @apply text-sm text-default-positive font-light uppercase;
 
-  // transition
   @apply transition-colors duration-500;
 
   &:not([disabled]) {
@@ -50,11 +47,9 @@
   }
 
   &:disabled {
-    // appearance
     @apply bg-gray-200;
 
     &#{$basebutton}--is-secondary {
-      // appearance
       @apply bg-gray-100
     }
   }
@@ -62,34 +57,27 @@
   &--is-default,
   &--is-secondary {
     &:not(&#{$basebutton}--is-small) {
-      // layer structure
       @apply w-full max-w-[var(--max-width)]
     }
   }
 
   &--is-secondary {
-    // appearance
     @apply bg-default-positive;
     @apply text-gray-400;
     @apply outline outline-gray-100 outline-2 outline-offset-[-1px]
   }
 
   &--is-small {
-    // layer structure
     @apply py-xsm px-sm;
-
-    // appearance
     @apply text-xs
   }
 
   &--is-squared,
   &--is-rounded {
-    // layer structure
     @apply w-xlg h-xlg;
     @apply flex justify-center items-center;
     @apply p-none;
 
-    // appearance
     @apply bg-gray-100;
   }
 
@@ -101,16 +89,13 @@
   }
 
   &--is-rounded {
-    // appearance
     @apply rounded-full;
 
     &#{$basebutton}--is-transparent {
-      // appearance
       @apply bg-none;
 
       >#{$basebutton}__label {
         >svg {
-          // appearance
           @apply text-default-positive;
         }
       }
@@ -118,30 +103,22 @@
   }
 
   &--is-icon {
-    // layer structure
     @apply p-sm pr-md;
 
     #{$basebutton}__label {
       >svg {
-        // layer structure
         @apply mr-md
       }
     }
   }
 
   &__label {
-    // layer structure
     @apply relative;
     @apply flex justify-center;
 
     >svg {
-      // layer structure
       @apply w-lg h-md;
-
-      // appearance
       @apply text-gray-400;
-
-      // transition
       @apply transition-colors duration-500;
     }
   }

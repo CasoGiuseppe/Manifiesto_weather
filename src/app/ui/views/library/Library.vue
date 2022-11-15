@@ -53,6 +53,18 @@
       </ul>
     </article>
 
+    <!-- category: components: badge -->
+    <article class="library__category">
+      <h2 class="library__title">Base Components: <span>Badge</span></h2>
+      <ul class="library__table">
+        <li data-label="is default">
+          <BaseBadge>
+            
+          </BaseBadge>
+        </li>
+      </ul>
+    </article>
+
      <!-- category: widgets -->
      <article class="library__category">
       <h2 class="library__title">Widgets: <span>Login</span></h2>
@@ -75,6 +87,7 @@ import { ref } from 'vue'
 import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 import BaseInput from "@/app/ui/components/base/base-input/BaseInput.vue"
 import BaseSelect from "@/app/ui/components/base/base-select/BaseSelect.vue"
+import BaseBadge from "@/app/ui/components/base/base-badge/BaseBadge.vue"
 import Login from "@/app/ui/widgets/login/Login.vue"
 import { Cog6ToothIcon } from '@heroicons/vue/24/solid'
 import { Is as IsButton } from '@/app/ui/components/base/base-button/types'

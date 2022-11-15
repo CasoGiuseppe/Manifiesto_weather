@@ -1,0 +1,6 @@
+.base-badge {
+  $basebadge: &;
+
+  @apply w-full;
+  @apply bg-gray-500
+}

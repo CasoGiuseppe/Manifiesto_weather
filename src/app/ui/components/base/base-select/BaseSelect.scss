@@ -2,10 +2,8 @@
   $basebutton: &;
   --max-width: 100%;
 
-  // layer structure
   @apply w-full max-w-[var(--max-width)] px-md py-[10px] relative;
 
-  // appearance
   @apply appearance-none;
   @apply cursor-pointer outline-none;
   @apply bg-none bg-default-positive;
@@ -13,10 +11,8 @@
   @apply rounded-2xl;
   @apply text-xs;
 
-  // transition
   @apply transition-colors duration-500;
 
-  // custom
   -webkit-appearance: none;
   background-image:
     linear-gradient(45deg, transparent 50%, gray 50%),
@@ -33,17 +29,14 @@
   background-repeat: no-repeat;
 
   &::-ms-expand {
-    // layer structure
     @apply hidden
   }
 
   &:focus {
-    // appearance
     @apply border-blue-100
   }
 
   &:disabled {
-    // appearance
     @apply bg-gray-50;
   }
 }
