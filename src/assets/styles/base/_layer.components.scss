@@ -21,18 +21,10 @@
     // router view box
     &__router-box {
       @apply order-1 flex-1 flex flex-col min-h-fit;
-      @apply transition-spacing duration-500;
-
 
       @screen tablet-ld {
-        @apply order-2 ml-[40vw];
-
-        #{$layout}--is-secondary & {
-          @apply ml-none;
-          @apply duration-300;
-        }
+        @apply order-2;
       }
-
 
       &__header {
         @apply sticky flex justify-end px-xlg py-sm gap-sm;
@@ -44,7 +36,26 @@
       }
 
       &__content {
-        @apply flex-1 overflow-y-auto
+        @apply flex-1 overflow-y-auto;
+        @apply transition-spacing duration-500;
+
+        @screen tablet-ld {
+          @apply ml-[40vw];
+        }
+
+        @screen desktop {
+          @apply ml-[32vw]
+        }
+
+        @screen large-desktop {
+          @apply ml-[26vw]
+        }
+
+
+        #{$layout}--is-secondary & {
+          @apply ml-none;
+          @apply duration-300;
+        }
       }
     }
   }
