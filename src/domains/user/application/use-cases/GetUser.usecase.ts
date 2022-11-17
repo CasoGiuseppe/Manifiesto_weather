@@ -1,5 +1,5 @@
 import { MESSAGES, type IMessages } from "@/app/shared/types/messages";
-import { ErrorsTypes, type IErrors } from "../../core/user.types";
+import { ErrorsTypes, type IErrors } from "@/app/shared/types/errors";
 import type { NotifyAdapter } from "../../infrastructure/NotificationAdapter/Notification.adapter";
 import type { RequestAdapter } from "../../infrastructure/RequestAdapter/Request.adapter";
 import { UserViewModel } from "../user.view";

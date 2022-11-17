@@ -58,7 +58,7 @@
       <h2 class="library__title">Base Components: <span>Badge</span></h2>
       <ul class="library__table">
         <li data-label="direction column and max width" class="library--is-max">
-          <BaseBadge :is="[IsBadge.COLUMN]" max-width="400px">
+          <BaseBadge id="column" :is="[IsBadge.COLUMN]" max-width="400px">
             <template #title>title</template>
             <template #payoff>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et </template>
             <template #content><ChartBarIcon style="fill: white" /></template>
@@ -70,7 +70,7 @@
           </BaseBadge>
         </li>
         <li data-label="direction row" class="library--is-max">
-          <BaseBadge :is="[IsBadge.ROW]">
+          <BaseBadge id="row" :is="[IsBadge.ROW]">
             <template #title>title</template>
             <template #payoff>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et </template>
             <template #content><ChartBarIcon style="fill: white" /></template>
