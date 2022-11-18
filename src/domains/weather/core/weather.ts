@@ -2,17 +2,14 @@ import type { WeatherType, WeatherDay } from './weather.types'
 
 export class Weather {
   constructor(
-    private readonly weather: WeatherDay[],
+    private readonly weather: WeatherType,
   ) { }
 
   static createWeatherForecast(props: WeatherType) {
-    const { weather } = props
-    return new Weather(weather)
+    return new Weather(props)
   }
 
   get WeatherEntity(): WeatherType {
-    return {
-      weather: this.weather
-    }
+    return this.weather
   }
 }

@@ -14,26 +14,7 @@ export class RequestAdapter implements IHandleRequest {
   async getWeatherForecast({ from, to, long, lat }: IWeatherParams): Promise<Weather> {
     try {
       const { weather } = await this.client.get<WeatherDTOAdapter>(BASE_API_WEATHER_URL, { date: from, last_date: to, lon: long, lat })
-      const modifyWeatherResponse = weather.map(day => {
-        const newDate = new Date(day.timestamp)
-        return {
-          ...day, ...{
-            timestamp: newDate.toJSON().slice(0, 10).replace(/-/g, '-'),
-            time: newDate.toLocaleTimeString()
-          }
-        }
-      })
-
-      const newWeatherFormat = [...new Set(modifyWeatherResponse.map(day => day.timestamp))].map(node => {
-        return {
-          time: node,
-          id: this.uuid.create(),
-          forecastDay: modifyWeatherResponse.filter((day) => day.timestamp === node)
-        }
-      })
-
-      console.log(newWeatherFormat)
-      const instance = new WeatherDTOAdapter(modifyWeatherResponse)
+      const instance = new WeatherDTOAdapter(this.uuid.create(), weather)
       return instance.createUserInstance()
     } catch (e) {
       throw new Error(e as string)
