@@ -65,7 +65,7 @@ interface IReactive {
   error: boolean | undefined
 }
 
-const userService = inject<UserServices>("userService");
+const UseUserService = inject<UserServices>("UseUserService");
 
 // input models
 const email:IReactive = reactive({
@@ -92,6 +92,6 @@ const fieldsEmptyState = computed(() => {
   return validator.some((value: boolean | undefined) => value)
 })
 
-const userLogin = async () => await userService?.getUserByLogin(email.label, pwd.label)
+const userLogin = async () => await UseUserService?.getUserByLogin(email.label, pwd.label)
 </script>
 <style lang="scss" src="./Login.scss" />

@@ -18,7 +18,7 @@ const mockServer = new Server({
       return result.length > 0 ? result[0] : new Response(400, { some: 'header' }, { errors: '400' })
     });
 
-    this.passthrough('https://api.brightsky.dev/current_weather');
+    this.passthrough(import.meta.env.VITE_APP_WEATHER_API_ENDPOINT);
   },
 });
 

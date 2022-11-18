@@ -1,9 +1,10 @@
 export type WeatherType = {
-  weather: Weather[]
+  weather: WeatherDay[]
 }
 
-export interface Weather {
-  timestamp: Date;
+export interface WeatherDay {
+  id: UniqueId;
+  timestamp: string;
   precipitation: number;
   sunshine?: number;
   temperature: number;

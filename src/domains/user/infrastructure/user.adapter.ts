@@ -19,9 +19,3 @@ export class UserDTOAdapter {
     })
   }
 }
-
-export class UserError {
-  constructor(
-    public readonly errors: string,
-  ) { }
-}

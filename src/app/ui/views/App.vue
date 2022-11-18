@@ -49,7 +49,7 @@
 import { provide, onBeforeMount, defineAsyncComponent, computed, } from "vue";
 import { useRoute, useRouter } from 'vue-router';
 import type { UserServices } from "@/domains/user/application/use-cases";
-import { userService } from '@/domains/user';
+import { UseUserService, UseWeatherService } from '@/domains';
 import { Is as IsButton } from '@/app/ui/components/base/base-button/types'
 import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 
@@ -61,8 +61,9 @@ const components = {
 const currentRouteName = computed(() => useRoute().name)
 const setComponent = computed(() => defineAsyncComponent(components[currentRouteName.value as keyof typeof components]))
 onBeforeMount(async () => {
+  console.log(await UseWeatherService.getWeatherForecastData('2020-04-21', '2020-04-22', '7.38', '51.58'))
   //console.log(await fetch(`https://api.brightsky.dev/current_weather?${new URLSearchParams({ lat: '51', lon: '7.38'})}`))
-  provide<UserServices>("userService", userService);
+  provide<UserServices>("UseUserService", UseUserService);
 })
 //onCreated(async () => {
   //provide<UserServices>("userService", userService);
