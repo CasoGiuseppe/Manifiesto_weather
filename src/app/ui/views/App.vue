@@ -61,7 +61,7 @@ const components = {
 const currentRouteName = computed(() => useRoute().name)
 const setComponent = computed(() => defineAsyncComponent(components[currentRouteName.value as keyof typeof components]))
 onBeforeMount(async () => {
-  console.log(await UseWeatherService.getWeatherForecastData('2020-04-21', '2020-04-22', '7.38', '51.58'))
+  console.log(await UseWeatherService.getWeatherForecastData('7.38', '51.58'))
   //console.log(await fetch(`https://api.brightsky.dev/current_weather?${new URLSearchParams({ lat: '51', lon: '7.38'})}`))
   provide<UserServices>("UseUserService", UseUserService);
 })

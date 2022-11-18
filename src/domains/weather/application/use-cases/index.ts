@@ -10,7 +10,7 @@ export class WeatherServices {
     this.getWeatherForecast = new GetWeatherForecast(this.requestAdapter)
   }
 
-  async getWeatherForecastData(from: string, to: string, long: string, lat: string) {
-    return await this.getWeatherForecast.execute(from, to, long, lat)
+  async getWeatherForecastData(long: string, lat: string) {
+    return await this.getWeatherForecast.execute(long, lat)
   }
 }

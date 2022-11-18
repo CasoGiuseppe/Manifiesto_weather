@@ -1,3 +1,5 @@
+import { setDateFormat, getTimeFromDate } from "@/app/shared/helpers/date";
+
 import { Weather } from "../core/weather";
 import type { WeatherDTOType } from "./weather.DTO.type";
 
@@ -12,32 +14,32 @@ export class WeatherDTOAdapter {
       const newDate = new Date(day.timestamp)
       return {
         ...day, ...{
-          timestamp: newDate.toJSON().slice(0, 10).replace(/-/g, '-'),
-          time: newDate.toLocaleTimeString('en-US', { hour12: false })
+          timestamp: setDateFormat({ date: newDate }),
+          time: getTimeFromDate({ date: newDate })
         }
       }
     })
 
-    const newWeatherFormat = [...new Set(modifyWeatherResponse.map(day => day.timestamp))].map(node => {
+    const transformedForecast = [...new Set(modifyWeatherResponse.map(day => day.timestamp))].map(node => {
       return {
         time: node,
         id: this.id,
         forecastDay: modifyWeatherResponse.filter((day) => day.timestamp === node).map(detail => {
           return {
             time: detail.time,
-            precipitation: detail.precipitation,
-            sunshine: detail.sunshine,
-            temperature: detail.temperature,
-            wind_speed: detail.wind_speed,
-            cloud_cover: detail.cloud_cover,
-            relative_humidity: detail.relative_humidity,
-            visibility: detail.visibility,
-            condition: detail.condition,
+            precipitation: detail.precipitation || 0,
+            sunshine: detail.sunshine || 0,
+            temperature: detail.temperature || 0,
+            wind_speed: detail.wind_speed || 0,
+            cloud_cover: detail.cloud_cover || 0,
+            relative_humidity: detail.relative_humidity || 0,
+            visibility: detail.visibility || 0,
+            condition: detail.condition || 0,
             icon: detail.icon,
           }
         })
       }
     })
-    return Weather.createWeatherForecast(newWeatherFormat)
+    return Weather.createWeatherForecast(transformedForecast)
   }
 }

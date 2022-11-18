@@ -5,12 +5,11 @@ export class GetWeatherForecast {
     private readonly handleResponse: RequestAdapter
   ) { }
 
-  execute(from: string, to: string, long: string, lat: string) {
+  execute(long: string, lat: string) {
     const date = new Date()
     const current = date.toJSON().slice(0, 10).replace(/-/g, '-')
     const next = new Date(date.setDate(date.getDate() + 7))
 
-    console.log(current, next.toJSON().slice(0, 10).replace(/-/g, '-'))
-    return this.handleResponse.getWeatherForecast({ from, to, long, lat })
+    return this.handleResponse.getWeatherForecast({ long, lat })
   }
 }
