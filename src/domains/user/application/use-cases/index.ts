@@ -1,4 +1,4 @@
-import type { RequestAdapter } from "../../infrastructure/RequestAdapter/Request.adapter";
+import type { UserResources } from "../../infrastructure/UserResources.adapter";
 import type { NotifyAdapter } from "../../infrastructure/NotificationAdapter/Notification.adapter";
 import { GetUser } from "./GetUser.usecase";
 
@@ -6,10 +6,9 @@ export class UserServices {
   private readonly getUser: GetUser;
 
   constructor(
-    private readonly requestAdapter: RequestAdapter,
-    private readonly notifiAdapter: NotifyAdapter
+    private readonly userResources: UserResources,
   ) {
-    this.getUser = new GetUser(this.requestAdapter, this.notifiAdapter);
+    this.getUser = new GetUser(this.userResources);
   }
 
   async getUserByLogin(email: string, password: string) {

@@ -14,20 +14,28 @@ export class RequestAdapter implements IHandleRequest {
     private readonly uuid: UUIDService
   ) { }
 
-  async getWeatherForecast({ long, lat }: IWeatherParams): Promise<Weather> {
+  async getWeatherForecast(): Promise<Weather> {
     const setDate = new Date()
     const currentDay = setDateFormat({ date: setDate })
     const next7Days = setDateFormat({ date: getForecastDays({ next: 7 }) })
     try {
 
-      // const position: Record<string, any> = await locator()
+      const position: Record<string, any> = await locator().catch(() => {
+        return {
+          coords: {
+            latitude: BASE_LAT_DEFAULT,
+            longitude: BASE_LONG_DEFAULT
+          }
+        }
+      })
 
       const { weather } = await this.client.get<WeatherDTOAdapter>(BASE_API_WEATHER_URL, {
         date: currentDay,
         last_date: next7Days,
-        lon: BASE_LONG_DEFAULT,
-        lat: BASE_LAT_DEFAULT
+        lon: position.coords.longitude,
+        lat: position.coords.latitude
       })
+
       const instance = new WeatherDTOAdapter(this.uuid.create(), weather)
       return instance.createUserInstance()
 

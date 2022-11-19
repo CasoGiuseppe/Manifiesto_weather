@@ -58,6 +58,7 @@ import { TvIcon } from '@heroicons/vue/24/solid'
 import { emailValidator, fieldLengthValidator} from '@/app/shared/helpers/validators'
 import { MIN_PWD_REQUIRED } from '@/app/shared/helpers/constants'
 import type { UserServices } from '@/domains/user/application/use-cases'
+import type { IResponseType } from '@/domains/user/application/use-cases/GetUser.usecase'
 
 interface IReactive {
   label: string
@@ -92,6 +93,7 @@ const fieldsEmptyState = computed(() => {
   return validator.some((value: boolean | undefined) => value)
 })
 
-const userLogin = async () => await UseUserService?.getUserByLogin(email.label, pwd.label)
+const userLogin = async ():Promise<IResponseType | undefined> => await UseUserService?.getUserByLogin(email.label, pwd.label)
+
 </script>
 <style lang="scss" src="./Login.scss" />
