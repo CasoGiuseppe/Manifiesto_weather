@@ -2,9 +2,7 @@
   <section
     :class="[
       ($route.name === 'library') ? 'layout--is-secondary' : null,
-      'layout',
-      'layout--is-blocked',
-      'layout--is-loading'
+      'layout'
     ]">
     <!--
       behaiour: user panel
@@ -48,12 +46,13 @@
 </template>
 
 <script setup lang="ts">
-import { provide, onBeforeMount, defineAsyncComponent, computed, } from "vue";
-import { useRoute, useRouter } from 'vue-router';
+import { inject, onMounted, defineAsyncComponent, computed, Transition, } from "vue";
+import { RouterView, useRoute, useRouter } from 'vue-router';
 import type { UserServices } from "@/domains/user/application/use-cases";
-import { UseUserService, UseWeatherService } from '@/domains';
+// import { UseUserService, UseWeatherService } from '@/domains';
 import { Is as IsButton } from '@/app/ui/components/base/base-button/types'
 import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
+import type { WeatherServices } from "@/domains/weather/application/use-cases";
 
 const components = {
   start: () => import("@/app/ui/widgets/login/Login.vue"),
@@ -62,10 +61,10 @@ const components = {
 
 const currentRouteName = computed(() => useRoute().name)
 const setComponent = computed(() => defineAsyncComponent(components[currentRouteName.value as keyof typeof components]))
-provide<UserServices>("UseUserService", UseUserService);
-  
-onBeforeMount(async () => {
-  console.log(await UseWeatherService.getWeatherForecastData())
+// provide<UserServices>("UseUserService", UseUserService);
+// const UseWeatherService = inject<WeatherServices>("UseWeatherService");
+onMounted(async () => {
+  //console.log(await UseWeatherService.getWeatherForecastData())
   //console.log(await fetch(`https://api.brightsky.dev/current_weather?${new URLSearchParams({ lat: '51', lon: '7.38'})}`))
   // 
 })

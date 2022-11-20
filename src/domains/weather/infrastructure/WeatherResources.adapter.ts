@@ -2,6 +2,7 @@ import { BASE_API_WEATHER_URL, BASE_LAT_DEFAULT, BASE_LONG_DEFAULT } from "@/app
 import { setDateFormat, getForecastDays } from "@/app/shared/helpers/date";
 
 import type { HTTPService } from "@/app/shared/services/http/http.services";
+import type { LoaderService } from "@/app/shared/services/loader/loader.services";
 import type { LocatorService } from "@/app/shared/services/locator/locator.services";
 import type { UUIDService } from "@/app/shared/services/uuid/uuid.services";
 import type { ILocator } from "@/app/shared/types/locator";
@@ -13,7 +14,8 @@ export class WeatherResources implements IWeatherRepository {
   constructor(
     private readonly client: HTTPService,
     private readonly uuid: UUIDService,
-    private readonly locator: LocatorService
+    private readonly locator: LocatorService,
+    private readonly loader: LoaderService
   ) { }
 
   async getWeatherForecast(): Promise<Weather> {
