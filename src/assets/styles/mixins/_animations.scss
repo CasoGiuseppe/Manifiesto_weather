@@ -36,3 +36,9 @@
     transform: $from
   }
 }
+
+@mixin keyAnimation($name) {
+  @keyframes #{$name} {
+    @content
+  }
+}

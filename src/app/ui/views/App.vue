@@ -2,7 +2,8 @@
   <section
     :class="[
       ($route.name === 'library') ? 'layout--is-secondary' : null,
-      'layout'
+      'layout',
+      'layout--is-blocked'
     ]">
     <!--
       behaiour: user panel

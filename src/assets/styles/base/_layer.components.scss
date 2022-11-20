@@ -8,6 +8,11 @@
     --to-animation: 0;
     $layout: &;
 
+    @include create-animation($name: 'appear-extra-panel',
+      $from: translateX(var(--from-animation)),
+      $to: translateX(var(--to-animation)),
+    );
+
     @apply flex flex-col min-h-screen w-screen justify-start;
 
     @screen tablet-ld {
@@ -19,10 +24,15 @@
       --to-animation: -100%;
     }
 
-    @include create-animation($name: 'appear-extra-panel',
-      $from: translateX(var(--from-animation)),
-      $to: translateX(var(--to-animation)),
-    );
+    &--is-blocked {
+      @apply max-h-screen relative overflow-hidden;
+
+      &::before {
+        @apply h-full absolute w-full z-[11];
+        @apply content-[''];
+        @apply animate-backdrop;
+      }
+    }
 
     // router view box
     &__router-box {
