@@ -4,11 +4,11 @@ import { locator } from "@/app/shared/helpers/geolocation";
 
 import type { HTTPService } from "@/app/shared/services/http/http.services";
 import type { UUIDService } from "@/app/shared/services/uuid/uuid.services";
-import type { IHandleRequest, IWeatherParams } from "../../core/repository/weather.repository";
-import type { Weather } from "../../core/weather";
-import { WeatherDTOAdapter } from "../weather.adapter";
+import type { IWeatherRepository } from "../core/repository/weather.repository";
+import type { Weather } from "../core/weather";
+import { WeatherDTOAdapter } from "./weather.adapter";
 
-export class RequestAdapter implements IHandleRequest {
+export class WeatherResources implements IWeatherRepository {
   constructor(
     private readonly client: HTTPService,
     private readonly uuid: UUIDService

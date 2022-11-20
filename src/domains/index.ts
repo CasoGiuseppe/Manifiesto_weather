@@ -8,11 +8,11 @@ import { UUIDService } from "@/app/shared/services/uuid/uuid.services";
 import { UserResources } from "@/domains/user/infrastructure/UserResources.adapter";
 import { NotifyAdapter } from "@/domains/user/infrastructure/NotificationAdapter/Notification.adapter";
 
-import { RequestAdapter as weatherRequest } from "@/domains/weather/infrastructure/RequestAdapter/Request.adapter";
+import { WeatherResources } from "@/domains/weather/infrastructure/WeatherResources.adapter";
 
 const userResources = new UserResources(new HTTPService(), new NotificationService());
-const weatherRequestAdapter = new weatherRequest(new HTTPService(), new UUIDService);
+const weatherResources = new WeatherResources(new HTTPService(), new UUIDService);
 
 
 export const UseUserService = new UserServices(userResources);
-export const UseWeatherService = new WeatherServices(weatherRequestAdapter);
+export const UseWeatherService = new WeatherServices(weatherResources);

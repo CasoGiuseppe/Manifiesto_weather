@@ -1,5 +1,5 @@
 import type { Weather } from "../weather";
 
-export interface IHandleRequest {
+export interface IWeatherRepository {
   getWeatherForecast(): Promise<Weather>
 }

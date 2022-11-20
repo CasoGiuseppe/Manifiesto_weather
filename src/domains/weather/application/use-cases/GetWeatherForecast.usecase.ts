@@ -1,8 +1,8 @@
-import type { RequestAdapter } from "../../infrastructure/RequestAdapter/Request.adapter";
+import type { WeatherResources } from "../../infrastructure/WeatherResources.adapter";
 
 export class GetWeatherForecast {
   constructor(
-    private readonly handleResponse: RequestAdapter
+    private readonly handleResponse: WeatherResources
   ) { }
 
   execute() {

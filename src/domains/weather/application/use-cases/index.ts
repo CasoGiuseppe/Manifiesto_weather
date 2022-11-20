@@ -1,13 +1,13 @@
-import type { RequestAdapter } from "../../infrastructure/RequestAdapter/Request.adapter";
+import type { WeatherResources } from "../../infrastructure/WeatherResources.adapter";
 import { GetWeatherForecast } from "./GetWeatherForecast.usecase";
 
 export class WeatherServices {
   private readonly getWeatherForecast: GetWeatherForecast;
 
   constructor(
-    private readonly requestAdapter: RequestAdapter
+    private readonly weatherResources: WeatherResources
   ) {
-    this.getWeatherForecast = new GetWeatherForecast(this.requestAdapter)
+    this.getWeatherForecast = new GetWeatherForecast(this.weatherResources)
   }
 
   async getWeatherForecastData() {
