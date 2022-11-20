@@ -3,7 +3,8 @@
     :class="[
       ($route.name === 'library') ? 'layout--is-secondary' : null,
       'layout',
-      'layout--is-blocked'
+      'layout--is-blocked',
+      'layout--is-loading'
     ]">
     <!--
       behaiour: user panel
