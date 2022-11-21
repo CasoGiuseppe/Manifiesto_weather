@@ -47,17 +47,12 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, defineAsyncComponent, computed } from "vue";
+import { defineAsyncComponent, computed } from "vue";
 import { RouterView, useRoute, useRouter } from 'vue-router';
-
-// services
-import type { UserServices } from "@/domains/user/application/use-cases";
-// import { UseUserService, UseWeatherService } from '@/domains';
 
 // UI
 import { Is as IsButton } from '@/app/ui/components/base/base-button/types'
 import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
-import type { WeatherServices } from "@/domains/weather/application/use-cases";
 
 // pinia
 import { useAppBehavioursStore } from "@/app/shared/stores/app_behaviours";
@@ -65,17 +60,12 @@ import { storeToRefs } from "pinia";
 
 const components = {
   start: () => import("@/app/ui/widgets/login/Login.vue"),
-  sign: () => import("@/app/ui/widgets/sign-in/SignIn.vue")
+  sign: () => import("@/app/ui/widgets/sign-in/SignIn.vue"),
+  dashboard: () => import("@/app/ui/widgets/forecast-weather/ForecastWeather.vue")
 }
 
 const currentRouteName = computed(() => useRoute().name)
 const setComponent = computed(() => defineAsyncComponent(components[currentRouteName.value as keyof typeof components]))
-// provide<UserServices>("UseUserService", UseUserService);
-// const UseWeatherService = inject<WeatherServices>("UseWeatherService");
-onMounted(async () => {
-  //console.log(await UseWeatherService.getWeatherForecastData())
-  // 
-})
 
 // router handler for buttons anction
 const router = useRouter()

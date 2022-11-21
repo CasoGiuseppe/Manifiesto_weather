@@ -9,6 +9,7 @@ import { MESSAGES, type IMessages } from "@/app/shared/types/messages";
 import { ErrorsTypes, type IErrors } from "@/app/shared/types/errors";
 import type { LoaderService } from "@/app/shared/services/loader/loader.services";
 
+import Router from "@/app/router";
 export class UserResources implements IUserRepository {
   constructor(
     private readonly client: HTTPService,
@@ -31,7 +32,7 @@ export class UserResources implements IUserRepository {
       const { id, name, surname, email: userEmail, password: userPWD } = response // correct API response
       const user = new UserDTOAdapter(id, name, surname, userEmail, userPWD)
 
-      this.notifyService.notify(MESSAGES['USERFOUND'])
+      Router.push({ name: 'dashboard' })
       return user.createUserInstance()
     } catch (e) {
       throw new Error(e as string)

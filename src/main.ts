@@ -52,4 +52,3 @@ export const UseWeatherService = new WeatherServices(weatherResources);
 
 app.mount("#app");
 app.provide<UserServices>("UseUserService", UseUserService);
-app.provide<WeatherServices>("UseWeatherService", UseWeatherService)

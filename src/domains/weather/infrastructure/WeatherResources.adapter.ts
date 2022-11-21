@@ -15,7 +15,7 @@ export class WeatherResources implements IWeatherRepository {
     private readonly client: HTTPService,
     private readonly uuid: UUIDService,
     private readonly locator: LocatorService,
-    private readonly loader: LoaderService
+    private readonly loaderService: LoaderService
   ) { }
 
   async getWeatherForecast(): Promise<Weather> {
@@ -23,7 +23,7 @@ export class WeatherResources implements IWeatherRepository {
     const currentDay = setDateFormat({ date: setDate })
     const next7Days = setDateFormat({ date: getForecastDays({ next: 7 }) })
     try {
-
+      this.loaderService.changeLoaderState({ value: true })
       const position: Record<string, any> = await this.locator.getCurrentLocation().catch((catchResult): ILocator => catchResult)
       const { weather } = await this.client.get<WeatherDTOAdapter>(BASE_API_WEATHER_URL, {
         date: currentDay,
@@ -37,6 +37,8 @@ export class WeatherResources implements IWeatherRepository {
 
     } catch (e) {
       throw new Error(e as string)
+    } finally {
+      this.loaderService.changeLoaderState({ value: false })
     }
   }
 
