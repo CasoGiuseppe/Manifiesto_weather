@@ -1,5 +1,5 @@
 export type ILoaderType = {
-  state: boolean;
+  value: boolean;
 };
 
 export interface ICosmeticStore {

@@ -8,19 +8,20 @@ import { CHANGE_LOADER_STATE } from "./actions";
 import getters from "./getters";
 import type { ILoaderType } from "../types";
 
+
 // types
-export const useAppBehavioursStoreStore = defineStore({
+export const useAppBehavioursStore = defineStore({
   id: "appBehaviours",
   state: () => BASE_APP_BEHAVIOURS_STORE,
 
   actions: {
-    [CHANGE_LOADER_STATE]({ state = false }: ILoaderType): void {
-      this.hasLoader.state = state;
+    [CHANGE_LOADER_STATE]({ value = false }: ILoaderType) {
+      this.hasLoader.value = value;
     },
   },
 
   getters,
 });
 
-const definedStore = useAppBehavioursStoreStore();
+const definedStore = useAppBehavioursStore();
 export type AppBehavioursStore = typeof definedStore;

@@ -1,5 +1,4 @@
 import type { UserResources } from "../../infrastructure/UserResources.adapter";
-import type { NotifyAdapter } from "../../infrastructure/NotificationAdapter/Notification.adapter";
 import { GetUser } from "./GetUser.usecase";
 
 export class UserServices {

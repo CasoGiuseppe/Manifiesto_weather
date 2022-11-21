@@ -1,6 +1,5 @@
 import { MESSAGES, type IMessages } from "@/app/shared/types/messages";
 import { ErrorsTypes, type IErrors } from "@/app/shared/types/errors";
-import type { NotifyAdapter } from "../../infrastructure/NotificationAdapter/Notification.adapter";
 import type { UserResources } from "../../infrastructure/UserResources.adapter";
 import { UserViewModel } from "../user.view";
 
@@ -15,7 +14,7 @@ export class GetUser {
 
   async execute(email: string, password: string): Promise<IResponseType | undefined> {
     try {
-      const result = await this.userResource.getUser(email, password)
+      const result = await this.userResource.getUserFromRepository(email, password)
       if (!result) return
       return UserViewModel.createUserViewModel(result).baseData
     } catch (e) {

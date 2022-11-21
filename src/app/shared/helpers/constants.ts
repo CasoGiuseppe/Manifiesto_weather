@@ -7,6 +7,6 @@ export const BASE_LAT_DEFAULT = import.meta.env.VITE_APP_LAT_DEFAULT;
 export const BASE_LONG_DEFAULT = import.meta.env.VITE_APP_LONG_DEFAULT;
 export const BASE_APP_BEHAVIOURS_STORE: ICosmeticStore = {
   hasLoader: {
-    state: false,
+    value: false,
   },
 };

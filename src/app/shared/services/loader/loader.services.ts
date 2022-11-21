@@ -5,7 +5,7 @@ import type { ILoaderType } from "../../stores/types";
 export class LoaderService {
   constructor(private readonly store: AppBehavioursStore) { }
 
-  loader({ state }: ILoaderType): void {
-    this.store[CHANGE_LOADER_STATE]({ state });
+  changeLoaderState({ value }: ILoaderType): void {
+    this.store[CHANGE_LOADER_STATE]({ value });
   }
 }

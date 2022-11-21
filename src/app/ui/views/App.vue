@@ -2,6 +2,7 @@
   <section
     :class="[
       ($route.name === 'library') ? 'layout--is-secondary' : null,
+      getLoaderStoreState.value ? 'layout--is-loading layout--is-blocked' : null,
       'layout'
     ]">
     <!--
@@ -46,13 +47,21 @@
 </template>
 
 <script setup lang="ts">
-import { inject, onMounted, defineAsyncComponent, computed, Transition, } from "vue";
+import { onMounted, defineAsyncComponent, computed } from "vue";
 import { RouterView, useRoute, useRouter } from 'vue-router';
+
+// services
 import type { UserServices } from "@/domains/user/application/use-cases";
 // import { UseUserService, UseWeatherService } from '@/domains';
+
+// UI
 import { Is as IsButton } from '@/app/ui/components/base/base-button/types'
 import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 import type { WeatherServices } from "@/domains/weather/application/use-cases";
+
+// pinia
+import { useAppBehavioursStore } from "@/app/shared/stores/app_behaviours";
+import { storeToRefs } from "pinia";
 
 const components = {
   start: () => import("@/app/ui/widgets/login/Login.vue"),
@@ -65,19 +74,10 @@ const setComponent = computed(() => defineAsyncComponent(components[currentRoute
 // const UseWeatherService = inject<WeatherServices>("UseWeatherService");
 onMounted(async () => {
   //console.log(await UseWeatherService.getWeatherForecastData())
-  //console.log(await fetch(`https://api.brightsky.dev/current_weather?${new URLSearchParams({ lat: '51', lon: '7.38'})}`))
   // 
 })
-//onCreated(async () => {
-  //provide<UserServices>("userService", userService);
-  //const res = await userService?.getUserByLogin('test@gmail.com', '12345677')
-  //console.log(res)
-  //const res = await fetch(`${import.meta.env.VITE_APP_API_ENDPOINT}`)
-  //const weather = await fetch(`https://api.brightsky.dev/current_weather?${new URLSearchParams({ lat: '51', lon: '7.38'})}`)
-  //console.log(await res.json())
-  //console.log(await weather.json())
-//})
 
+// router handler for buttons anction
 const router = useRouter()
 const bringLibrary = () => {router.push({ name: 'library'})}
 const bringFigma = () => {
@@ -85,4 +85,8 @@ const bringFigma = () => {
   const w = window.open(url, '_blank');
   if (w) w.focus()
 }
+
+// store handler for loader state
+const behavioursStore = useAppBehavioursStore();
+const getLoaderStoreState = storeToRefs(behavioursStore).hasLoader;
 </script>
