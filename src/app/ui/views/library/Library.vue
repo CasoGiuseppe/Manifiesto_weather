@@ -84,6 +84,24 @@
       </ul>
     </article>
 
+    <!-- category: components: Weather Info -->
+    <article class="library__category">
+      <h2 class="library__title">Base Components: <span>Weather info</span></h2>
+      <ul class="library__table">
+        <li class="library--is-max library--is-negative">
+          <BaseWeatherInfoVue>
+            <template #place>Madrid<span>/Spain</span></template>
+            <template #temperature>19<CloudIcon /></template>
+            <template #date>04.11.2022</template>
+            <template #min-max><EyeDropperIcon />15° - 19°</template>
+            <template #user-title>don't forget the umbrella</template>
+            <template #user-message>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
+            </template>
+          </BaseWeatherInfoVue>
+        </li>
+      </ul>
+    </article>
      <!-- category: widgets -->
      <article class="library__category">
       <h2 class="library__title">Widgets: <span>Login</span></h2>
@@ -107,8 +125,10 @@ import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 import BaseInput from "@/app/ui/components/base/base-input/BaseInput.vue"
 import BaseSelect from "@/app/ui/components/base/base-select/BaseSelect.vue"
 import BaseBadge from "@/app/ui/components/base/base-badge/BaseBadge.vue"
+import BaseWeatherInfoVue from '../../components/base/base-weather-info/BaseWeatherInfo.vue'
+
 import Login from "@/app/ui/widgets/login/Login.vue"
-import { Cog6ToothIcon, ChartBarIcon, DocumentDuplicateIcon } from '@heroicons/vue/24/solid'
+import { Cog6ToothIcon, ChartBarIcon, DocumentDuplicateIcon, CloudIcon, EyeDropperIcon } from '@heroicons/vue/24/solid'
 import { Is as IsButton } from '@/app/ui/components/base/base-button/types'
 import { Is as IsInput } from '@/app/ui/components/base/base-input/types'
 import { Is as IsBadge } from '@/app/ui/components/base/base-badge/types'

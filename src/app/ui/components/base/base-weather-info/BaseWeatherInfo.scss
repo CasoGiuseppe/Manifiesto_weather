@@ -1,0 +1,67 @@
+.base-weather-info {
+  $baseweatherinfo: &;
+
+  &__place,
+  &__temperature {
+    @apply text-default-positive
+  }
+
+  &__place {
+    @apply font-bold text-base;
+
+    >* {
+      @apply font-light;
+    }
+  }
+
+  &__temperature {
+    @apply flex;
+    @apply text-xxxlg tracking-tighter leading-[200px];
+
+    >* {
+      &:is(svg) {
+        @apply w-lg h-lg;
+        @apply translate-y-lg
+      }
+    }
+  }
+
+  &__more {
+    @apply text-default-positive;
+
+    >li {
+      @apply flex gap-xsm items-center;
+      @apply font-bold;
+
+      >* {
+        @apply font-light;
+
+        &:is(svg) {
+          @apply w-md h-md;
+        }
+      }
+    }
+
+    +#{$baseweatherinfo}__user-payoff {
+      @apply mt-xxlg
+    }
+  }
+
+  &__user-payoff {
+    @apply text-default-positive
+  }
+
+  &__user {
+    &-title {
+      @apply font-light uppercase;
+
+      +#{$baseweatherinfo}__user-message {
+        @apply mt-sm
+      }
+    }
+
+    &-message {
+      @apply text-xlg leading-none
+    }
+  }
+}

@@ -69,6 +69,7 @@ module.exports = {
       base: ['var(--sm-font-size-medium)', { lineHeight: 'normal' }],
       lg: ['var(--sm-font-size-big)', { lineHeight: 'normal' }],
       xlg: ['var(--sm-font-size-xlarge)', { lineHeight: 'normal' }],
+      xxxlg: ['var(--sm-font-size-xxxlarge)', { lineHeight: 'normal' }],
     },
     transitionProperty: {
       colors: 'color, background-color, border-color, text-decoration-color, fill, stroke, outline-color',
