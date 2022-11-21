@@ -49,16 +49,24 @@
 </template>
 <script setup lang="ts">
 import { reactive, computed, inject } from 'vue'
+
+// components
 import BaseInput from "@/app/ui/components/base/base-input/BaseInput.vue"
 import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
+
+// types
 import { Types } from '@/app/ui/components/base/base-input/types'
 import { Is as IsButton } from '@/app/ui/components/base/base-button/types'
 import { Is as IsInput } from '@/app/ui/components/base/base-input/types'
 import { TvIcon } from '@heroicons/vue/24/solid'
-import { emailValidator, fieldLengthValidator} from '@/app/shared/helpers/validators'
+
+// helper
 import { MIN_PWD_REQUIRED } from '@/app/shared/helpers/constants'
+import { emailValidator, fieldLengthValidator} from '@/app/shared/helpers/validators'
+import router from '@/app/router'
+
+// user use case
 import type { UserServices } from '@/domains/user/application/use-cases'
-import type { IResponseType } from '@/domains/user/application/use-cases/GetUser.usecase'
 
 interface IReactive {
   label: string
@@ -93,7 +101,10 @@ const fieldsEmptyState = computed(() => {
   return validator.some((value: boolean | undefined) => value)
 })
 
-const userLogin = async ():Promise<IResponseType | undefined> => await UseUserService?.getUserByLogin(email.label, pwd.label)
+const userLogin = async ():Promise<void> => {
+  const userLoginState = await UseUserService?.getUserByLogin(email.label, pwd.label)
+  if(userLoginState) router.push({name: 'dashboard'})
+}
 
 </script>
 <style lang="scss" src="./Login.scss" />

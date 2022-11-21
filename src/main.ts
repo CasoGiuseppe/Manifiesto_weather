@@ -24,7 +24,7 @@ import { LoaderService } from "@/app/shared/services/loader/loader.services";
 import { UserResources } from "@/domains/user/infrastructure/UserResources.adapter";
 import { WeatherResources } from "@/domains/weather/infrastructure/WeatherResources.adapter";
 
-// app behaviours store
+// store
 import { useAppBehavioursStore } from "@/app/shared/stores/app_behaviours";
 
 const app = createApp(App);

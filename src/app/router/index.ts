@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { UseWeatherService } from "@/main";
+import { userStore, useUserStore } from "@/domains/user/infrastructure/store/user"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,8 @@ const router = createRouter({
       },
 
       beforeEnter: async (to, from) => {
+        const isUserLogged = userStore.getUserLogged
+        if (!isUserLogged) return '/'
         await UseWeatherService.getWeatherForecastData()
       }
     },

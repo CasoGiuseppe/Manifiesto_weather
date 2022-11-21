@@ -1,8 +1,8 @@
 <template>
 <aside class="panel" v-if="$route.name !== 'library'">
-  <navigation class="panel-navigation">
+  <nav class="panel-navigation">
     <BaseButton id="squared" :is="[IsButton.SQUARED, IsButton.SMALL]"><XCircleIcon/></BaseButton>
-  </navigation>
+  </nav>
   <section class="panel-content">
     <header class="panel__header">
       <RouterLink :to="{name: 'start'}">

@@ -21,4 +21,9 @@ export class UserViewModel {
       surname: this.surname
     }
   }
+
+  get isLogged() {
+    const filter = [this.name, this.surname]
+    return filter.every(node => node !== undefined)
+  }
 }

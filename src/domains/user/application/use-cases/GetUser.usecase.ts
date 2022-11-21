@@ -1,5 +1,3 @@
-import { MESSAGES, type IMessages } from "@/app/shared/types/messages";
-import { ErrorsTypes, type IErrors } from "@/app/shared/types/errors";
 import type { UserResources } from "../../infrastructure/UserResources.adapter";
 import { UserViewModel } from "../user.view";
 
@@ -12,11 +10,16 @@ export class GetUser {
     private readonly userResource: UserResources,
   ) { }
 
-  async execute(email: string, password: string): Promise<IResponseType | undefined> {
+  async execute(email: string, password: string): Promise<IResponseType | undefined | boolean> {
     try {
       const result = await this.userResource.getUserFromRepository(email, password)
       if (!result) return
-      return UserViewModel.createUserViewModel(result).baseData
+
+      const userModelView = UserViewModel.createUserViewModel(result)
+      const { name, surname } = userModelView.baseData
+      this.userResource.saveUserData(name, surname)
+
+      return userModelView.isLogged
     } catch (e) {
       throw new Error(e as string);
     }
