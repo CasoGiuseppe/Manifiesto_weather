@@ -1,7 +1,20 @@
 .dashboard {
   $dashboard: &;
+  --from-animation: 70%;
+  --to-animation: -70%;
+
+  @include create-animation($name: 'appear-extra-panel',
+    $from: translateY(var(--from-animation)),
+    $to: translateY(var(--to-animation)),
+  );
 
   @apply flex flex-col flex-1 items-center justify-center h-full p-lg;
+
+  &--is {
+    &-no-logged {
+      @apply duration-700;
+    }
+  }
 
   &__highlight {
     @apply flex flex-col;
@@ -18,6 +31,7 @@
 
   &__charts {
     @apply grid grid-cols-3 gap-lg;
+    @apply duration-1000;
 
     &--is {
       &-expand {
