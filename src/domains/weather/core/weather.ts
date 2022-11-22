@@ -9,7 +9,7 @@ export class Weather {
     return new Weather(props)
   }
 
-  get WeatherEntity(): WeatherType {
+  get weatherEntity(): WeatherType {
     return this.weather
   }
 }
