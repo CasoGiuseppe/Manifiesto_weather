@@ -2,14 +2,14 @@ import { setDateFormat, getTimeFromDate } from "@/app/shared/helpers/date";
 
 import { Weather } from "../core/weather";
 import type { WeatherDTOType } from "./weather.DTO.type";
+import { UUIDService } from "@/app/shared/services/uuid/uuid.services";
 
 export class WeatherDTOAdapter {
   constructor(
-    public readonly id: UniqueId,
     public readonly weather: WeatherDTOType
   ) { }
 
-  createUserInstance(): Weather {
+  createWeatherInstance(): Weather {
     const modifyWeatherResponse = (this.weather as unknown as any[]).map(day => {
       const newDate = new Date(day.timestamp)
       return {
@@ -20,10 +20,10 @@ export class WeatherDTOAdapter {
       }
     })
 
-    const transformedForecast = [...new Set(modifyWeatherResponse.map(day => day.timestamp))].map(node => {
+    const transformedForecast = [...new Set(modifyWeatherResponse.map(day => day.timestamp))].map((node) => {
       return {
-        time: node,
-        id: this.id,
+        time: this.getCorrectDateFormat(node),
+        id: node.id || UUIDService.create(),
         forecastDay: modifyWeatherResponse.filter((day) => day.timestamp === node).map(detail => {
           return {
             time: detail.time,
@@ -41,5 +41,10 @@ export class WeatherDTOAdapter {
       }
     })
     return Weather.createWeatherForecast(transformedForecast)
+  }
+
+  getCorrectDateFormat(date: string): string {
+    const dateTransform = new Date(date)
+    return `${dateTransform.getDate()}/${dateTransform.getMonth()}/${dateTransform.getFullYear()}`
   }
 }

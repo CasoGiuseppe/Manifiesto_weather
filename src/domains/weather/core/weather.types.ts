@@ -2,6 +2,7 @@ export type WeatherType = ForecastDay[]
 
 export interface ForecastDay {
   time: string;
+  id: string;
   forecastDay: WeatherDay[]
 }
 

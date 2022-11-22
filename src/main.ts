@@ -16,9 +16,9 @@ import { WeatherServices } from "@/domains/weather/application/use-cases";
 // app common services
 import { HTTPService } from "@/app/shared/services/http/http.services";
 import { NotificationService } from "@/app/shared/services/notification/notification.services";
-import { UUIDService } from "@/app/shared/services/uuid/uuid.services";
 import { LocatorService } from "@/app/shared/services/locator/locator.services";
 import { LoaderService } from "@/app/shared/services/loader/loader.services";
+import { PersistService } from "./app/shared/services/persistData/persist.data.services";
 
 // implementations adapters
 import { UserResources } from "@/domains/user/infrastructure/UserResources.adapter";
@@ -26,6 +26,8 @@ import { WeatherResources } from "@/domains/weather/infrastructure/WeatherResour
 
 // store
 import { useAppBehavioursStore } from "@/app/shared/stores/app_behaviours";
+import { userStore } from "@/domains/user/infrastructure/store/user"
+import { weatherStore } from "@/domains/weather/infrastructure/store/weather"
 
 const app = createApp(App);
 
@@ -36,13 +38,14 @@ const behavioursStore = useAppBehavioursStore();
 const userResources = new UserResources(
   new HTTPService(),
   new NotificationService(),
-  new LoaderService(behavioursStore)
+  new LoaderService(behavioursStore),
+  new PersistService(userStore)
 );
 const weatherResources = new WeatherResources(
   new HTTPService(),
-  new UUIDService,
   new LocatorService(),
-  new LoaderService(behavioursStore)
+  new LoaderService(behavioursStore),
+  new PersistService(weatherStore)
 );
 
 

@@ -1,4 +1,4 @@
-import type { WeatherType, WeatherDay } from './weather.types'
+import type { WeatherType } from './weather.types'
 
 export class Weather {
   constructor(

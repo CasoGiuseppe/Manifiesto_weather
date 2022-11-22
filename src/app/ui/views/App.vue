@@ -9,16 +9,23 @@
       behaiour: user panel
       visible: router name !== library
     -->
-    
     <RouterView name="panel" v-slot="{ Component, route }">
       <Transition
         mode="out-in"
         name="appear-extra-panel"
         appear
       >
-        <component :is="Component" :key="route.meta.login" v-if="route.name !== 'library'">
+        <component
+          v-if="route.meta.type !== 'library'"
+          :is="Component"
+          :key="route.meta.login"
+        >
           <template #component>
-            <component :is="setComponent" :key="route.name">
+            <component
+              :is="setComponent"
+              :key="route.meta.type"
+              @upload:day="setNewCurrentDay"
+            >
               <template #title>get started</template>
               <template #message>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim</template>
             </component>
@@ -47,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, computed } from "vue";
+import { defineAsyncComponent, computed, Transition, provide, reactive, watch, ref } from "vue";
 import { RouterView, useRoute, useRouter } from 'vue-router';
 
 // UI
@@ -57,6 +64,7 @@ import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 // pinia
 import { useAppBehavioursStore } from "@/app/shared/stores/app_behaviours";
 import { storeToRefs } from "pinia";
+import { UseWeatherService } from "@/main";
 
 const components = {
   start: () => import("@/app/ui/widgets/login/Login.vue"),
@@ -79,4 +87,16 @@ const bringFigma = () => {
 // store handler for loader state
 const behavioursStore = useAppBehavioursStore();
 const getLoaderStoreState = storeToRefs(behavioursStore).hasLoader;
+
+let reactiveForecastData = reactive({value: {prev: '', next: '', current: {}}})
+provide('nextDay', computed(() => reactiveForecastData?.value?.next))
+provide('prevDay', computed(() => reactiveForecastData?.value?.prev))
+provide('current', computed(() => reactiveForecastData?.value?.current))
+
+const setNewCurrentDay = async (id: string | undefined) => {
+  const { prev, next, current} = await UseWeatherService.getWeatherForecastData(id)
+  reactiveForecastData.value.prev = prev
+  reactiveForecastData.value.next = next
+  reactiveForecastData.value.current = current
+}
 </script>

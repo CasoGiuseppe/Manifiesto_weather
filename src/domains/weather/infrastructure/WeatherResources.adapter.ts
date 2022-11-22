@@ -4,21 +4,31 @@ import { setDateFormat, getForecastDays } from "@/app/shared/helpers/date";
 import type { HTTPService } from "@/app/shared/services/http/http.services";
 import type { LoaderService } from "@/app/shared/services/loader/loader.services";
 import type { LocatorService } from "@/app/shared/services/locator/locator.services";
-import type { UUIDService } from "@/app/shared/services/uuid/uuid.services";
+import type { PersistService } from "@/app/shared/services/persistData/persist.data.services";
+
 import type { ILocator } from "@/app/shared/types/locator";
 import type { IWeatherRepository } from "../core/repository/weather.repository";
 import type { Weather } from "../core/weather";
+import { CHANGE_WEATHER_LIST } from "./store/weather/actions";
+import { GET_WEATHER_LIST } from "./store/weather/getters";
 import { WeatherDTOAdapter } from "./weather.adapter";
 
 export class WeatherResources implements IWeatherRepository {
   constructor(
     private readonly client: HTTPService,
-    private readonly uuid: UUIDService,
     private readonly locator: LocatorService,
-    private readonly loaderService: LoaderService
+    private readonly loaderService: LoaderService,
+    private readonly persistService: PersistService
   ) { }
 
   async getWeatherForecast(): Promise<Weather> {
+    const storedWeatherData = this.persistService.getFromData({ getter: GET_WEATHER_LIST })
+
+    if (storedWeatherData) {
+      const storedInstance = new WeatherDTOAdapter(JSON.parse(JSON.stringify(storedWeatherData))).createWeatherInstance()
+      return storedInstance
+    }
+
     const setDate = new Date()
     const currentDay = setDateFormat({ date: setDate })
     const next7Days = setDateFormat({ date: getForecastDays({ next: 7 }) })
@@ -32,8 +42,10 @@ export class WeatherResources implements IWeatherRepository {
         lat: position?.coords?.latitude || BASE_LAT_DEFAULT
       })
 
-      const instance = new WeatherDTOAdapter(this.uuid.create(), weather)
-      return instance.createUserInstance()
+      const weatherInstance = new WeatherDTOAdapter(weather).createWeatherInstance()
+
+      this.persistService.save({ action: CHANGE_WEATHER_LIST, params: weather })
+      return weatherInstance
 
     } catch (e) {
       throw new Error(e as string)

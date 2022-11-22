@@ -20,7 +20,7 @@
 
     >* {
       &:is(svg) {
-        @apply w-lg h-lg;
+        @apply w-lg h-lg ml-sm;
         @apply translate-y-lg
       }
     }

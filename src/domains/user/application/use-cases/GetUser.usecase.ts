@@ -12,10 +12,10 @@ export class GetUser {
 
   async execute(email: string, password: string): Promise<IResponseType | undefined | boolean> {
     try {
-      const result = await this.userResource.getUserFromRepository(email, password)
-      if (!result) return
+      const APIresult = await this.userResource.getUserFromRepository(email, password)
+      if (!APIresult) return
 
-      const userModelView = UserViewModel.createUserViewModel(result)
+      const userModelView = UserViewModel.createUserViewModel(APIresult)
       const { name, surname } = userModelView.baseData
       this.userResource.saveUserData(name, surname)
 

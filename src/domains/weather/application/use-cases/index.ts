@@ -10,7 +10,7 @@ export class WeatherServices {
     this.getWeatherForecast = new GetWeatherForecast(this.weatherResources)
   }
 
-  async getWeatherForecastData() {
-    return await this.getWeatherForecast.execute()
+  async getWeatherForecastData(id: string | undefined = undefined) {
+    return await this.getWeatherForecast.execute(id)
   }
 }

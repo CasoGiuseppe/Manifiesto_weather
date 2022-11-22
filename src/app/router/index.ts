@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { UseWeatherService } from "@/main";
-import { userStore, useUserStore } from "@/domains/user/infrastructure/store/user"
+import { userStore } from "@/domains/user/infrastructure/store/user"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,7 +7,7 @@ const router = createRouter({
     {
       path: "/",
       name: "start",
-      meta: { login: true },
+      meta: { login: true, type: 'start' },
       components: {
         default: () => import("@/app/ui/views/dashboard/Dashboard.vue"),
         panel: () => import("@/app/ui/views/panel/Panel.vue"),
@@ -17,16 +16,16 @@ const router = createRouter({
     {
       path: "/sign",
       name: "sign",
-      meta: { login: true },
+      meta: { login: true, type: 'sign-in' },
       components: {
         default: () => import("@/app/ui/views/dashboard/Dashboard.vue"),
         panel: () => import("@/app/ui/views/panel/Panel.vue"),
       },
     },
     {
-      path: "/dashboard",
+      path: "/dashboard/:id?",
       name: "dashboard",
-      meta: { login: true },
+      meta: { login: true, type: 'dashboard' },
       components: {
         default: () => import("@/app/ui/views/dashboard/Dashboard.vue"),
         panel: () => import("@/app/ui/views/panel/Panel.vue"),
@@ -35,13 +34,12 @@ const router = createRouter({
       beforeEnter: async (to, from) => {
         const isUserLogged = userStore.getUserLogged
         if (!isUserLogged) return '/'
-        await UseWeatherService.getWeatherForecastData()
-      }
+      },
     },
     {
       path: "/library",
       name: "library",
-      meta: { login: false },
+      meta: { login: false, type: 'library' },
       components: {
         default: () => import("@/app/ui/views/library/Library.vue"),
       },

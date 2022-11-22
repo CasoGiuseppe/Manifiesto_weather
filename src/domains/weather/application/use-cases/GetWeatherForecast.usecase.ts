@@ -1,11 +1,28 @@
 import type { WeatherResources } from "../../infrastructure/WeatherResources.adapter";
+import { WeatherViewModel } from "../weather.view";
 
 export class GetWeatherForecast {
   constructor(
-    private readonly handleResponse: WeatherResources
+    private readonly weatherResources: WeatherResources
   ) { }
 
-  execute() {
-    return this.handleResponse.getWeatherForecast()
+  async execute(id: string | undefined = undefined) {
+    try {
+      const APIresult = await this.weatherResources.getWeatherForecast()
+      const weatherViewModel = WeatherViewModel.createWeatherViewModel(APIresult, id)
+
+      return {
+        current: {
+          time: weatherViewModel.time,
+          temperature: weatherViewModel.medianTemperature,
+          max: weatherViewModel.maxTemperature,
+          min: weatherViewModel.minTemperature
+        },
+        next: weatherViewModel.nextItem,
+        prev: weatherViewModel.prevItem
+      }
+    } catch (e) {
+      throw new Error(e as string);
+    }
   }
 }
