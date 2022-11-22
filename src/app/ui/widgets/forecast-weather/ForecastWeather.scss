@@ -7,7 +7,20 @@
     $to: translateX(var(--to-animation)),
   );
 
+  @apply flex w-full items-center;
+
+  >* {
+    &:is(button) {
+      +* {
+        &:is(button) {
+          @apply ml-sm
+        }
+      }
+    }
+  }
+
   &__switch {
+    @apply flex-1;
     @apply duration-700
   }
 }

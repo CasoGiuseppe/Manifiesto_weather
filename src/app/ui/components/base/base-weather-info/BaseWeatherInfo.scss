@@ -27,7 +27,7 @@
       @apply flex;
 
       &:after {
-        @apply flex;
+        @apply flex ml-sm;
         @apply text-[6rem] content-["°"] leading-none;
       }
     }
@@ -80,7 +80,7 @@
     }
 
     &-message {
-      @apply text-xlg leading-none
+      @apply text-lg leading-none
     }
   }
 }
