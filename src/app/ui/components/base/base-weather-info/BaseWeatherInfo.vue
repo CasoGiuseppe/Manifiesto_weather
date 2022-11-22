@@ -4,12 +4,18 @@
       v-if="$slots['place']"
       class="base-weather-info__place">
       <slot name="place" />
+      <span
+        v-if="$slots['icon']"
+        class="base-weather-info__icon"
+      >
+      <slot name="icon" />
+      </span>
     </h3>
     <h2
       v-if="$slots['temperature']"
       class="base-weather-info__temperature"
     >
-      <slot name="temperature" />
+      <span class="base-weather-info__temperature-label"><slot name="temperature" /></span>
     </h2>
     <ul class="base-weather-info__more">
       <li v-if="$slots['date']">

@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, computed, Transition, provide, reactive, watch, ref } from "vue";
+import { defineAsyncComponent, computed, Transition, watch, shallowRef } from "vue";
 import { RouterView, useRoute, useRouter } from 'vue-router';
 
 // UI
@@ -63,7 +63,6 @@ import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 // pinia
 import { useAppBehavioursStore } from "@/app/shared/stores/app_behaviours";
 import { storeToRefs } from "pinia";
-import { UseWeatherService } from "@/main";
 
 const components = {
   start: () => import("@/app/ui/widgets/login/Login.vue"),
@@ -71,11 +70,20 @@ const components = {
   dashboard: () => import("@/app/ui/widgets/forecast-weather/ForecastWeather.vue")
 }
 
-const currentRouteName = computed(() => useRoute().name)
-const setComponent = computed(() => defineAsyncComponent(components[currentRouteName.value as keyof typeof components]))
+const route = useRoute()
+const router = useRouter()
+
+// change dynamic panel component
+const currentRouteName = computed(() => route.name)
+const setComponent = shallowRef()
+watch(() => route.meta.type, (value) => {
+  if (value === 'library') return
+  console.log('ciccio')
+  setComponent.value = defineAsyncComponent(components[currentRouteName.value as keyof typeof components])
+})
+  
 
 // router handler for buttons anction
-const router = useRouter()
 const bringLibrary = () => {router.push({ name: 'library'})}
 const bringFigma = () => {
   const url = "https://www.figma.com/proto/GzwexU2trMU1cyvRQnQlPx/Manifesto---Weather-test?page-id=0%3A1&node-id=24%3A22&viewport=668%2C369%2C1.18&scaling=scale-down&starting-point-node-id=6%3A5"

@@ -7,10 +7,15 @@
   }
 
   &__place {
+    @apply flex;
     @apply font-bold text-base;
 
     >* {
       @apply font-light;
+    }
+
+    +#{$baseweatherinfo}__temperature {
+      @apply mt-lg
     }
   }
 
@@ -18,10 +23,24 @@
     @apply flex;
     @apply text-xxxlg tracking-tighter leading-[200px];
 
+    &-label {
+      @apply flex;
+
+      &:after {
+        @apply flex;
+        @apply text-[6rem] content-["°"] leading-none;
+      }
+    }
+
+    +#{$baseweatherinfo}__more {
+      @apply mt-md
+    }
+  }
+
+  &__icon {
     >* {
       &:is(svg) {
         @apply w-lg h-lg ml-sm;
-        @apply translate-y-lg
       }
     }
   }

@@ -1,0 +1,13 @@
+.forecast-weather {
+  --from-animation: 100%;
+  --to-animation: -50%;
+
+  @include create-animation($name: 'current-day-change',
+    $from: translateX(var(--from-animation)),
+    $to: translateX(var(--to-animation)),
+  );
+
+  &__switch {
+    @apply duration-700
+  }
+}
