@@ -24,7 +24,6 @@
             <component
               :is="setComponent"
               :key="route.meta.type"
-              @upload:day="setNewCurrentDay"
             >
               <template #title>get started</template>
               <template #message>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim</template>
@@ -88,15 +87,4 @@ const bringFigma = () => {
 const behavioursStore = useAppBehavioursStore();
 const getLoaderStoreState = storeToRefs(behavioursStore).hasLoader;
 
-let reactiveForecastData = reactive({value: {prev: '', next: '', current: {}}})
-provide('nextDay', computed(() => reactiveForecastData?.value?.next))
-provide('prevDay', computed(() => reactiveForecastData?.value?.prev))
-provide('current', computed(() => reactiveForecastData?.value?.current))
-
-const setNewCurrentDay = async (id: string | undefined) => {
-  const { prev, next, current} = await UseWeatherService.getWeatherForecastData(id)
-  reactiveForecastData.value.prev = prev
-  reactiveForecastData.value.next = next
-  reactiveForecastData.value.current = current
-}
 </script>

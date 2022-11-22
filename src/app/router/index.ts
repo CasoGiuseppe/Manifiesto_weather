@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { userStore } from "@/domains/user/infrastructure/store/user"
+import { UseWeatherService } from "@/main";
+import { weatherStore } from "@/domains/weather/infrastructure/store/weather";
+import { CHANGE_CURRENT_DAY } from "@/domains/weather/infrastructure/store/weather/actions";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -46,5 +49,15 @@ const router = createRouter({
     },
   ],
 });
+
+router.beforeEach(async (to, from) => {
+  const isDashboard = to.meta.type === 'dashboard'
+  if (isDashboard) {
+
+    const routerID = to.params.id as string
+    const { prev, next, current } = await UseWeatherService.getWeatherForecastData(routerID)
+    weatherStore[CHANGE_CURRENT_DAY]?.({ prev, next, current })
+  }
+})
 
 export default router;

@@ -31,13 +31,13 @@ export class WeatherViewModel {
     return `${Math.max(...this.allTemperatures)}°`
   }
 
-  get nextItem() {
+  get nextItem(): string {
     const currentLenght: number = this.weather.length
     const currentIndex: number = this.weather.indexOf(this.currentDay || this.weather[0])
     return this.weather[(currentIndex + 1) % currentLenght]?.time.replace(/\//g, '')
   }
 
-  get prevItem() {
+  get prevItem(): string {
     const currentLenght: number = this.weather.length
     const currentIndex: number = this.weather.indexOf(this.currentDay || this.weather[0])
     return this.weather[(currentIndex + currentLenght - 1) % currentLenght]?.time.replace(/\//g, '')
