@@ -112,9 +112,6 @@
             <template #message>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim</template>
           </Login>
         </li>
-        <li class="library--is-max">2</li>
-        <li class="library--is-max">3</li>
-        <li class="library--is-max">4</li>
       </ul>
     </article>
   </section>

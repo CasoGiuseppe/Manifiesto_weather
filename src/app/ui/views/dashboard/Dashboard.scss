@@ -1,7 +1,7 @@
 .dashboard {
   $dashboard: &;
 
-  @apply flex flex-1 items-center justify-center h-full;
+  @apply flex flex-col flex-1 items-center justify-center h-full p-lg;
 
   &__highlight {
     @apply flex flex-col;
@@ -13,6 +13,16 @@
 
     >* {
       @apply font-regular text-base;
+    }
+  }
+
+  &__charts {
+    @apply grid grid-cols-3 gap-lg;
+
+    &--is {
+      &-expand {
+        @apply col-span-2
+      }
     }
   }
 }
