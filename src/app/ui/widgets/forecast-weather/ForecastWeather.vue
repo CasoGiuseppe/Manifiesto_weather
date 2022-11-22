@@ -9,7 +9,7 @@
         class="forecast-weather__switch"
       >
         <BaseWeatherInfo>
-          <template #place>Madrid<span>/Spain</span></template>
+          <template #place>{{getCurrentDay?.current.place}}<span>/Spain</span></template>
           <template #temperature>{{getCurrentDay?.current.temperature}}</template>
           <template #icon><CloudIcon /></template>
           <template #date>{{getCurrentDay?.current.time}}</template>

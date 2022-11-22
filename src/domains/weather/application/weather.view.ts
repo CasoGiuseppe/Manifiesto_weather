@@ -11,6 +11,10 @@ export class WeatherViewModel {
     return new WeatherViewModel(weather.WeatherEntity, id);
   }
 
+  get all() {
+    return this.weather
+  }
+
   get currentDay() {
     return (!this.id) ? this.weather[0] : this.weather.find(node => node.time.replace(/\//g, '') === this.id)
   }
@@ -45,5 +49,9 @@ export class WeatherViewModel {
 
   get time(): string | undefined {
     return this.currentDay?.time.replace(/\//g, '.')
+  }
+
+  get place(): string | undefined {
+    return this.currentDay?.place.replace(/\//g, ' - ').toLowerCase()
   }
 }

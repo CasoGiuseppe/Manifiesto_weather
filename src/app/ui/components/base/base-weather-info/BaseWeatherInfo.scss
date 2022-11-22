@@ -8,7 +8,7 @@
 
   &__place {
     @apply flex;
-    @apply font-bold text-base;
+    @apply font-bold text-base capitalize;
 
     >* {
       @apply font-light;

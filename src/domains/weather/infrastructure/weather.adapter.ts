@@ -6,7 +6,8 @@ import { UUIDService } from "@/app/shared/services/uuid/uuid.services";
 
 export class WeatherDTOAdapter {
   constructor(
-    public readonly weather: WeatherDTOType
+    public readonly weather: Weather[],
+    public readonly sources: any = {}
   ) { }
 
   createWeatherInstance(): Weather {
@@ -19,11 +20,11 @@ export class WeatherDTOAdapter {
         }
       }
     })
-
     const transformedForecast = [...new Set(modifyWeatherResponse.map(day => day.timestamp))].map((node) => {
       return {
         time: this.getCorrectDateFormat(node),
         id: node.id || UUIDService.create(),
+        place: [...new Set(modifyWeatherResponse.map(day => day.place))].toString(),
         forecastDay: modifyWeatherResponse.filter((day) => day.timestamp === node).map(detail => {
           return {
             time: detail.time,

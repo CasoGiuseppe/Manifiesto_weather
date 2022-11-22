@@ -6,6 +6,7 @@ export interface WeatherPanel {
 
 export interface WeatherCurrent {
   time: string | undefined,
+  place: string | undefined,
   temperature: string,
   max: string,
   min: string

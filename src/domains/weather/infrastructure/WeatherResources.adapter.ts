@@ -12,6 +12,7 @@ import type { Weather } from "../core/weather";
 import { CHANGE_WEATHER_LIST } from "./store/weather/actions";
 import { GET_WEATHER_LIST } from "./store/weather/getters";
 import { WeatherDTOAdapter } from "./weather.adapter";
+import type { WeatherDTOType } from "./weather.DTO.type";
 
 export class WeatherResources implements IWeatherRepository {
   constructor(
@@ -35,16 +36,23 @@ export class WeatherResources implements IWeatherRepository {
     try {
       this.loaderService.changeLoaderState({ value: true })
       const position: Record<string, any> = await this.locator.getCurrentLocation().catch((catchResult): ILocator => catchResult)
-      const { weather } = await this.client.get<WeatherDTOAdapter>(BASE_API_WEATHER_URL, {
+      const { weather, sources } = await this.client.get<WeatherDTOAdapter>(BASE_API_WEATHER_URL, {
         date: currentDay,
         last_date: next7Days,
         lon: position?.coords?.longitude || BASE_LONG_DEFAULT,
         lat: position?.coords?.latitude || BASE_LAT_DEFAULT
       })
 
-      const weatherInstance = new WeatherDTOAdapter(weather).createWeatherInstance()
+      const { station_name } = sources.find((source: Record<string, any>) => source.observation_type === 'forecast')
+      const addWeatherPlace = (weather as unknown as any[]).map(node => {
+        return {
+          ...node,
+          ...{ place: station_name }
+        }
+      })
+      const weatherInstance = new WeatherDTOAdapter(addWeatherPlace).createWeatherInstance()
 
-      this.persistService.save({ action: CHANGE_WEATHER_LIST, params: weather })
+      this.persistService.save({ action: CHANGE_WEATHER_LIST, params: addWeatherPlace })
       return weatherInstance
 
     } catch (e) {
