@@ -47,8 +47,8 @@
       }
 
       &__header {
-        @apply sticky flex justify-end px-xlg py-sm gap-sm;
-        @apply bg-default-positive shadow-b rounded-br-lg rounded-bl-lg;
+        @apply sticky flex justify-end px-xlg py-sm gap-sm top-none;
+        @apply bg-default-positive shadow-b rounded-br-lg rounded-bl-lg z-[9];
 
         @screen tablet-ld {
           @apply rounded-br-xl rounded-bl-none
@@ -56,7 +56,7 @@
       }
 
       &__content {
-        @apply flex-1 overflow-y-auto;
+        @apply flex-1;
         @apply transition-spacing duration-500;
 
         @screen tablet-ld {

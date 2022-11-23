@@ -17,7 +17,7 @@ export class ChartViewModel {
           name: 'Temperature',
           data: this.chartModel.map(chart => chart.temperature === 0 ? Math.floor(Math.random() * 10) + 1 : chart.temperature)
         }],
-        xaxis: { categories: this.chartModel.map(chart => chart.time) }
+        xaxis: { categories: this.chartModel.map(chart => chart.time.slice(0, -3)) }
       }
     }
   }
@@ -51,7 +51,7 @@ export class ChartViewModel {
       Cloud: {
         type: 'pie',
         series: this.chartModel.map(chart => chart.cloud_cover === null ? 0 : chart.cloud_cover),
-        labels: this.chartModel.map(chart => chart.time)
+        labels: this.chartModel.map(chart => chart.time.slice(0, -3))
       }
     }
   }

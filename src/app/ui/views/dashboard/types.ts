@@ -14,9 +14,10 @@ export const MODELS = {
   },
   temperature: {
     heading: 'Temperature',
-    class: null,
+    class: 'x2',
     chart: {
       type: 'bar',
+      height: 500,
       zoom: {
         enabled: false
       }
@@ -24,6 +25,7 @@ export const MODELS = {
     plotOptions: {
       bar: {
         horizontal: false,
+        borderRadius: 4,
         endingShape: 'rounded'
       },
     },

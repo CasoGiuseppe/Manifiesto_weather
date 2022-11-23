@@ -64,10 +64,10 @@ router.beforeEach(async (to, from) => {
     const { temperature, humidity, wind, cloud } = await UseChartService?.getChartParamsData(routerID)
 
     // persist data on local store
-    //chartStore[CHANGE_CURRENT_CHARTS]?.(temperature)
     chartStore[CHANGE_CURRENT_CHARTS]?.(humidity)
     chartStore[CHANGE_CURRENT_CHARTS]?.(wind)
     chartStore[CHANGE_CURRENT_CHARTS]?.(cloud)
+    chartStore[CHANGE_CURRENT_CHARTS]?.(temperature)
     weatherStore[CHANGE_CURRENT_DAY]?.({ prev, next, current })
   }
 })

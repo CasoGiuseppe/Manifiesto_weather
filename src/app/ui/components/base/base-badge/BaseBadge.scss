@@ -55,10 +55,10 @@
 
   &__content {
     @apply flex-1 flex justify-center;
-    @apply bg-gray-200 rounded-md;
+    @apply bg-gray-300 rounded-md;
 
     >* {
-      @apply flex items-center
+      @apply flex items-center flex-1
     }
   }
 }
