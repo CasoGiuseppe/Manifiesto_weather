@@ -13,6 +13,7 @@ import '@/assets/styles/layout.scss';
 // app use cases
 import { UserServices } from "@/domains/user/application/use-cases";
 import { WeatherServices } from "@/domains/weather/application/use-cases";
+import { ChartServices } from "@/domains/charts/application/use-cases";
 
 // app common services
 import { HTTPService } from "@/app/shared/services/http/http.services";
@@ -20,6 +21,7 @@ import { NotificationService } from "@/app/shared/services/notification/notifica
 import { LocatorService } from "@/app/shared/services/locator/locator.services";
 import { LoaderService } from "@/app/shared/services/loader/loader.services";
 import { PersistService } from "./app/shared/services/persistData/persist.data.services";
+
 
 // implementations adapters
 import { UserResources } from "@/domains/user/infrastructure/UserResources.adapter";
@@ -53,7 +55,8 @@ const weatherResources = new WeatherResources(
 
 export const UseUserService = new UserServices(userResources);
 export const UseWeatherService = new WeatherServices(weatherResources);
-
+export const UseChartService = new ChartServices(weatherResources);
 
 app.mount("#app");
 app.provide<UserServices>("UseUserService", UseUserService);
+app.provide<ChartServices>("UseChartService", UseChartService);

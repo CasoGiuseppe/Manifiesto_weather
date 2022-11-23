@@ -67,6 +67,7 @@ import router from '@/app/router'
 
 // user use case
 import type { UserServices } from '@/domains/user/application/use-cases'
+import { UseWeatherService } from "@/main";
 
 interface IReactive {
   label: string
@@ -103,7 +104,10 @@ const fieldsEmptyState = computed(() => {
 
 const userLogin = async ():Promise<void> => {
   const userLoginState = await UseUserService?.getUserByLogin(email.label, pwd.label)
-  if(userLoginState) router.push({name: 'dashboard'})
+  if(userLoginState) {
+    const { current: { time }} = await UseWeatherService.getWeatherForecastData()
+    router.push({path: `/dashboard/${time?.replace(/\./g, '')}`})
+  }
 }
 
 </script>

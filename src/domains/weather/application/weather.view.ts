@@ -16,7 +16,11 @@ export class WeatherViewModel {
   }
 
   get currentDay() {
-    return (!this.id) ? this.weather[0] : this.weather.find(node => node.time.replace(/\//g, '') === this.id)
+    return (!this.id) ? this.weather[0] : this.weather.find(node => node.id === this.id)
+  }
+
+  get currentID() {
+    return this.currentDay?.id
   }
 
   get allTemperatures(): number[] {

@@ -34,8 +34,12 @@
     @apply duration-1000;
 
     &--is {
-      &-expand {
+      &-x2 {
         @apply col-span-2
+      }
+
+      &-x3 {
+        @apply col-span-3
       }
     }
   }

@@ -21,7 +21,9 @@
         <slot name="payoff" />
       </p>
     </header>
-    <slot name="content" />
+    <section class="base-badge__content">
+      <slot name="content" />
+    </section>
     <footer
       v-if="$slots['footer']"
       class="base-badge__footer"

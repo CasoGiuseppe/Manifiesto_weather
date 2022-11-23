@@ -21,9 +21,10 @@ export class WeatherDTOAdapter {
       }
     })
     const transformedForecast = [...new Set(modifyWeatherResponse.map(day => day.timestamp))].map((node) => {
+      const normalizeDate = this.getCorrectDateFormat(node)
       return {
         time: this.getCorrectDateFormat(node),
-        id: node.id || UUIDService.create(),
+        id: normalizeDate.replace(/\//g, ''),
         place: [...new Set(modifyWeatherResponse.map(day => day.place))].toString(),
         forecastDay: modifyWeatherResponse.filter((day) => day.timestamp === node).map(detail => {
           return {

@@ -7,37 +7,25 @@
       >
       <ul
         class="dashboard__charts"
-        v-if="isPageReady"
+        v-if="Object.keys(chartModels).length > 0"
       >
-        <li>
+        <li
+          v-for="key in Object.keys(chartModels)"
+        >
           <BaseBadge id="row" :is="[IsBadge.COLUMN]">
-            <template #title>title</template>
+            <template #title>{{key}}</template>
             <template #payoff>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et </template>
-            <template #content><ChartBarIcon style="fill: white" /></template>
+            <template #content>
+              <!--{{ Object.assign(MODELS[key.toLocaleLowerCase() as keyof typeof MODELS], {label: chartModels[key].labels, xaxis: chartModels[key].xaxis})}}
+              {{ {...MODELS[key.toLocaleLowerCase() as keyof typeof MODELS], {label: 'ciccio'} } }}-->
+              <apexchart
+                :type="MODELS[key.toLocaleLowerCase() as keyof typeof MODELS]?.chart.type"
+                :options="Object.assign(MODELS[key.toLocaleLowerCase() as keyof typeof MODELS], {labels: chartModels[key].labels, xaxis: chartModels[key].xaxis})"
+                :series="chartModels[key].series">
+              </apexchart>
+            </template>
           </BaseBadge>
         </li>
-        <li>
-          <BaseBadge id="row" :is="[IsBadge.COLUMN]">
-            <template #title>title</template>
-            <template #payoff>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et </template>
-            <template #content><ChartBarIcon style="fill: white" /></template>
-          </BaseBadge>
-        </li>
-        <li>
-          <BaseBadge id="row" :is="[IsBadge.ROW]">
-            <template #title>title</template>
-            <template #payoff>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et </template>
-            <template #content><ChartBarIcon style="fill: white" /></template>
-          </BaseBadge>
-        </li>
-        <li>
-          <BaseBadge id="row" :is="[IsBadge.COLUMN]">
-            <template #title>title</template>
-            <template #payoff>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et </template>
-            <template #content><ChartBarIcon style="fill: white" /></template>
-          </BaseBadge>
-        </li>
-        <li class="dashboard__charts--is-expand">5</li>
       </ul>
 
       <!-- log out user-->
@@ -56,22 +44,18 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { RouterLink } from "vue-router";
-import { computed } from "vue";
 
 // UI
 import BaseBadge from "@/app/ui/components/base/base-badge/BaseBadge.vue"
 import { Is as IsBadge } from '@/app/ui/components/base/base-badge/types'
-import { ChartBarIcon } from '@heroicons/vue/24/solid'
 
 // store
-import { userStore } from "@/domains/user/infrastructure/store/user";
-import { weatherStore } from "@/domains/weather/infrastructure/store/weather";
+import { chartStore } from "@/domains/charts/infrastructure/store/chart";
 
-const isUserLogged = storeToRefs(userStore).getUserLogged
-const hasWeatherList = storeToRefs(weatherStore).getWeatherList
-const isPageReady = computed(() => {
-  return [isUserLogged.value, hasWeatherList.value !== undefined].every(value => value === true)
-})
+// types
+import { MODELS } from './types'
+
+const chartModels = storeToRefs(chartStore).current
 
 </script>
 <style lang="scss" src="./Dashboard.scss" />

@@ -9,8 +9,9 @@ export class GetWeatherForecast {
 
   async execute(id: string | undefined = undefined): Promise<WeatherPanel> {
     try {
-      const APIresult = await this.weatherResources.getWeatherForecast()
+      const forecastWeatherFromApi = await this.weatherResources.getWeatherForecast()
       const {
+        currentID,
         time,
         place,
         medianTemperature,
@@ -18,10 +19,11 @@ export class GetWeatherForecast {
         minTemperature,
         nextItem,
         prevItem
-      } = WeatherViewModel.createWeatherViewModel(APIresult, id)
+      } = WeatherViewModel.createWeatherViewModel(forecastWeatherFromApi, id)
 
       return {
         current: {
+          id: currentID,
           time,
           place,
           temperature: medianTemperature,
