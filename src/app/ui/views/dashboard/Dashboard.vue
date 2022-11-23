@@ -10,17 +10,18 @@
         v-if="Object.keys(chartModels).length > 0"
       >
         <li
+          :class="[
+            `dashboard__charts--is-${MODELS[key.toLocaleLowerCase() as keyof typeof MODELS]?.class}`
+          ]"
           v-for="key in Object.keys(chartModels)"
         >
           <BaseBadge id="row" :is="[IsBadge.COLUMN]">
-            <template #title>{{key}}</template>
+            <template #title>{{MODELS[key.toLocaleLowerCase() as keyof typeof MODELS].heading}}</template>
             <template #payoff>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et </template>
             <template #content>
-              <!--{{ Object.assign(MODELS[key.toLocaleLowerCase() as keyof typeof MODELS], {label: chartModels[key].labels, xaxis: chartModels[key].xaxis})}}
-              {{ {...MODELS[key.toLocaleLowerCase() as keyof typeof MODELS], {label: 'ciccio'} } }}-->
               <apexchart
                 :type="MODELS[key.toLocaleLowerCase() as keyof typeof MODELS]?.chart.type"
-                :options="Object.assign(MODELS[key.toLocaleLowerCase() as keyof typeof MODELS], {labels: chartModels[key].labels, xaxis: chartModels[key].xaxis})"
+                :options="Object.assign(MODELS[key.toLocaleLowerCase() as keyof typeof MODELS], {labels: chartModels[key].labels || {}, xaxis: chartModels[key].xaxis || {}})"
                 :series="chartModels[key].series">
               </apexchart>
             </template>

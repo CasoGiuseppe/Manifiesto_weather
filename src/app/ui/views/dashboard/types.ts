@@ -1,5 +1,7 @@
 export const MODELS = {
   humidity: {
+    heading: 'Min/max humidity',
+    class: null,
     chart: {
       type: 'donut',
       height: 350,
@@ -11,6 +13,8 @@ export const MODELS = {
     },
   },
   temperature: {
+    heading: 'Temperature',
+    class: null,
     chart: {
       type: 'bar',
       zoom: {
@@ -26,6 +30,8 @@ export const MODELS = {
   },
 
   wind: {
+    heading: 'Max wind speed',
+    class: null,
     chart: {
       type: 'radialBar',
       height: 350,
@@ -39,6 +45,15 @@ export const MODELS = {
           },
         }
       }
+    }
+  },
+
+  cloud: {
+    heading: 'Cloud cover',
+    class: null,
+    chart: {
+      type: 'pie',
+      width: 380,
     }
   }
 }

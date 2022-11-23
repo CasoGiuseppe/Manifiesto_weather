@@ -45,4 +45,14 @@ export class ChartViewModel {
       }
     }
   }
+
+  get cloudModel() {
+    return {
+      Cloud: {
+        type: 'pie',
+        series: this.chartModel.map(chart => chart.cloud_cover === null ? 0 : chart.cloud_cover),
+        labels: this.chartModel.map(chart => chart.time)
+      }
+    }
+  }
 }
