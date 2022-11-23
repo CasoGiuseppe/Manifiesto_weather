@@ -6,7 +6,13 @@
   ]"
 >
   <nav class="panel-navigation">
-    <BaseButton id="squared" :is="[IsButton.SQUARED, IsButton.SMALL]"><XCircleIcon/></BaseButton>
+    <BaseButton
+      id="squared"
+      :is="[IsButton.SQUARED, IsButton.SMALL]"
+      @send-click="userLogOut"
+    >
+      <XCircleIcon/>
+    </BaseButton>
   </nav>
   <section class="panel-content">
     <header class="panel__header">
@@ -40,5 +46,8 @@ import { useRoute } from 'vue-router';
 
 const currentRouteName = computed(() => useRoute().name as string)
 const userLoggedState = inject("userLoggedState")
+
+const clickEmit = defineEmits(["userLogout"]);
+const userLogOut = () => clickEmit("userLogout");
 </script>
 <style lang="scss" src="./Panel.scss" />

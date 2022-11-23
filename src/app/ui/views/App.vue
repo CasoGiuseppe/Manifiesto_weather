@@ -19,6 +19,7 @@
           v-if="route.meta.type !== 'library'"
           :is="Component"
           :key="route.meta.login"
+          @user-logout="closeUserSession"
         >
           <template #component>
             <component
@@ -53,10 +54,9 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, computed, Transition, watch, shallowRef, provide } from "vue";
+import { defineAsyncComponent, computed, watch, shallowRef, provide } from "vue";
 import { RouterView, useRoute, useRouter } from 'vue-router';
 import { BASE_FIGMA_URL } from "@/app/shared/helpers/constants";
-import { userStore } from "@/domains/user/infrastructure/store/user"
 
 // UI
 import { Is as IsButton } from '@/app/ui/components/base/base-button/types'
@@ -65,6 +65,12 @@ import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 // pinia
 import { useAppBehavioursStore } from "@/app/shared/stores/app_behaviours";
 import { storeToRefs } from "pinia";
+import { userStore } from "@/domains/user/infrastructure/store/user"
+import { weatherStore } from "@/domains/weather/infrastructure/store/weather";
+import { chartStore } from "@/domains/charts/infrastructure/store/chart";
+import { CHANGE_USER_STATE } from "@/domains/user/infrastructure/store/user/actions";
+import { CHANGE_CURRENT_DAY, CHANGE_WEATHER_LIST } from "@/domains/weather/infrastructure/store/weather/actions";
+import { REMOVE_CHARTS } from "@/domains/charts/infrastructure/store/chart/actions";
 
 const components = {
   start: () => import("@/app/ui/widgets/login/Login.vue"),
@@ -98,4 +104,12 @@ const getLoaderStoreState = storeToRefs(behavioursStore).hasLoader;
 const isLogged = storeToRefs(userStore).getUserLogged
 provide("userLoggedState", isLogged)
 
+// logout
+const closeUserSession = () => {
+  router.push({name: 'start'})
+  userStore[CHANGE_USER_STATE]({})
+  weatherStore[CHANGE_WEATHER_LIST]()
+  weatherStore[CHANGE_CURRENT_DAY]()
+  chartStore[REMOVE_CHARTS]()
+}
 </script>

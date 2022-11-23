@@ -2,7 +2,7 @@ import type { IChartModel, IChartStore, } from "./types";
 import { defineStore } from "pinia";
 
 // actions
-import { CHANGE_CURRENT_CHARTS } from "./actions";
+import { CHANGE_CURRENT_CHARTS, REMOVE_CHARTS } from "./actions";
 
 // getters
 import getters from "./getters";
@@ -22,6 +22,10 @@ export const useChartStore = defineStore({
         ...this.current,
         ...chartModel
       };
+    },
+
+    [REMOVE_CHARTS]() {
+      this.current = {};
     },
   },
 
