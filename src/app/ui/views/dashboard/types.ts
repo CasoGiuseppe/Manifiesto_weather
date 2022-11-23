@@ -1,10 +1,17 @@
+const SHARED_CHART = {
+  foreColor: '#fff',
+  zoom: {
+    enabled: false
+  }
+}
+
 export const MODELS = {
   humidity: {
     heading: 'Min/max humidity',
     class: null,
     chart: {
       type: 'donut',
-      height: 350,
+      ...SHARED_CHART
     },
     theme: {
       monochrome: {
@@ -17,10 +24,7 @@ export const MODELS = {
     class: 'x2',
     chart: {
       type: 'bar',
-      height: 500,
-      zoom: {
-        enabled: false
-      }
+      ...SHARED_CHART,
     },
     plotOptions: {
       bar: {
@@ -36,7 +40,7 @@ export const MODELS = {
     class: null,
     chart: {
       type: 'radialBar',
-      height: 350,
+      ...SHARED_CHART
     },
     plotOptions: {
       radialBar: {
@@ -55,7 +59,7 @@ export const MODELS = {
     class: null,
     chart: {
       type: 'pie',
-      width: 380,
+      ...SHARED_CHART
     }
   }
 }
