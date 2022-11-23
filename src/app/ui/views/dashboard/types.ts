@@ -55,7 +55,7 @@ export const MODELS = {
   },
 
   cloud: {
-    heading: 'Cloud cover',
+    heading: 'Max/min cloud cover',
     class: null,
     chart: {
       type: 'pie',

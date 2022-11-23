@@ -22,7 +22,7 @@
       </p>
     </header>
     <section class="base-badge__content">
-      <slot name="content" />
+      <slot name="chart" />
     </section>
     <footer
       v-if="$slots['footer']"

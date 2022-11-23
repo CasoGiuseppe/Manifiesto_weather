@@ -56,7 +56,7 @@
       }
 
       &__content {
-        @apply flex-1;
+        @apply flex-1 flex justify-center;
         @apply transition-spacing duration-500;
 
         @screen tablet-ld {

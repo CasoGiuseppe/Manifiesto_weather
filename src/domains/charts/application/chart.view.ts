@@ -10,6 +10,10 @@ export class ChartViewModel {
     return new ChartViewModel(model.chartEntity);
   }
 
+  get all() {
+    return this.chartModel
+  }
+
   get temperatureModel() {
     return {
       Temperature: {
@@ -50,8 +54,11 @@ export class ChartViewModel {
     return {
       Cloud: {
         type: 'pie',
-        series: this.chartModel.map(chart => chart.cloud_cover === null ? 0 : chart.cloud_cover),
-        labels: this.chartModel.map(chart => chart.time.slice(0, -3))
+        series: [
+          Math.min(...this.chartModel.map(chart => chart.cloud_cover || 0)),
+          Math.max(...this.chartModel.map(chart => chart.cloud_cover || 0))
+        ],
+        labels: ['min', 'max']
       }
     }
   }

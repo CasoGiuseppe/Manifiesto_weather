@@ -40,12 +40,14 @@
   }
 
   &-content {
-    // layer structure
     @apply flex flex-initial flex-col grow order-1 p-lg justify-end gap-xlg overflow-hidden;
 
     @screen tablet-ld {
-      // layer structure
       @apply flex-col order-2;
+    }
+
+    @screen phone {
+      @apply py-md
     }
   }
 

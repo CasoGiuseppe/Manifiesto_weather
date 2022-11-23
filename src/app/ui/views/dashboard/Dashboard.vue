@@ -9,6 +9,11 @@
         class="dashboard__charts"
         v-if="Object.keys(chartModels).length > 0"
       >
+        <li>
+          <BaseBadge id="row" :is="[IsBadge.COLUMN]">
+            <template #title>Min/Max</template>
+          </BaseBadge>
+        </li>
         <li
           :class="[
             `dashboard__charts--is-${MODELS[key.toLocaleLowerCase() as keyof typeof MODELS]?.class}`
@@ -16,9 +21,9 @@
           v-for="key in Object.keys(chartModels)"
         >
           <BaseBadge id="row" :is="[IsBadge.COLUMN]">
-            <template #title>{{MODELS[key.toLocaleLowerCase() as keyof typeof MODELS].heading}}</template>
+            <template #title><ChartBarIcon style="fill: white" />{{MODELS[key.toLocaleLowerCase() as keyof typeof MODELS].heading}}</template>
             <template #payoff>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et </template>
-            <template #content>
+            <template #chart>
               <apexchart
                 :type="MODELS[key.toLocaleLowerCase() as keyof typeof MODELS]?.chart.type"
                 :options="Object.assign(MODELS[key.toLocaleLowerCase() as keyof typeof MODELS], {labels: chartModels[key].labels || {}, xaxis: chartModels[key].xaxis || {}})"
@@ -49,6 +54,8 @@ import { RouterLink } from "vue-router";
 // UI
 import BaseBadge from "@/app/ui/components/base/base-badge/BaseBadge.vue"
 import { Is as IsBadge } from '@/app/ui/components/base/base-badge/types'
+import { ChartBarIcon } from '@heroicons/vue/24/solid'
+
 
 // store
 import { chartStore } from "@/domains/charts/infrastructure/store/chart";

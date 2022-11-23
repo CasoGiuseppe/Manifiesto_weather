@@ -8,7 +8,7 @@
     $to: translateY(var(--to-animation)),
   );
 
-  @apply flex flex-col flex-1 items-center justify-center h-full p-lg;
+  @apply flex flex-col flex-1 items-center justify-center h-full p-lg max-w-7xl;
 
   &--is {
     &-no-logged {
@@ -30,8 +30,16 @@
   }
 
   &__charts {
-    @apply grid grid-cols-3 gap-lg;
+    @apply grid grid-cols-2 gap-lg;
     @apply duration-1000;
+
+    @screen desktop {
+      @apply grid-cols-3
+    }
+
+    @screen phone {
+      @apply grid-cols-1 gap-md
+    }
 
     &--is {
       &-x2 {

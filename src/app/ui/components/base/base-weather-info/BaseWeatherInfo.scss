@@ -1,6 +1,10 @@
 .base-weather-info {
   $baseweatherinfo: &;
 
+  @screen phone {
+    @apply flex flex-wrap items-center
+  }
+
   &__place,
   &__temperature {
     @apply text-default-positive
@@ -10,12 +14,20 @@
     @apply flex;
     @apply font-bold text-base capitalize;
 
+    @screen phone {
+      @apply w-full
+    }
+
     >* {
       @apply font-light;
     }
 
     +#{$baseweatherinfo}__temperature {
-      @apply mt-lg
+      @apply mt-lg;
+
+      @screen phone {
+        @apply mt-sm;
+      }
     }
   }
 
@@ -23,17 +35,30 @@
     @apply flex;
     @apply text-xxxlg tracking-tighter leading-[200px];
 
+    @screen phone {
+      @apply text-xxlg
+    }
+
     &-label {
       @apply flex;
 
       &:after {
         @apply flex ml-sm;
         @apply text-[6rem] content-["°"] leading-none;
+
+        @screen phone {
+          @apply text-lg
+        }
+
       }
     }
 
     +#{$baseweatherinfo}__more {
-      @apply mt-md
+      @apply mt-none;
+
+      @screen phone {
+        @apply ml-lg
+      }
     }
   }
 
@@ -67,7 +92,11 @@
   }
 
   &__user-payoff {
-    @apply text-default-positive
+    @apply text-default-positive hidden;
+
+    @screen tablet-ld {
+      @apply flex flex-col
+    }
   }
 
   &__user {

@@ -69,6 +69,7 @@ module.exports = {
       base: ['var(--sm-font-size-medium)', { lineHeight: 'normal' }],
       lg: ['var(--sm-font-size-big)', { lineHeight: 'normal' }],
       xlg: ['var(--sm-font-size-xlarge)', { lineHeight: 'normal' }],
+      xxlg: ['var(--sm-font-size-xxlarge)', { lineHeight: 'normal' }],
       xxxlg: ['var(--sm-font-size-xxxlarge)', { lineHeight: 'normal' }],
     },
     transitionProperty: {

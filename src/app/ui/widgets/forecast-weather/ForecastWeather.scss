@@ -7,7 +7,11 @@
     $to: translateX(var(--to-animation)),
   );
 
-  @apply flex w-full items-center;
+  @apply flex w-full items-center flex-wrap;
+
+  @screen phone {
+    @apply justify-end
+  }
 
   >* {
     &:is(button) {
@@ -21,6 +25,10 @@
 
   &__switch {
     @apply flex-1;
-    @apply duration-700
+    @apply duration-700;
+
+    @screen phone {
+      @apply w-full flex-auto
+    }
   }
 }

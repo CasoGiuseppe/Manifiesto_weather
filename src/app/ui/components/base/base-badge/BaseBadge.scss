@@ -46,7 +46,14 @@
   }
 
   &__title {
+    @apply flex items-center;
     @apply font-bold text-base uppercase text-default-positive;
+
+    >* {
+      &:is(svg) {
+        @apply w-md h-md mr-sm
+      }
+    }
   }
 
   &__payoff {
