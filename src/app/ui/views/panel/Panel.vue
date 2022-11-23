@@ -1,5 +1,10 @@
 <template>
-<aside class="panel" v-if="$route.name !== 'library'">
+<aside v-if="$route.name !== 'library'"
+  :class="[
+    userLoggedState ? 'panel--is-logged' : null,
+    'panel'
+  ]"
+>
   <nav class="panel-navigation">
     <BaseButton id="squared" :is="[IsButton.SQUARED, IsButton.SMALL]"><XCircleIcon/></BaseButton>
   </nav>
@@ -26,7 +31,7 @@
 </aside>
 </template>
 <script setup lang="ts">
-import { computed, } from "vue";
+import { computed, inject, } from "vue";
 import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 import { AcademicCapIcon, SunIcon } from '@heroicons/vue/24/solid';
 import { Is as IsButton } from '@/app/ui/components/base/base-button/types'
@@ -34,5 +39,6 @@ import { XCircleIcon } from '@heroicons/vue/24/solid'
 import { useRoute } from 'vue-router';
 
 const currentRouteName = computed(() => useRoute().name as string)
+const userLoggedState = inject("userLoggedState")
 </script>
 <style lang="scss" src="./Panel.scss" />

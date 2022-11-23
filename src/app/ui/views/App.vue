@@ -53,9 +53,10 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, computed, Transition, watch, shallowRef } from "vue";
+import { defineAsyncComponent, computed, Transition, watch, shallowRef, provide } from "vue";
 import { RouterView, useRoute, useRouter } from 'vue-router';
 import { BASE_FIGMA_URL } from "@/app/shared/helpers/constants";
+import { userStore } from "@/domains/user/infrastructure/store/user"
 
 // UI
 import { Is as IsButton } from '@/app/ui/components/base/base-button/types'
@@ -93,5 +94,8 @@ const bringFigma = () => {
 // store handler for loader state
 const behavioursStore = useAppBehavioursStore();
 const getLoaderStoreState = storeToRefs(behavioursStore).hasLoader;
+
+const isLogged = storeToRefs(userStore).getUserLogged
+provide("userLoggedState", isLogged)
 
 </script>

@@ -30,17 +30,23 @@
   }
 
   &-navigation {
-    @apply basis-xlg order-2 justify-end items-end flex p-sm;
+    @apply basis-xlg order-2 justify-end items-end flex p-sm translate-x-[-100%];
     @apply bg-gray-600 rounded-t-lg;
+    @apply transition-transform duration-500;
 
     @screen tablet-ld {
       @apply flex-row order-1 basis-xxlg justify-center;
       @apply rounded-r-xl
     }
+
+    #{$panel}--is-logged & {
+      @apply translate-x-none
+    }
   }
 
   &-content {
-    @apply flex flex-initial flex-col grow order-1 p-lg justify-end gap-xlg overflow-hidden;
+    @apply flex flex-initial flex-col grow order-1 p-lg justify-end gap-xlg overflow-hidden translate-x-[-2rem];
+    @apply transition-transform duration-500;
 
     @screen tablet-ld {
       @apply flex-col order-2;
@@ -48,6 +54,10 @@
 
     @screen phone {
       @apply py-md
+    }
+
+    #{$panel}--is-logged & {
+      @apply translate-x-none
     }
   }
 

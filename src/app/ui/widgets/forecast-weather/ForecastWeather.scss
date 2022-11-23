@@ -7,10 +7,10 @@
     $to: translateX(var(--to-animation)),
   );
 
-  @apply flex w-full items-center flex-wrap;
+  @apply flex w-full items-center;
 
   @screen phone {
-    @apply justify-end
+    @apply justify-end flex-wrap
   }
 
   >* {
