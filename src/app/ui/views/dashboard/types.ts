@@ -1,14 +1,31 @@
-const SHARED_CHART = {
+export type SharedType = {
+  foreColor: string,
+  zoom: Record<string, boolean>
+}
+
+export type Models = {
+  [key: string]: {
+    heading: string,
+    direction?: string,
+    class: string,
+    chart?: Record<string, any>,
+    theme?: Record<string, any>,
+    plotOptions?: Record<string, any>
+  }
+}
+
+const SHARED_CHART: SharedType = {
   foreColor: '#fff',
   zoom: {
     enabled: false
   }
 }
 
-export const MODELS = {
+export const MODELS: Models = {
   humidity: {
     heading: 'Min/max humidity',
-    class: null,
+    direction: 'COLUMN',
+    class: '30',
     chart: {
       type: 'donut',
       ...SHARED_CHART
@@ -19,25 +36,11 @@ export const MODELS = {
       }
     },
   },
-  temperature: {
-    heading: 'Temperature',
-    class: 'x2',
-    chart: {
-      type: 'bar',
-      ...SHARED_CHART,
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        borderRadius: 4,
-        endingShape: 'rounded'
-      },
-    },
-  },
 
   wind: {
     heading: 'Max wind speed',
-    class: null,
+    direction: 'ROW',
+    class: '45',
     chart: {
       type: 'radialBar',
       ...SHARED_CHART
@@ -56,10 +59,28 @@ export const MODELS = {
 
   cloud: {
     heading: 'Max/min cloud cover',
-    class: null,
+    direction: 'COLUMN',
+    class: '40',
     chart: {
       type: 'pie',
       ...SHARED_CHART
     }
+  },
+
+  temperature: {
+    heading: 'Temperature',
+    class: '60',
+    direction: 'COLUMN',
+    chart: {
+      type: 'bar',
+      ...SHARED_CHART,
+    },
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        borderRadius: 4,
+        endingShape: 'rounded'
+      },
+    },
   }
 }

@@ -1,5 +1,5 @@
 import type { Chart } from "../core/chart";
-import type { ChartType } from "../core/charts.types";
+import type { ChartModel, ChartType } from "../core/charts.types";
 
 export class ChartViewModel {
   private constructor(
@@ -14,7 +14,7 @@ export class ChartViewModel {
     return this.chartModel
   }
 
-  get temperatureModel() {
+  get temperatureModel(): ChartModel {
     return {
       Temperature: {
         series: [{
@@ -26,10 +26,9 @@ export class ChartViewModel {
     }
   }
 
-  get humidityModel() {
+  get humidityModel(): ChartModel {
     return {
       Humidity: {
-        type: 'donut',
         series: [
           Math.min(...this.chartModel.map(chart => chart.relative_humidity === 0 ? Math.floor(Math.random() * 10) + 1 : chart.relative_humidity)),
           Math.max(...this.chartModel.map(chart => chart.relative_humidity === 0 ? Math.floor(Math.random() * 10) + 1 : chart.relative_humidity)),
@@ -38,10 +37,9 @@ export class ChartViewModel {
       }
     }
   }
-  get windModel() {
+  get windModel(): ChartModel {
     return {
       Wind: {
-        type: 'radialBar',
         series: [
           Math.max(...this.chartModel.map(chart => chart.wind_speed === 0 ? Math.floor(Math.random() * 10) + 1 : chart.wind_speed))
         ],
@@ -50,16 +48,23 @@ export class ChartViewModel {
     }
   }
 
-  get cloudModel() {
+  get cloudModel(): ChartModel {
     return {
       Cloud: {
-        type: 'pie',
         series: [
           Math.min(...this.chartModel.map(chart => chart.cloud_cover || 0)),
           Math.max(...this.chartModel.map(chart => chart.cloud_cover || 0))
         ],
         labels: ['min', 'max']
       }
+    }
+  }
+
+  get minMax(): Record<string, string> {
+    const temperatures = this.chartModel?.map(node => Math.floor(node.temperature)) || [];
+    return {
+      min: `${Math.min(...temperatures)}°`,
+      max: `${Math.max(...temperatures)}°`
     }
   }
 }

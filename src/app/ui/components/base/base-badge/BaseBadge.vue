@@ -38,7 +38,7 @@ import type { Is } from './types';
 
 export interface IBadge {
   id: string,
-  is: Is[],
+  is: Is[] | string[],
   maxWidth?: string
 }
 
@@ -49,7 +49,7 @@ const props = withDefaults(defineProps<IBadge>(), {
 })
 
 const cssCustomElementTypes = computed(() => {
-  return props.is.length > 0 ? props.is.map((type) => `base-badge--is-${type}`) : []
+  return props.is.length > 0 ? props.is.map((type) => `base-badge--is-${type.toLocaleLowerCase()}`) : []
 })
 
 const cssCustomVariables = computed(() => {

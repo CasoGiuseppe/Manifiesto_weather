@@ -10,13 +10,19 @@ export class GetChartParameters {
   async execute(id: string) {
     const dataWeather = await (await this.weatherRepository.getWeatherForecast()).weatherEntity
     const { forecastDay } = dataWeather.find(data => data.id === id) as unknown as ForecastDay
-    const { temperatureModel, humidityModel, windModel, cloudModel, all } = ChartViewModel.createChartViewModel(Chart.createChart(forecastDay))
+    const {
+      temperatureModel,
+      humidityModel,
+      windModel,
+      cloudModel,
+      minMax
+    } = ChartViewModel.createChartViewModel(Chart.createChart(forecastDay))
     return {
-      all,
       temperature: temperatureModel,
       humidity: humidityModel,
       wind: windModel,
       cloud: cloudModel,
+      minMax
     }
   }
 }

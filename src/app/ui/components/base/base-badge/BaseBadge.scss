@@ -7,10 +7,10 @@
 
   &--is {
     &-row {
-      @apply flex-row justify-between;
+      @apply flex-col justify-between;
 
-      @screen phone {
-        @apply flex-col;
+      @screen desktop {
+        @apply flex-row;
       }
     }
 
@@ -23,19 +23,21 @@
     @apply flex flex-col gap-sm;
 
     #{$basebadge}--is-row & {
-      @apply basis-[45%];
+      @apply flex-auto;
 
-      @screen phone {
-        @apply flex-auto;
+      @screen desktop {
+        @apply basis-[35%];
       }
     }
 
     +* {
       #{$basebadge}--is-row & {
-        @apply basis-[45%];
+        @apply flex-auto;
+        @apply max-w-full;
 
-        @screen phone {
-          @apply flex-auto;
+        @screen desktop {
+          @apply basis-[55%];
+          @apply max-w-[55%];
         }
       }
     }
@@ -62,7 +64,10 @@
 
   &__content {
     @apply flex-1 flex justify-center;
-    @apply bg-gray-300 rounded-md;
+    @apply rounded-md;
+
+    // custom
+    background: linear-gradient(to bottom right, transparent 0%, transparent 50%, #545454 50%, #545454 100%);
 
     >* {
       @apply flex items-center flex-1

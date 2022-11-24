@@ -2,13 +2,18 @@
   $dashboard: &;
   --from-animation: 70%;
   --to-animation: -70%;
+  --cell-gap: 1%;
 
   @include create-animation($name: 'appear-extra-panel',
     $from: translateY(var(--from-animation)),
     $to: translateY(var(--to-animation)),
   );
 
-  @apply flex flex-col flex-1 items-center justify-center h-full p-lg max-w-7xl;
+  @apply flex flex-col flex-1 items-center justify-center h-full p-lg max-w-4xl;
+
+  @screen large-desktop {
+    @apply max-w-6xl
+  }
 
   &--is {
     &-no-logged {
@@ -30,24 +35,67 @@
   }
 
   &__charts {
-    @apply grid grid-cols-2 gap-lg;
+    // @apply grid grid-cols-2 gap-lg;
+    @apply flex gap-[var(--cell-gap)] flex-wrap justify-between;
     @apply duration-1000;
 
     @screen desktop {
-      @apply grid-cols-3
+      //@apply grid-cols-3
     }
 
     @screen phone {
-      @apply grid-cols-1 gap-md
+      //@apply grid-cols-1 gap-md
     }
 
-    &--is {
-      &-x2 {
-        @apply col-span-2
+    &__box {
+      flex-basis: calc(50% - var(--cell-gap));
+
+      @screen phone {
+        @apply basis-full;
+      }
+    }
+
+    &--is- {
+      &20 {
+        @screen desktop {
+          flex-basis: calc(20% - var(--cell-gap))
+        }
       }
 
-      &-x3 {
-        @apply col-span-3
+      &25 {
+        @screen desktop {
+          flex-basis: calc(25% - var(--cell-gap))
+        }
+      }
+
+      &30 {
+        @screen desktop {
+          flex-basis: calc(30% - var(--cell-gap))
+        }
+      }
+
+      &35 {
+        @screen desktop {
+          flex-basis: calc(35% - var(--cell-gap))
+        }
+      }
+
+      &40 {
+        @screen desktop {
+          flex-basis: calc(40% - var(--cell-gap))
+        }
+      }
+
+      &45 {
+        @screen desktop {
+          flex-basis: calc(45% - var(--cell-gap))
+        }
+      }
+
+      &60 {
+        @screen desktop {
+          flex-basis: calc(60% - var(--cell-gap));
+        }
       }
     }
   }
