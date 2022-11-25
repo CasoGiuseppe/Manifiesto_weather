@@ -9,7 +9,7 @@
         class="dashboard__charts"
         v-if="Object.keys(chartModels).length > 0"
       >
-        <li class="
+        <!--<li class="
           dashboard__charts__box
           dashboard__charts--is-25
         ">
@@ -19,26 +19,29 @@
           >
             <template #title>Min/Max</template>
           </BaseBadge>
-        </li>
+        </li>-->
         <li
           :class="[
-            `dashboard__charts--is-${MODELS[key.toLocaleLowerCase() as keyof typeof MODELS]?.class}`,
+            `dashboard__charts--is-${chartModels[key].class}`,
             'dashboard__charts__box'
           ]"
           v-for="key in Object.keys(chartModels)"
         >
           <BaseBadge
             :id="key"
-            :is="[MODELS[key.toLocaleLowerCase() as keyof typeof MODELS]?.direction || 'Row']"
+            :is="[chartModels[key].direction]"
           >
-            <template #title><ChartBarIcon style="fill: white" />{{MODELS[key.toLocaleLowerCase() as keyof typeof MODELS].heading}}</template>
-            <template #payoff>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et </template>
+            <template #title><ChartBarIcon style="fill: white" />{{key}}</template>
+            <template #payoff>{{ chartModels[key].payoff }}</template>
             <template #chart>
-              <apexchart
-                :type="MODELS[key.toLocaleLowerCase() as keyof typeof MODELS]?.chart?.type"
-                :options="Object.assign(MODELS[key.toLocaleLowerCase() as keyof typeof MODELS], {labels: chartModels[key].labels || {}, xaxis: chartModels[key].xaxis || {}})"
-                :series="chartModels[key].series">
-              </apexchart>
+              <!-- chart placeholder-->
+              <template v-if="chartModels[key].typeChart">
+                <apexchart
+                  :type="chartModels[key].options.chart.type"
+                  :options="chartModels[key].options"
+                  :series="chartModels[key].series">
+                </apexchart>
+              </template>
             </template>
           </BaseBadge>
         </li>
@@ -66,13 +69,8 @@ import BaseBadge from "@/app/ui/components/base/base-badge/BaseBadge.vue"
 import { Is as IsBadge } from '@/app/ui/components/base/base-badge/types'
 import { ChartBarIcon } from '@heroicons/vue/24/solid'
 
-
 // store
-import { chartStore } from "@/domains/charts/infrastructure/store/chart";
-
-// types
-import { MODELS } from './types'
-
+import { chartStore } from "@/domains/visualizers/charts/shared/infrastructure/store/chart";
 const chartModels = storeToRefs(chartStore).current
 
 </script>

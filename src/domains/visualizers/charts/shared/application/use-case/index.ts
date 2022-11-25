@@ -1,13 +1,13 @@
 import type { IWeatherRepository } from "@/domains/weather/core/repository/weather.repository";
-import { GetChartParameters } from "./GetChartParameters.usecase";
+import { GetChartDataOrigin } from "./GetChartDataOrigin.usecase";
 
 export class ChartServices {
-  private readonly getChartParameters: GetChartParameters;
+  private readonly getChartParameters: GetChartDataOrigin;
 
   constructor(
     private readonly wheaterRepository: IWeatherRepository
   ) {
-    this.getChartParameters = new GetChartParameters(this.wheaterRepository);
+    this.getChartParameters = new GetChartDataOrigin(this.wheaterRepository);
   }
 
   async getChartParamsData(id: string) {

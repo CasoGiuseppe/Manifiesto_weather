@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { UseChartService, UseWeatherService } from "@/main";
+import { UseWeatherService, UseBarChartService } from "@/main";
 import { userStore } from "@/domains/user/infrastructure/store/user"
 import { weatherStore } from "@/domains/weather/infrastructure/store/weather";
 import { CHANGE_CURRENT_DAY } from "@/domains/weather/infrastructure/store/weather/actions";
-import { chartStore } from "@/domains/charts/infrastructure/store/chart";
-import { CHANGE_CURRENT_CHARTS } from "@/domains/charts/infrastructure/store/chart/actions";
+import { chartStore } from "@/domains/visualizers/charts/shared/infrastructure/store/chart";
+import { CHANGE_CURRENT_CHARTS } from "@/domains/visualizers/charts/shared/infrastructure/store/chart/actions";
+import { BAR_TYPE } from "../ui/views/dashboard/types";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -61,14 +62,20 @@ router.beforeEach(async (to, from) => {
 
     // get current day info and charts
     const { prev, next, current } = await UseWeatherService.getWeatherForecastData(routerID)
-    const { temperature, humidity, wind, cloud, minMax } = await UseChartService?.getChartParamsData(routerID)
+    // const { temperature, humidity, wind, cloud, minMax } = await UseChartService?.getChartParamsData(routerID)
 
-    console.log(minMax)
+    console.log('bar', await UseBarChartService.getBarChartOptions(routerID))
     // persist data on local store
-    chartStore[CHANGE_CURRENT_CHARTS]?.(humidity)
-    chartStore[CHANGE_CURRENT_CHARTS]?.(wind)
-    chartStore[CHANGE_CURRENT_CHARTS]?.(cloud)
-    chartStore[CHANGE_CURRENT_CHARTS]?.(temperature)
+    //chartStore[CHANGE_CURRENT_CHARTS]?.(minMax)
+    //chartStore[CHANGE_CURRENT_CHARTS]?.(humidity)
+    //chartStore[CHANGE_CURRENT_CHARTS]?.(wind)
+    //chartStore[CHANGE_CURRENT_CHARTS]?.(cloud)
+    chartStore[CHANGE_CURRENT_CHARTS]?.({
+      Temperature: {
+        ...BAR_TYPE,
+        ...await UseBarChartService.getBarChartOptions(routerID)
+      }
+    })
     weatherStore[CHANGE_CURRENT_DAY]?.({ prev, next, current })
   }
 })

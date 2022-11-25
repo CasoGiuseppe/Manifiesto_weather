@@ -1,6 +1,7 @@
 .base-badge {
   $basebadge: &;
   --max-width: 100%;
+  --bg-color: #545454;
 
   @apply w-full py-lg px-md flex gap-sm flex-wrap max-w-[var(--max-width)] min-h-full;
   @apply bg-gray-400 rounded-md;
@@ -67,7 +68,7 @@
     @apply rounded-md;
 
     // custom
-    background: linear-gradient(to bottom right, transparent 0%, transparent 50%, #545454 50%, #545454 100%);
+    background: linear-gradient(to bottom right, transparent 0%, transparent 50%, var(--bg-color) 50%, var(--bg-color) 100%);
 
     >* {
       @apply flex items-center flex-1

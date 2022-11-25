@@ -67,10 +67,10 @@ import { useAppBehavioursStore } from "@/app/shared/stores/app_behaviours";
 import { storeToRefs } from "pinia";
 import { userStore } from "@/domains/user/infrastructure/store/user"
 import { weatherStore } from "@/domains/weather/infrastructure/store/weather";
-import { chartStore } from "@/domains/charts/infrastructure/store/chart";
+import { chartStore } from "@/domains/visualizers/charts/shared/infrastructure/store/chart";
 import { CHANGE_USER_STATE } from "@/domains/user/infrastructure/store/user/actions";
 import { CHANGE_CURRENT_DAY, CHANGE_WEATHER_LIST } from "@/domains/weather/infrastructure/store/weather/actions";
-import { REMOVE_CHARTS } from "@/domains/charts/infrastructure/store/chart/actions";
+import { REMOVE_CHARTS } from "@/domains/visualizers/charts/shared/infrastructure/store/chart/actions";
 
 const components = {
   start: () => import("@/app/ui/widgets/login/Login.vue"),
@@ -106,7 +106,6 @@ provide("userLoggedState", isLogged)
 
 // logout
 const closeUserSession = () => {
-  router.push({name: 'start'})
   userStore[CHANGE_USER_STATE]({})
   weatherStore[CHANGE_WEATHER_LIST]()
   weatherStore[CHANGE_CURRENT_DAY]()
