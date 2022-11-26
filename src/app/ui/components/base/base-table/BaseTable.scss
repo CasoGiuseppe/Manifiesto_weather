@@ -1,0 +1,20 @@
+.base-table {
+  $basetable: &;
+
+  @apply flex w-full;
+
+  &__display {
+    // @apply w-full;
+  }
+
+  &__head {
+    th {
+      @apply p-sm
+    }
+
+    &-label {
+      @apply items-center justify-center p-xsm px-lg;
+      @apply bg-gray-100 rounded-md font-bold uppercase text-xs text-gray-400
+    }
+  }
+}

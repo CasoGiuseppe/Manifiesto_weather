@@ -102,6 +102,20 @@
         </li>
       </ul>
     </article>
+
+     <!-- category: components: table -->
+     <article class="library__category">
+      <h2 class="library__title">Base Components: <span>Table</span></h2>
+      <ul class="library__table">
+        <li class="library--is-max">
+          <BaseTable :head="table.head">
+            <template #head="{property}">
+              {{ property}}
+            </template>
+          </BaseTable>
+        </li>
+      </ul>
+    </article>
      <!-- category: widgets -->
      <article class="library__category">
       <h2 class="library__title">Widgets: <span>Login</span></h2>
@@ -122,7 +136,8 @@ import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 import BaseInput from "@/app/ui/components/base/base-input/BaseInput.vue"
 import BaseSelect from "@/app/ui/components/base/base-select/BaseSelect.vue"
 import BaseBadge from "@/app/ui/components/base/base-badge/BaseBadge.vue"
-import BaseWeatherInfoVue from '../../components/base/base-weather-info/BaseWeatherInfo.vue'
+import BaseWeatherInfoVue from '@/app/ui/components/base/base-weather-info/BaseWeatherInfo.vue'
+import BaseTable from "@/app/ui/components/base/base-table/BaseTable.vue"
 
 import Login from "@/app/ui/widgets/login/Login.vue"
 import { Cog6ToothIcon, ChartBarIcon, DocumentDuplicateIcon, CloudIcon, EyeDropperIcon } from '@heroicons/vue/24/solid'
@@ -140,5 +155,9 @@ const options = [
   {value: '2', label: 'option 2'},
   {value: '3', label: 'option 3'}
 ]
+
+const table = {
+  head: ['uno', 'due', 'tre', 'quattro']
+}
 </script>
 <style lang="scss" src="./Library.scss" />
