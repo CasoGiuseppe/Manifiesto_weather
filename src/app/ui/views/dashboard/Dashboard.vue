@@ -22,23 +22,24 @@
         </li>-->
         <li
           :class="[
-            `dashboard__charts--is-${chartModels[key].class}`,
+            `dashboard__charts--is-${BAR_TYPE.class}`,
             'dashboard__charts__box'
           ]"
           v-for="key in Object.keys(chartModels)"
         >
+          {{ chartModels[key] }}
           <BaseBadge
             :id="key"
-            :is="[chartModels[key].direction]"
+            :is="[BAR_TYPE.direction]"
           >
             <template #title><ChartBarIcon style="fill: white" />{{key}}</template>
-            <template #payoff>{{ chartModels[key].payoff }}</template>
+            <template #payoff>{{ BAR_TYPE.payoff }}</template>
             <template #chart>
               <!-- chart placeholder-->
-              <template v-if="chartModels[key].typeChart">
+              <template v-if="BAR_TYPE.typeChart">
                 <apexchart
                   :type="chartModels[key].options.chart.type"
-                  :options="chartModels[key].options"
+                  :options="Object.assign(BAR_TYPE, chartModels[key].options)"
                   :series="chartModels[key].series">
                 </apexchart>
               </template>
@@ -68,7 +69,7 @@ import { RouterLink } from "vue-router";
 import BaseBadge from "@/app/ui/components/base/base-badge/BaseBadge.vue"
 import { Is as IsBadge } from '@/app/ui/components/base/base-badge/types'
 import { ChartBarIcon } from '@heroicons/vue/24/solid'
-
+import { BAR_TYPE} from './types'
 // store
 import { chartStore } from "@/domains/visualizers/charts/shared/infrastructure/store/chart";
 const chartModels = storeToRefs(chartStore).current

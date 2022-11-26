@@ -17,7 +17,6 @@ export class BarViewModel {
   get parsedData() {
     return {
       series: [{
-        name: 'Temperature',
         data: this?.series.map(node => node === 0 ? Math.floor(Math.random() * 10) + 1 : node),
       }],
       options: {

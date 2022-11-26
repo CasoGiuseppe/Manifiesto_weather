@@ -71,10 +71,7 @@ router.beforeEach(async (to, from) => {
     //chartStore[CHANGE_CURRENT_CHARTS]?.(wind)
     //chartStore[CHANGE_CURRENT_CHARTS]?.(cloud)
     chartStore[CHANGE_CURRENT_CHARTS]?.({
-      Temperature: {
-        ...BAR_TYPE,
-        ...await UseBarChartService.getBarChartOptions(routerID)
-      }
+      Temperature: await UseBarChartService.getBarChartOptions(routerID)
     })
     weatherStore[CHANGE_CURRENT_DAY]?.({ prev, next, current })
   }
