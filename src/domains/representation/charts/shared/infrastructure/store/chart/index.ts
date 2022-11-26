@@ -18,10 +18,7 @@ export const useChartStore = defineStore({
 
   actions: {
     [CHANGE_CURRENT_CHARTS](chartModel: IChartModel) {
-      this.current = {
-        ...this.current,
-        ...chartModel
-      };
+      this.current = JSON.parse(JSON.stringify({ ...this.current, ...chartModel }));
     },
 
     [REMOVE_CHARTS]() {

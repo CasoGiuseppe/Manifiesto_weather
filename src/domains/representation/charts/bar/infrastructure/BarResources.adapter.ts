@@ -12,8 +12,8 @@ export class BarResources implements IChartBar {
   async getChartBarData(origin: any): Promise<ChartBar> {
     const { origin: { origin: data } } = origin
     const series: number[] = data.map((chart: OriginData) => chart.temperature)
-    const xaxis: string[] = data.map((chart: OriginData) => chart.time)
-    const chart: ChartType = { type: 'bar', ...ChartSharedModule }
+    const xaxis: string[] | undefined = data.map((chart: OriginData) => chart.time)
+    const chart: ChartType | undefined = { type: 'bar', ...ChartSharedModule }
     const plotOptions: Plot = {
       bar: {
         horizontal: false,
@@ -22,7 +22,7 @@ export class BarResources implements IChartBar {
       },
     }
 
-    const bar = new BarDTOAdapter(series, xaxis, chart, plotOptions)
+    const bar = new BarDTOAdapter(series, chart, plotOptions, xaxis)
     return bar.createBarInstance()
   }
 }

@@ -27,7 +27,6 @@
           ]"
           v-for="key in Object.keys(chartModels)"
         >
-          {{ chartModels[key] }}
           <BaseBadge
             :id="key"
             :is="[BAR_TYPE.direction]"
@@ -67,11 +66,10 @@ import { RouterLink } from "vue-router";
 
 // UI
 import BaseBadge from "@/app/ui/components/base/base-badge/BaseBadge.vue"
-import { Is as IsBadge } from '@/app/ui/components/base/base-badge/types'
 import { ChartBarIcon } from '@heroicons/vue/24/solid'
 import { BAR_TYPE} from './types'
 // store
-import { chartStore } from "@/domains/visualizers/charts/shared/infrastructure/store/chart";
+import { chartStore } from "@/domains/representation/charts/shared/infrastructure/store/chart";
 const chartModels = storeToRefs(chartStore).current
 
 </script>

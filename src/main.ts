@@ -13,8 +13,8 @@ import '@/assets/styles/layout.scss';
 // app use cases
 import { UserServices } from "@/domains/user/application/use-cases";
 import { WeatherServices } from "@/domains/weather/application/use-cases";
-import { ChartServices } from "@/domains/visualizers/charts/shared/application/use-case";
-import { BarChartServices } from "@/domains/visualizers/charts/bar/application/use-case";
+import { ChartServices } from "@/domains/representation/charts/shared/application/use-case";
+import { BarChartServices } from "@/domains/representation/charts/bar/application/use-case";
 
 // app common services
 import { HTTPService } from "@/app/shared/services/http/http.services";
@@ -27,8 +27,8 @@ import { PersistService } from "./app/shared/services/persistData/persist.data.s
 // implementations adapters
 import { UserResources } from "@/domains/user/infrastructure/UserResources.adapter";
 import { WeatherResources } from "@/domains/weather/infrastructure/WeatherResources.adapter";
-import { ChartResources } from "@/domains/visualizers/charts/shared/infrastructure/ChartResources.adapter"
-import { BarResources } from "@/domains/visualizers/charts/bar/infrastructure/BarResources.adapter";
+import { ChartResources } from "@/domains/representation/charts/shared/infrastructure/ChartResources.adapter"
+import { BarResources } from "@/domains/representation/charts/bar/infrastructure/BarResources.adapter";
 
 // store
 import { useAppBehavioursStore } from "@/app/shared/stores/app_behaviours";

@@ -3,9 +3,8 @@ import { UseWeatherService, UseBarChartService } from "@/main";
 import { userStore } from "@/domains/user/infrastructure/store/user"
 import { weatherStore } from "@/domains/weather/infrastructure/store/weather";
 import { CHANGE_CURRENT_DAY } from "@/domains/weather/infrastructure/store/weather/actions";
-import { chartStore } from "@/domains/visualizers/charts/shared/infrastructure/store/chart";
-import { CHANGE_CURRENT_CHARTS } from "@/domains/visualizers/charts/shared/infrastructure/store/chart/actions";
-import { BAR_TYPE } from "../ui/views/dashboard/types";
+import { chartStore } from "@/domains/representation/charts/shared/infrastructure/store/chart";
+import { CHANGE_CURRENT_CHARTS } from "@/domains/representation/charts/shared/infrastructure/store/chart/actions";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -64,7 +63,7 @@ router.beforeEach(async (to, from) => {
     const { prev, next, current } = await UseWeatherService.getWeatherForecastData(routerID)
     // const { temperature, humidity, wind, cloud, minMax } = await UseChartService?.getChartParamsData(routerID)
 
-    console.log('bar', await UseBarChartService.getBarChartOptions(routerID))
+    console.log(await UseBarChartService.getBarChartOptions(routerID))
     // persist data on local store
     //chartStore[CHANGE_CURRENT_CHARTS]?.(minMax)
     //chartStore[CHANGE_CURRENT_CHARTS]?.(humidity)

@@ -4,14 +4,15 @@ import type { ChartType, Plot } from "../core/bar.types.";
 export class BarViewModel {
   private constructor(
     public readonly series: number[],
-    public readonly xaxis: string[],
     public readonly chart: ChartType,
-    public readonly plotOptions: Plot
+    public readonly plotOptions?: Plot | Record<string, any>,
+    public readonly xaxis?: string[],
+    public readonly labels?: string[],
   ) { }
 
   static createBarViewModel(data: ChartBar) {
-    const { series, xaxis, chart, plotOptions } = data.barEntity
-    return new BarViewModel(series, xaxis, chart, plotOptions)
+    const { series, chart, plotOptions, xaxis, labels } = data.barEntity
+    return new BarViewModel(series, chart, plotOptions, xaxis, labels)
   }
 
   get parsedData() {
@@ -22,7 +23,8 @@ export class BarViewModel {
       options: {
         chart: this.chart,
         plotOptions: this.plotOptions,
-        xaxis: { categories: this.xaxis.map((axis: string) => axis.slice(0, -3)) }
+        xaxis: { categories: this.xaxis?.map((axis: string) => axis) },
+        labels: this.labels
       }
     }
   }

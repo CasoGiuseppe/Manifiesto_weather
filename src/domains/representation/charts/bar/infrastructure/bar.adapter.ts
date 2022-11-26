@@ -4,18 +4,19 @@ import { ChartBar } from "../core/bar";
 export class BarDTOAdapter {
   constructor(
     public readonly series: number[],
-    public readonly xaxis: string[],
     public readonly chart: ChartType,
-    public readonly plotOptions: Plot,
-    public readonly typeChart?: boolean
+    public readonly plotOptions?: Plot | Record<string, any>,
+    public readonly xaxis?: string[],
+    public readonly labels?: string[]
   ) { }
 
   createBarInstance(): ChartBar {
     return ChartBar.createChartBar(
       this.series,
-      this.xaxis,
       this.chart,
-      this.plotOptions
+      this.plotOptions,
+      this.xaxis,
+      this.labels
     )
   }
 }
