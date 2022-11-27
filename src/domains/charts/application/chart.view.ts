@@ -41,7 +41,7 @@ export class ChartViewModel {
     return {
       Wind: {
         series: [
-          Math.max(...this.chartModel.map(chart => chart.wind_speed === 0 ? Math.floor(Math.random() * 10) + 1 : chart.wind_speed))
+          Math.max(...this.chartModel.map(chart => chart.wind_speed === 0 ? Math.floor(Math.random() * 100) + 1 : chart.wind_speed))
         ],
         labels: ['wind speed']
       }
@@ -56,6 +56,17 @@ export class ChartViewModel {
           Math.max(...this.chartModel.map(chart => chart.cloud_cover || 0))
         ],
         labels: ['min', 'max']
+      }
+    }
+  }
+
+  get precipitationModel(): ChartModel {
+    return {
+      Precipitation: {
+        series: [
+          Math.max(...this.chartModel.map(chart => chart.precipitation === 0 ? Math.floor(Math.random() * 100) + 1 : chart.precipitation))
+        ],
+        labels: ['precipitation']
       }
     }
   }

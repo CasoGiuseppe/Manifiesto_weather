@@ -1,6 +1,16 @@
 export type SharedType = {
-  foreColor: string,
-  zoom: Record<string, boolean>
+  foreColor?: string,
+  fontSize?: string,
+  color?: string,
+  zoom?: Record<string, boolean>,
+}
+
+export type SharedRadialType = {
+  dataLabels: SharedNameType
+}
+
+export type SharedNameType = {
+  name: SharedType
 }
 
 export type Models = {
@@ -18,6 +28,15 @@ const SHARED_CHART: SharedType = {
   foreColor: '#fff',
   zoom: {
     enabled: false
+  }
+}
+
+const SHARED_RADIAL: SharedRadialType = {
+  dataLabels: {
+    name: {
+      fontSize: '12px',
+      color: '#fff'
+    },
   }
 }
 
@@ -46,14 +65,7 @@ export const MODELS: Models = {
       ...SHARED_CHART
     },
     plotOptions: {
-      radialBar: {
-        dataLabels: {
-          name: {
-            fontSize: '12px',
-            color: '#fff'
-          },
-        }
-      }
+      radialBar: SHARED_RADIAL
     }
   },
 
@@ -64,6 +76,19 @@ export const MODELS: Models = {
     chart: {
       type: 'pie',
       ...SHARED_CHART
+    }
+  },
+
+  precipitation: {
+    heading: 'Max precipitation',
+    direction: 'COLUMN',
+    class: 'c__left-bottom',
+    chart: {
+      type: 'radialBar',
+      ...SHARED_CHART
+    },
+    plotOptions: {
+      radialBar: SHARED_RADIAL
     }
   },
 
