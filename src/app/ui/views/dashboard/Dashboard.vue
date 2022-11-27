@@ -6,6 +6,32 @@
         appear
       >
       <ul
+        v-if="Object.keys(chartModels).length > 0"
+        class="dashboard__charts"
+      >
+        <li class="dashboard__charts--is-row-t__left">
+          1
+        </li>
+        <li class="dashboard__charts--is-row-t__center">
+          2
+        </li>
+        <li class="dashboard__charts--is-row-t__right">
+          3
+        </li>
+        <li class="dashboard__charts--is-row-c__left-top">
+          4
+        </li>
+        <li class="dashboard__charts--is-row-c__left-bottom">
+          5
+        </li>
+        <li class="dashboard__charts--is-row-c__right">
+          6
+        </li>
+        <li class="dashboard__charts--is-row-b">
+          7
+        </li>
+      </ul>
+      <!--<ul
         class="dashboard__charts"
         v-if="Object.keys(chartModels).length > 0"
       >
@@ -42,7 +68,7 @@
             </template>
           </BaseBadge>
         </li>
-      </ul>
+      </ul>-->
 
       <!-- log out user-->
       <article
