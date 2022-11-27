@@ -8,7 +8,7 @@ export class GetChartParameters {
     private readonly weatherRepository: IWeatherRepository
   ) { }
   async execute(id: string) {
-    const dataWeather = await (await this.weatherRepository.getWeatherForecast()).weatherEntity
+    const dataWeather = await (await this.weatherRepository.getWeatherForecast())
     const { forecastDay } = dataWeather.find(data => data.id === id) as unknown as ForecastDay
     const {
       temperatureModel,

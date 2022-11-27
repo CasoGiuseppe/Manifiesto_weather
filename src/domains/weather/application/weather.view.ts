@@ -8,7 +8,7 @@ export class WeatherViewModel {
   ) { }
 
   static createWeatherViewModel(weather: Weather, id: string | undefined) {
-    return new WeatherViewModel(weather.weatherEntity, id);
+    return new WeatherViewModel(weather.weatherEntity || weather, id);
   }
 
   get all() {

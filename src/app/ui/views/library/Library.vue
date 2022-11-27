@@ -107,10 +107,60 @@
      <article class="library__category">
       <h2 class="library__title">Base Components: <span>Table</span></h2>
       <ul class="library__table">
-        <li class="library--is-max">
-          <BaseTable :head="table.head">
+        <li
+          class="library--is-max"
+          data-label="direction column"
+        >
+          <BaseTable
+            current="2"
+            :head="table.head"
+            :body="table.body"
+          >
+            <template #title>weather <span>forecast</span></template>
+            <template #payoff>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+            </template>
             <template #head="{property}">
               {{ property}}
+            </template>
+            <template #cell="{property: {value, component}}">
+              {{ value}}
+              <component
+                :is="component?.type"
+                v-bind="component?.properties"
+                @send-click="tableEvent"
+              >
+                {{ component?.label}}
+              </component>
+            </template>
+          </BaseTable>
+        </li>
+        <li
+          class="library--is-max"
+          data-label="direction row"
+        >
+          <BaseTable
+            current="2"
+            :head="table.head"
+            :body="table.body"
+            :is="[IsTable.ROW]"
+          >
+            <template #title>weather <span>forecast</span></template>
+            <template #payoff>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+            </template>
+            <template #head="{property}">
+              {{ property}}
+            </template>
+            <template #cell="{property: {value, component}}">
+              {{ value}}
+              <component
+                :is="component?.type"
+                v-bind="component?.properties"
+                @send-click="tableEvent"
+              >
+                {{ component?.label}}
+              </component>
             </template>
           </BaseTable>
         </li>
@@ -131,7 +181,7 @@
   </section>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { defineAsyncComponent, ref, reactive, shallowRef } from 'vue'
 import BaseButton from "@/app/ui/components/base/base-button/BaseButton.vue"
 import BaseInput from "@/app/ui/components/base/base-input/BaseInput.vue"
 import BaseSelect from "@/app/ui/components/base/base-select/BaseSelect.vue"
@@ -144,6 +194,7 @@ import { Cog6ToothIcon, ChartBarIcon, DocumentDuplicateIcon, CloudIcon, EyeDropp
 import { Is as IsButton } from '@/app/ui/components/base/base-button/types'
 import { Is as IsInput } from '@/app/ui/components/base/base-input/types'
 import { Is as IsBadge } from '@/app/ui/components/base/base-badge/types'
+import { Is as IsTable } from '@/app/ui/components/base/base-table/types'
 
 const placeholder = ref('Write your custom input')
 const message = ref('default input value')
@@ -156,8 +207,51 @@ const options = [
   {value: '3', label: 'option 3'}
 ]
 
-const table = {
-  head: ['uno', 'due', 'tre', 'quattro']
-}
+const table = shallowRef({
+  head: ['uno', 'due', 'tre', 'quattro'],
+  body: [
+    {
+      id: '1',
+      values: [
+        { 
+          id: '001',
+          type: 'bold',
+          value: 'value001'
+        },
+        {
+          id: '002',
+          type: 'center',
+          value: 'value002'
+        },
+        {
+          id: '003',
+          type: 'center',
+          value: 'value003'
+        },
+        {
+          id: '004',
+          type: 'center',
+          value: 'value004'
+        },
+        {
+          id: '005',
+          type: 'center',
+          component: {
+            type: defineAsyncComponent(() => import("@/app/ui/components/base/base-button/BaseButton.vue")),
+            label: 'Details',
+            properties: {
+              id: '001',
+              is: [IsButton.DEFAULT]
+            }
+          }
+        },
+      ]
+    },
+  ]
+})
+
+const tableEvent = ((id: string) => console.log(id))
+
+
 </script>
 <style lang="scss" src="./Library.scss" />

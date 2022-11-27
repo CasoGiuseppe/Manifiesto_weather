@@ -25,10 +25,7 @@ export class WeatherResources implements IWeatherRepository {
   async getWeatherForecast(): Promise<Weather> {
     const storedWeatherData = this.persistService.getFromData({ getter: GET_WEATHER_LIST })
 
-    if (storedWeatherData) {
-      const storedInstance = new WeatherDTOAdapter(JSON.parse(JSON.stringify(storedWeatherData))).createWeatherInstance()
-      return storedInstance
-    }
+    if (storedWeatherData) return JSON.parse(JSON.stringify(storedWeatherData))
 
     const setDate = new Date()
     const currentDay = setDateFormat({ date: setDate })
@@ -51,8 +48,7 @@ export class WeatherResources implements IWeatherRepository {
         }
       })
       const weatherInstance = new WeatherDTOAdapter(addWeatherPlace).createWeatherInstance()
-
-      this.persistService.save({ action: CHANGE_WEATHER_LIST, params: addWeatherPlace })
+      this.persistService.save({ action: CHANGE_WEATHER_LIST, params: weatherInstance.weatherEntity })
       return weatherInstance
 
     } catch (e) {

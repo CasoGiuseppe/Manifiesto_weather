@@ -1,10 +1,55 @@
 .base-table {
   $basetable: &;
 
-  @apply flex w-full;
+  @apply flex w-full justify-between h-full;
+
+  &--is {
+    &-row {
+      @apply flex-col;
+
+      @screen desktop {
+        @apply flex-row items-start;
+      }
+    }
+
+    &-column {
+      @apply flex-col;
+    }
+  }
+
+  &__header {
+    +#{$basetable}__display {
+      @apply mt-md;
+
+      #{$basetable}--is-row & {
+        @screen desktop {
+          @apply mt-none ml-md;
+        }
+      }
+    }
+  }
+
+  &__title {
+    @apply flex flex-col flex-wrap;
+    @apply font-bold text-xlg uppercase text-gray-600;
+
+    >* {
+      @apply w-full;
+      @apply text-lg text-gray-200
+    }
+
+    +#{$basetable}__payoff {
+      @apply mt-md
+    }
+  }
+
+  &__payoff {
+    @apply text-sm text-gray-200
+  }
 
   &__display {
-    // @apply w-full;
+    @apply w-full;
+    @apply border-spacing-y-xsm border-separate;
   }
 
   &__head {
@@ -13,8 +58,68 @@
     }
 
     &-label {
-      @apply items-center justify-center p-xsm px-lg;
+      @apply flex items-center justify-center p-xsm px-lg w-full;
       @apply bg-gray-100 rounded-md font-bold uppercase text-xs text-gray-400
+    }
+  }
+
+  &__body {
+    td {
+      @apply py-md px-xsm;
+      @apply text-sm;
+
+      &:not(&#{$basetable}--is-bold) {
+        @apply font-light;
+      }
+
+      +td {
+        @apply relative;
+
+        &:before {
+          @apply absolute left-none top-2/4 w-[1px] h-[35%];
+          @apply bg-gray-100 content-[''];
+          @apply translate-y-[-50%]
+        }
+      }
+    }
+
+    tr {
+      @apply relative;
+
+      &#{$basetable}--is-current {
+        >td {
+          @apply bg-gray-300 text-default-positive
+        }
+      }
+
+      +tr {
+        &:after {
+          @apply absolute top-none left-none w-full h-[1px];
+          @apply bg-gray-100 content-[""];
+        }
+      }
+
+      >td {
+        @apply px-sm py-md;
+
+        &:first-child {
+          @apply rounded-tl-md rounded-bl-md
+        }
+
+        &:last-child {
+          @apply rounded-br-md rounded-tr-md
+        }
+      }
+    }
+  }
+
+  &--is- {
+    &bold {
+      @apply font-medium
+    }
+
+    &center {
+      @apply text-center
     }
   }
 }

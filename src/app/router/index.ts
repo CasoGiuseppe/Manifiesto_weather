@@ -63,7 +63,6 @@ router.beforeEach(async (to, from) => {
     const { prev, next, current } = await UseWeatherService.getWeatherForecastData(routerID)
     const { temperature, humidity, wind, cloud, minMax } = await UseChartService?.getChartParamsData(routerID)
 
-    console.log(minMax)
     // persist data on local store
     chartStore[CHANGE_CURRENT_CHARTS]?.(humidity)
     chartStore[CHANGE_CURRENT_CHARTS]?.(wind)
