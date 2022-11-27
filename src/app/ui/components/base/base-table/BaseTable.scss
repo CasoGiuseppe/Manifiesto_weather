@@ -18,7 +18,7 @@
   }
 
   &__header {
-    +#{$basetable}__display {
+    +#{$basetable}__overflow {
       @apply mt-md;
 
       #{$basetable}--is-row & {
@@ -45,6 +45,10 @@
 
   &__payoff {
     @apply text-sm text-gray-200
+  }
+
+  &__overflow {
+    overflow-y: auto;
   }
 
   &__display {

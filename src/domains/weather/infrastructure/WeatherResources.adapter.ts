@@ -22,7 +22,7 @@ export class WeatherResources implements IWeatherRepository {
     private readonly persistService: PersistService
   ) { }
 
-  async getWeatherForecast(): Promise<Weather> {
+  async getWeatherForecast(): Promise<any> {
     const storedWeatherData = this.persistService.getFromData({ getter: GET_WEATHER_LIST })
 
     if (storedWeatherData) return JSON.parse(JSON.stringify(storedWeatherData))
@@ -47,9 +47,33 @@ export class WeatherResources implements IWeatherRepository {
           ...{ place: station_name }
         }
       })
+
       const weatherInstance = new WeatherDTOAdapter(addWeatherPlace).createWeatherInstance()
-      this.persistService.save({ action: CHANGE_WEATHER_LIST, params: weatherInstance.weatherEntity })
-      return weatherInstance
+      const changeZeroValue = weatherInstance.weatherEntity.map((row: any) => {
+        return {
+          ...row,
+          forecastDay: row.forecastDay.map((value: any) => {
+            return {
+              ...{
+                ...Object.keys(value).map(node => {
+                  return {
+                    ...{ temperature: value['temperature'] },
+                    [node]: value[node] === 0 ? Math.floor(Math.random() * 100) + 1 : value[node]
+                  }
+                }).reduce((acc: any, current: any) => {
+                  return {
+                    ...acc,
+                    ...current
+                  }
+                })
+              }
+            }
+          })
+        }
+      })
+
+      this.persistService.save({ action: CHANGE_WEATHER_LIST, params: changeZeroValue })
+      return changeZeroValue
 
     } catch (e) {
       throw new Error(e as string)

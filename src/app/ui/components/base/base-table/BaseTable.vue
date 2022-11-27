@@ -19,42 +19,44 @@
         <slot name="payoff" />
       </p>
     </header>
-    <table class="base-table__display">
-      <thead class="base-table__head">
-        <tr>
-          <th
-            v-for="(key) in head"
-            :key="key"
+    <section class="base-table__overflow">
+      <table class="base-table__display">
+        <thead class="base-table__head">
+          <tr>
+            <th
+              v-for="(key) in head"
+              :key="key"
+            >
+              <span class="base-table__head-label">
+                <slot :property="key" name="head" />
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="base-table__body">
+          <tr
+            v-for="row in body"
+            :key="row.id"
+            :class="[
+              row.id === current ? 'base-table--is-current' : null
+            ]"
           >
-            <span class="base-table__head-label">
-              <slot :property="key" name="head" />
-            </span>
-          </th>
-        </tr>
-      </thead>
-      <tbody class="base-table__body">
-        <tr
-          v-for="row in body"
-          :key="row.id"
-          :class="[
-            row.id === current ? 'base-table--is-current' : null
-          ]"
-        >
-          <td
-            v-for="{
-              value,
-              component,
-              id,
-              type
-            } in row.values"
-            :key="id"
-            :class="type ? `base-table--is-${type}` : null"
-          >
-            <slot :property="{value, component}" name="cell" />
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <td
+              v-for="{
+                value,
+                component,
+                id,
+                type
+              } in row.values"
+              :key="id"
+              :class="type ? `base-table--is-${type}` : null"
+            >
+              <slot :property="{value, component}" name="cell" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
   </section>
 </template>
 <script setup lang="ts">

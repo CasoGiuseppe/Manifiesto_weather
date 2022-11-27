@@ -13,7 +13,7 @@
       $to: translateX(var(--to-animation)),
     );
 
-    @apply flex flex-col min-h-screen w-screen justify-start;
+    @apply flex flex-col min-h-screen w-screen justify-start overflow-hidden;
 
     @screen tablet-ld {
       @apply flex-row justify-end;
@@ -28,7 +28,7 @@
       @apply max-h-screen relative overflow-hidden;
 
       &::before {
-        @apply h-full absolute w-full z-[11];
+        @apply h-full absolute w-full z-20;
         @apply content-[''];
         @apply animate-backdrop;
       }
@@ -40,7 +40,7 @@
 
     // router view box
     &__router-box {
-      @apply order-1 flex-1 flex flex-col min-h-fit;
+      @apply order-1 flex-1 flex flex-col min-h-fit overflow-auto;
 
       @screen tablet-ld {
         @apply order-2;

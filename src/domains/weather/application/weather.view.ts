@@ -28,7 +28,7 @@ export class WeatherViewModel {
   }
 
   get medianTemperature(): string {
-    return `${Math.floor(this.allTemperatures.reduce((partial, value) => partial + value, 0) / this.allTemperatures.length)}`
+    return `${Math.floor((Math.min(...this.allTemperatures) + Math.max(...this.allTemperatures)) / 2)}`
   }
 
   get minTemperature(): string {

@@ -44,7 +44,7 @@
 
   &::after {
     @apply block h-[var(--size-value)] left-[50%] fixed w-[var(--size-value)] top-[50%];
-    @apply rounded-[50%] z-[4] border-x-[16px] border-y-[16px] border-solid border-y-[var(--border-color)] border-x-none;
+    @apply rounded-[50%] z-[21] border-x-[16px] border-y-[16px] border-solid border-y-[var(--border-color)] border-x-none;
     @apply content-[''];
 
     @apply animate-spin;

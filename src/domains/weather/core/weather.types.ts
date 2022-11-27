@@ -16,6 +16,5 @@ export interface WeatherDay {
   cloud_cover?: number;
   relative_humidity: number;
   visibility?: number;
-  condition: string;
   icon: string;
 }

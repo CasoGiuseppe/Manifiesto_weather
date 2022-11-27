@@ -19,7 +19,7 @@ export class ChartViewModel {
       Temperature: {
         series: [{
           name: 'Temperature',
-          data: this.chartModel.map(chart => chart.temperature === 0 ? Math.floor(Math.random() * 10) + 1 : chart.temperature)
+          data: this.chartModel.map(chart => chart.temperature)
         }],
         xaxis: { categories: this.chartModel.map(chart => chart.time.slice(0, -3)) }
       }
@@ -30,8 +30,8 @@ export class ChartViewModel {
     return {
       Humidity: {
         series: [
-          Math.min(...this.chartModel.map(chart => chart.relative_humidity === 0 ? Math.floor(Math.random() * 10) + 1 : chart.relative_humidity)),
-          Math.max(...this.chartModel.map(chart => chart.relative_humidity === 0 ? Math.floor(Math.random() * 10) + 1 : chart.relative_humidity)),
+          Math.min(...this.chartModel.map(chart => chart.relative_humidity)),
+          Math.max(...this.chartModel.map(chart => chart.relative_humidity)),
         ],
         labels: ['min', 'max']
       }
@@ -41,7 +41,7 @@ export class ChartViewModel {
     return {
       Wind: {
         series: [
-          Math.max(...this.chartModel.map(chart => chart.wind_speed === 0 ? Math.floor(Math.random() * 100) + 1 : chart.wind_speed))
+          Math.max(...this.chartModel.map(chart => chart.wind_speed))
         ],
         labels: ['wind speed']
       }
@@ -64,7 +64,7 @@ export class ChartViewModel {
     return {
       Precipitation: {
         series: [
-          Math.max(...this.chartModel.map(chart => chart.precipitation === 0 ? Math.floor(Math.random() * 100) + 1 : chart.precipitation))
+          Math.max(...this.chartModel.map(chart => chart.precipitation))
         ],
         labels: ['precipitation']
       }

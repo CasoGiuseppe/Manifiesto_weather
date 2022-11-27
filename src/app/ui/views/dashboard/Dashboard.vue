@@ -99,7 +99,7 @@ type WeatherParse = string[]
 
 const weatherParse: WeatherParse = ['precipitation', 'relative_humidity', 'wind_speed', 'cloud_cover', 'temperature']
 let weatherTableModel = shallowRef({
-  head: ['Date', 'Rain', 'Hum.', 'Wind', 'Cloud', 'Temp.'],
+  head: ['Date', 'Rain', 'Humidity', 'Wind', 'Cloud', 'Degrees'],
   body: []
 })
 const weatherTableData = computed(() => weatherTableModel).value

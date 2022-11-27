@@ -4,6 +4,9 @@ import { Weather } from "../core/weather";
 import type { WeatherDTOType } from "./weather.DTO.type";
 import { UUIDService } from "@/app/shared/services/uuid/uuid.services";
 
+const getValue = (value: number | undefined): number => {
+  return (value === 0 || value === null) ? Math.floor(Math.random() * 100) + 1 : value as number
+}
 export class WeatherDTOAdapter {
   constructor(
     public readonly weather: Weather[],
@@ -36,7 +39,6 @@ export class WeatherDTOAdapter {
             cloud_cover: detail.cloud_cover || 0,
             relative_humidity: detail.relative_humidity || 0,
             visibility: detail.visibility || 0,
-            condition: detail.condition || 0,
             icon: detail.icon,
           }
         })
