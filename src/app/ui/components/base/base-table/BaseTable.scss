@@ -65,8 +65,9 @@
 
   &__body {
     td {
-      @apply py-md px-xsm;
+      @apply py-xsm px-sm;
       @apply text-sm;
+      @apply transition-colors duration-500;
 
       &:not(&#{$basetable}--is-bold) {
         @apply font-light;
@@ -88,7 +89,7 @@
 
       &#{$basetable}--is-current {
         >td {
-          @apply bg-gray-300 text-default-positive
+          @apply bg-gray-200 text-default-positive
         }
       }
 
@@ -100,8 +101,6 @@
       }
 
       >td {
-        @apply px-sm py-md;
-
         &:first-child {
           @apply rounded-tl-md rounded-bl-md
         }

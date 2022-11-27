@@ -66,7 +66,7 @@ export interface ITableHead {
   head: string[],
   body: IRowValue[],
   is: Is[] | string[],
-  current: string | undefined
+  current: string | undefined | string[]
 }
 
 const props = withDefaults(defineProps<ITableHead>(), {

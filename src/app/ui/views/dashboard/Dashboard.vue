@@ -33,9 +33,9 @@
         </li>
         <li class="dashboard__charts--is-row-c__right">
           <BaseTable
-            current="2"
-            :head="table.head"
-            :body="table.body"
+            :current="route.params.id"
+            :head="weatherTableModel.head"
+            :body="weatherTableData.body"
             :is="[IsTable.COLUMN]"
           >
             <template #title>weather <span>forecast</span></template>
@@ -50,6 +50,7 @@
               <component
                 :is="component?.type"
                 v-bind="component?.properties"
+                @send-click="changeWeatherDay"
               >
                 {{ component?.label}}
               </component>
@@ -57,27 +58,6 @@
           </BaseTable>
         </li>
         <!-- end dynamic data-->
-        <!--<li class="dashboard__charts--is-row-t__left">
-          1
-        </li>
-        <li class="dashboard__charts--is-row-t__center">
-          2
-        </li>
-        <li class="dashboard__charts--is-row-t__right">
-          3
-        </li>
-        <li class="dashboard__charts--is-row-c__left-top">
-          4
-        </li>
-        <li class="dashboard__charts--is-row-c__left-bottom">
-          5
-        </li>
-        <li class="dashboard__charts--is-row-c__right">
-          6
-        </li>
-        <li class="dashboard__charts--is-row-b">
-          7
-        </li>-->
       </ul>
       
       <!-- log out user-->
@@ -94,9 +74,9 @@
   </section>
 </template>
 <script setup lang="ts">
-import { defineAsyncComponent, shallowRef } from "vue";
+import { computed, defineAsyncComponent, shallowRef, watch } from "vue";
 import { storeToRefs } from "pinia";
-import { RouterLink } from "vue-router";
+import { RouterLink, useRoute, useRouter } from "vue-router";
 
 // UI
 import BaseBadge from "@/app/ui/components/base/base-badge/BaseBadge.vue"
@@ -107,55 +87,64 @@ import { Is as IsTable } from '@/app/ui/components/base/base-table/types'
 
 // store
 import { chartStore } from "@/domains/charts/infrastructure/store/chart";
+import { weatherStore } from "@/domains/weather/infrastructure/store/weather";
 
 // types
 import { MODELS } from './types'
 
 const chartModels = storeToRefs(chartStore).current
+const weatherModel = storeToRefs(weatherStore).weather || []
 
+type WeatherParse = string[]
 
-// temp data table
-const table = shallowRef({
-  head: ['uno', 'due', 'tre', 'quattro'],
-  body: [
-    {
-      id: '1',
-      values: [
-        { 
-          id: '001',
-          type: 'bold',
-          value: 'value001'
-        },
-        {
-          id: '002',
-          type: 'center',
-          value: 'value002'
-        },
-        {
-          id: '003',
-          type: 'center',
-          value: 'value003'
-        },
-        {
-          id: '004',
-          type: 'center',
-          value: 'value004'
-        },
-        {
-          id: '005',
-          type: 'center',
-          component: {
-            type: defineAsyncComponent(() => import("@/app/ui/components/base/base-button/BaseButton.vue")),
-            label: 'Details',
-            properties: {
-              id: '001',
-              is: [IsButton.DEFAULT]
-            }
-          }
-        },
-      ]
-    },
-  ]
+const weatherParse: WeatherParse = ['precipitation', 'relative_humidity', 'wind_speed', 'cloud_cover', 'temperature']
+let weatherTableModel = shallowRef({
+  head: ['Date', 'Rain', 'Hum.', 'Wind', 'Cloud', 'Temp.'],
+  body: []
 })
+const weatherTableData = computed(() => weatherTableModel).value
+
+const route = useRoute()
+const router = useRouter()
+
+watch(() => weatherModel.value, (model) => {
+  weatherTableModel.value.body = JSON.parse(JSON.stringify(model || [])).map((node: Record<string, any>) => {
+      return {
+        id: node.id,
+        values:[
+          {
+            id: node.id,
+            type: 'bold',
+            value: node.time
+          },
+          ...weatherParse.map((type: string) => {
+            return {
+              id: type,
+              type: 'center',
+              value: Math.floor(node.forecastDay.map((day: any) => {
+                return day[type]
+              }).reduce((partial: number, value: number) => partial + value, 0) / node.forecastDay.length)
+            }
+          }),
+          {
+            id: node.id,
+            type: 'center',
+            component: {
+              type: defineAsyncComponent(() => import("@/app/ui/components/base/base-button/BaseButton.vue")),
+              label: 'Details',
+              properties: {
+                id: node.id,
+                is: [IsButton.DEFAULT]
+              }
+            }
+          },
+        ]
+      }
+    })
+}, {
+  immediate: true
+})
+
+const changeWeatherDay = (id: string) => router.push({name: 'dashboard', params: {id}})
 </script>
 <style lang="scss" src="./Dashboard.scss" />

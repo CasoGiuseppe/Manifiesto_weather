@@ -9,6 +9,7 @@
     "src/**/__tests__/*"
   ],
   "compilerOptions": {
+    "composite": true,
     "baseUrl": ".",
     "paths": {
       "@/*": [
@@ -18,6 +19,7 @@
     "lib": [
       "es5",
       "es6",
+      "es7",
       "dom",
       "es2015.collection"
     ]

@@ -6,12 +6,14 @@
     "cypress.config.*"
   ],
   "compilerOptions": {
+    "composite": true,
     "types": [
       "node"
     ],
     "lib": [
       "es5",
       "es6",
+      "es7",
       "es2017",
       "dom",
       "es2015.collection"
