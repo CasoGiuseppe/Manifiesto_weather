@@ -9,7 +9,28 @@
         v-if="Object.keys(chartModels).length > 0"
         class="dashboard__charts"
       >
-        <li class="dashboard__charts--is-row-t__left">
+        <li
+          v-for="key in Object.keys(chartModels)"
+          :class="[
+            `dashboard__charts--is-row-${MODELS[key.toLocaleLowerCase() as keyof typeof MODELS]?.class}`,
+          ]"
+        >
+          <BaseBadge
+            :id="key"
+            :is="[MODELS[key.toLocaleLowerCase() as keyof typeof MODELS]?.direction || 'Row']"
+          >
+            <template #title><ChartBarIcon style="fill: white" />{{MODELS[key.toLocaleLowerCase() as keyof typeof MODELS].heading}}</template>
+            <template #payoff>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et </template>
+            <template #chart>
+              <apexchart
+                :type="MODELS[key.toLocaleLowerCase() as keyof typeof MODELS]?.chart?.type"
+                :options="Object.assign(MODELS[key.toLocaleLowerCase() as keyof typeof MODELS], {labels: chartModels[key].labels || {}, xaxis: chartModels[key].xaxis || {}})"
+                :series="chartModels[key].series">
+              </apexchart>
+            </template>
+          </BaseBadge>
+        </li>
+        <!--<li class="dashboard__charts--is-row-t__left">
           1
         </li>
         <li class="dashboard__charts--is-row-t__center">
@@ -29,7 +50,7 @@
         </li>
         <li class="dashboard__charts--is-row-b">
           7
-        </li>
+        </li>-->
       </ul>
       <!--<ul
         class="dashboard__charts"

@@ -25,7 +25,7 @@ export const MODELS: Models = {
   humidity: {
     heading: 'Min/max humidity',
     direction: 'COLUMN',
-    class: '30',
+    class: 't__center',
     chart: {
       type: 'donut',
       ...SHARED_CHART
@@ -39,8 +39,8 @@ export const MODELS: Models = {
 
   wind: {
     heading: 'Max wind speed',
-    direction: 'ROW',
-    class: '45',
+    direction: 'COLUMN',
+    class: 't__right',
     chart: {
       type: 'radialBar',
       ...SHARED_CHART
@@ -60,7 +60,7 @@ export const MODELS: Models = {
   cloud: {
     heading: 'Max/min cloud cover',
     direction: 'COLUMN',
-    class: '40',
+    class: 'c__left-top',
     chart: {
       type: 'pie',
       ...SHARED_CHART
@@ -69,7 +69,7 @@ export const MODELS: Models = {
 
   temperature: {
     heading: 'Temperature',
-    class: '60',
+    class: 'b',
     direction: 'COLUMN',
     chart: {
       type: 'bar',
