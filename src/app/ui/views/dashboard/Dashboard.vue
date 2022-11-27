@@ -21,7 +21,7 @@
             :is="[MODELS[key.toLocaleLowerCase() as keyof typeof MODELS]?.direction || 'Row']"
           >
             <template #title><ChartBarIcon style="fill: white" />{{MODELS[key.toLocaleLowerCase() as keyof typeof MODELS].heading}}</template>
-            <template #payoff>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et </template>
+            <template #payoff>{{MODELS[key.toLocaleLowerCase() as keyof typeof MODELS]?.payoff}}</template>
             <template #chart>
               <apexchart
                 :type="MODELS[key.toLocaleLowerCase() as keyof typeof MODELS]?.chart?.type"

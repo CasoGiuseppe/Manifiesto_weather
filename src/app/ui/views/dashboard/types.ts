@@ -18,6 +18,7 @@ export type Models = {
     heading: string,
     direction?: string,
     class: string,
+    payoff: string,
     chart?: Record<string, any>,
     theme?: Record<string, any>,
     plotOptions?: Record<string, any>
@@ -40,11 +41,15 @@ const SHARED_RADIAL: SharedRadialType = {
   }
 }
 
+const LONG_PAYOFF: string = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et'
+const SHORT_PAYOFF: string = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et'
+
 export const MODELS: Models = {
   humidity: {
     heading: 'Min/max humidity',
-    direction: 'COLUMN',
-    class: 't__center',
+    direction: 'ROW',
+    class: 't__left',
+    payoff: LONG_PAYOFF,
     chart: {
       type: 'donut',
       ...SHARED_CHART
@@ -60,6 +65,7 @@ export const MODELS: Models = {
     heading: 'Max wind speed',
     direction: 'COLUMN',
     class: 't__right',
+    payoff: SHORT_PAYOFF,
     chart: {
       type: 'radialBar',
       ...SHARED_CHART
@@ -73,6 +79,7 @@ export const MODELS: Models = {
     heading: 'Max/min cloud cover',
     direction: 'COLUMN',
     class: 'c__left-top',
+    payoff: SHORT_PAYOFF,
     chart: {
       type: 'pie',
       ...SHARED_CHART
@@ -83,6 +90,7 @@ export const MODELS: Models = {
     heading: 'Max precipitation',
     direction: 'COLUMN',
     class: 'c__left-bottom',
+    payoff: SHORT_PAYOFF,
     chart: {
       type: 'radialBar',
       ...SHARED_CHART
@@ -96,6 +104,7 @@ export const MODELS: Models = {
     heading: 'Temperature',
     class: 'b',
     direction: 'COLUMN',
+    payoff: SHORT_PAYOFF,
     chart: {
       type: 'bar',
       ...SHARED_CHART,
