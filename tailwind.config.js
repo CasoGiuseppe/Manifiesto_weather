@@ -74,9 +74,10 @@ module.exports = {
     },
     transitionProperty: {
       colors: 'color, background-color, border-color, text-decoration-color, fill, stroke, outline-color',
-      transform: 'transform',
+      transform: 'transform opacity',
       size: 'width, min-width, height, min-height',
-      spacing: 'margin, padding'
+      spacing: 'margin, padding',
+      opacity: 'opacity'
     },
     extend: {
       animation: {

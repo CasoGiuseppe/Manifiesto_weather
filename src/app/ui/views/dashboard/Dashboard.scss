@@ -1,6 +1,6 @@
 .dashboard {
   $dashboard: &;
-  --from-animation: 70%;
+  --from-animation: 100%;
   --to-animation: -70%;
   --cell-gap: 1%;
 
@@ -50,6 +50,10 @@
     @screen phone {
       grid-template-columns: 1fr;
       grid-template-rows: repeat(auto, 1fr);
+    }
+
+    >* {
+      @apply transition-transform duration-700 ease-out;
     }
 
     &--is- {

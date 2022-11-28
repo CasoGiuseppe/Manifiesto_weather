@@ -1,20 +1,25 @@
 <template>
   <section class="dashboard">
-    <Transition
+    <!--<Transition
         mode="out-in"
         name="appear-extra-panel"
         appear
-      >
-      <ul
+      >-->
+      <TransitionGroup
+        appear
         v-if="Object.keys(chartModels).length > 0"
+        tag="ul"
         class="dashboard__charts"
+        name="appear-extra-panel"
       >
         <!-- dynamic data -->
         <li
-          v-for="key in Object.keys(chartModels)"
+          v-for="key, index in Object.keys(chartModels)"
           :class="[
             `dashboard__charts--is-row-${MODELS[key.toLocaleLowerCase() as keyof typeof MODELS]?.class}`,
           ]"
+          :key="key"
+          :style="{ transitionDelay: `${index  * 0.1}s`}"
         >
           <BaseBadge
             :id="key"
@@ -31,7 +36,11 @@
             </template>
           </BaseBadge>
         </li>
-        <li class="dashboard__charts--is-row-c__right">
+        <li
+          class="dashboard__charts--is-row-c__right"
+          key="table"
+          :style="{ transitionDelay: `.5s`}"
+        >
           <BaseTable
             :current="route.params.id"
             :head="weatherTableModel.head"
@@ -58,8 +67,8 @@
           </BaseTable>
         </li>
         <!-- end dynamic data-->
-      </ul>
-      
+      </TransitionGroup>
+
       <!-- log out user-->
       <article
         v-else
@@ -70,7 +79,7 @@
           <RouterLink :to="{name: 'sign'}" class="link link--is-simple">Sign in </RouterLink>
         </p>
       </article>
-    </Transition>
+    <!--</Transition>-->
   </section>
 </template>
 <script setup lang="ts">
